@@ -1,787 +1,88 @@
 <!DOCTYPE html>
 <html lang="de"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#070b18"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Malle 2027">
+<meta name="theme-color" content="#070b18">
 <title>Malle 2027 Bootcamp</title>
-<style>
-:root{--bg:#070b18;--card:rgba(255,255,255,.06);--bd:rgba(255,255,255,.12);--tx:#eef2ff;--mu:#9aa6c7;--or:#ffb020;--rd:#ff4d5e;--gr:#2ee59d;--pu:#c084fc}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{-webkit-text-size-adjust:100%;text-size-adjust:100%;background:#070b18}
-body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;color:var(--tx);background:var(--bg);min-height:100vh;min-height:100dvh;padding-bottom:calc(96px + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch}
-button{touch-action:manipulation;font-family:inherit}
-svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.15em}
-.bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
-.bg i{position:absolute;border-radius:50%;filter:blur(90px);opacity:.45;animation:float 16s ease-in-out infinite;will-change:transform}
-.bg i:nth-child(1){width:380px;height:380px;background:#ff6a3d;top:-100px;left:-80px}
-.bg i:nth-child(2){width:420px;height:420px;background:#7c3aed;bottom:-120px;right:-100px;animation-delay:-5s}
-.bg i:nth-child(3){width:300px;height:300px;background:#06b6d4;top:40%;left:55%;animation-delay:-9s;opacity:.3}
-@keyframes float{50%{transform:translate(40px,-50px) scale(1.15)}}
-header{padding:calc(24px + env(safe-area-inset-top)) 18px 8px;text-align:center;animation:down .8s cubic-bezier(.2,.8,.2,1)}
-header .logo{width:70px;height:70px;display:inline-block;animation:sway 3.5s ease-in-out infinite;transform-origin:50% 90%}
-header h1{margin:2px 0 0;font-size:1.7rem;font-weight:800;letter-spacing:-.02em;background:linear-gradient(90deg,#ffb020,#ff4d5e,#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent}
-header p{margin:4px 0 0;color:var(--mu);font-size:.9rem}
-@keyframes sway{50%{transform:rotate(6deg)}}
-@keyframes down{from{opacity:0;transform:translateY(-20px)}}
-@keyframes up{from{opacity:0;transform:translateY(24px)}}
-@keyframes inx{from{opacity:0;transform:translateX(-14px)}}
-@keyframes fade{from{opacity:0}}
-@keyframes sheet{from{transform:translateY(60px);opacity:0}}
-main{max-width:880px;margin:auto;padding:12px 14px}
-.tab{display:none}.tab.on{display:block}
-.tab.on .card{animation:up .6s cubic-bezier(.2,.8,.2,1) both}
-.tab.on .card:nth-child(2){animation-delay:.08s}.tab.on .card:nth-child(3){animation-delay:.16s}
-.card{background:var(--card);border:1px solid var(--bd);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 10px 40px rgba(0,0,0,.35)}
-h2{margin:0 0 12px;font-size:1.05rem;font-weight:700;display:flex;gap:10px;align-items:center}
-h2 svg.i{color:var(--or);font-size:1.3em}
-label{display:block;font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mu);margin:10px 0 5px}
-input{width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--bd);background:rgba(0,0,0,.3);color:#fff;font-size:16px;outline:0;transition:.2s;font-family:inherit;-webkit-appearance:none;appearance:none;min-height:46px}
-input:focus{border-color:var(--or);box-shadow:0 0 0 3px rgba(255,176,32,.2)}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.seg{display:grid;grid-template-columns:1fr 1fr;background:rgba(0,0,0,.3);border-radius:14px;padding:4px;border:1px solid var(--bd)}
-.seg button{border:0;background:none;color:var(--mu);padding:10px;border-radius:10px;font-size:1rem;cursor:pointer;transition:.25s}
-.seg button.on{background:linear-gradient(135deg,var(--or),#ff6a3d);color:#1a1000;font-weight:700;box-shadow:0 4px 14px rgba(255,120,40,.4)}
-.hero{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:center}
-@media(max-width:560px){.hero{grid-template-columns:1fr}}
-.gauge{position:relative;width:200px;height:200px;margin:auto}
-.gauge svg{transform:rotate(-90deg);width:100%;height:100%}
-.gauge circle{fill:none;stroke-width:14;stroke-linecap:round}
-.gauge .trk{stroke:rgba(255,255,255,.08)}
-.gauge .val{stroke:var(--pu);filter:drop-shadow(0 0 8px var(--pu))}
-.gauge .mid{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.gauge .mid b{font-size:2.6rem;font-weight:800;line-height:1}
-.gauge .mid span{font-size:.7rem;color:var(--mu);text-transform:uppercase;letter-spacing:.1em;margin-top:4px;text-align:center}
-.bacbig{text-align:center}
-.bacbig .n{font-size:3.4rem;font-weight:800;letter-spacing:-.03em;transition:color .4s}
-.pill{display:inline-flex;gap:8px;align-items:center;padding:7px 14px;border-radius:99px;font-size:.85rem;font-weight:600;margin-top:6px;transition:.4s}
-.dot{width:9px;height:9px;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor;animation:pulse 1.6s infinite}
-@keyframes pulse{50%{opacity:.4}}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
-.stat{background:rgba(0,0,0,.28);border:1px solid var(--bd);border-radius:16px;padding:12px;text-align:center}
-.stat small{display:block;color:var(--mu);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em}
-.stat b{font-size:1.25rem}
-.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 0 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;overscroll-behavior-x:contain}
-.chips::-webkit-scrollbar{display:none}
-.chip{flex:none;border:1px solid var(--bd);background:rgba(0,0,0,.25);color:var(--mu);padding:8px 14px;border-radius:99px;font-size:.85rem;cursor:pointer;transition:.25s}
-.chip.on{background:linear-gradient(135deg,var(--or),#ff6a3d);color:#1a1000;font-weight:700;border-color:transparent}
-.searchw{position:relative;margin-bottom:6px}.searchw svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--mu);font-size:1.1rem;pointer-events:none}
-.searchw input{padding-left:42px}
-.cat{font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--or);margin:16px 0 4px}
-.drink{display:flex;align-items:center;justify-content:space-between;padding:8px 12px 8px 8px;border-radius:18px;margin:6px 0;background:rgba(0,0,0,.22);border:1px solid transparent;transition:.25s;animation:inx .4s both}
-.drink.has{border-color:rgba(255,176,32,.55);background:rgba(255,176,32,.08)}
-.drink .l{display:flex;gap:12px;align-items:center;min-width:0}
-.dic{flex:none;width:52px;height:52px;border-radius:15px;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,.16),rgba(255,255,255,.04));border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;transition:.3s}
-.dic svg{width:42px;height:42px;overflow:visible}
-.drink.has .dic{transform:scale(1.08) rotate(-4deg)}
-.drink .nm{font-weight:600;font-size:.95rem}
-.drink small{display:block;color:var(--mu);font-size:.75rem;margin-top:1px}
-.rbtn{margin-top:5px;border:1px solid var(--bd);background:rgba(255,255,255,.07);color:var(--mu);border-radius:99px;padding:3px 10px 3px 8px;font-size:.72rem;cursor:pointer;display:inline-flex;gap:5px;align-items:center;transition:.2s}
-.rbtn:active{transform:scale(.93)}.rbtn:hover{color:#fff;border-color:var(--or)}
-.rbtn svg.i{font-size:1em;color:var(--or)}
-.ctr{display:flex;align-items:center;gap:10px;flex:none}
-.ctr button{width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.1);color:#fff;font-size:1.1rem;cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:center}
-.ctr button.p{background:linear-gradient(135deg,var(--or),#ff6a3d);color:#1a1000}
-.ctr button:active{transform:scale(.82)}
-.ctr span{min-width:24px;text-align:center;font-weight:800;font-size:1.1rem;display:inline-block}
-.pop{animation:pop .3s}@keyframes pop{50%{transform:scale(1.5)}}
-.sum{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
-.sum .pill{margin:0;background:rgba(255,255,255,.1)}
-.addrow{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:8px;align-items:end}
-@media(max-width:560px){.addrow{grid-template-columns:1fr 1fr}.addrow .nm2{grid-column:1/-1}}
-canvas{width:100%;height:300px;display:block;border-radius:16px;background:rgba(0,0,0,.25);touch-action:pan-y}
-.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.8rem;color:var(--mu);margin-top:10px}
-.legend i{display:inline-block;width:12px;height:12px;border-radius:4px;margin-right:5px;vertical-align:-1px}
-.info{font-size:.78rem;color:var(--mu);line-height:1.5}
-.btn{border:0;border-radius:14px;padding:12px 18px;background:rgba(255,255,255,.1);color:#fff;cursor:pointer;font-size:.95rem;transition:.2s;display:inline-flex;gap:8px;align-items:center;font-family:inherit}
-.btn:hover{background:rgba(255,255,255,.18)}
-.btn.pr{background:linear-gradient(135deg,var(--or),#ff6a3d);color:#1a1000;font-weight:700}
-nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:center;padding:10px 10px calc(10px + env(safe-area-inset-bottom));z-index:10;pointer-events:none}
-nav div{pointer-events:auto;display:flex;gap:2px;padding:6px;border-radius:24px;background:rgba(15,20,40,.78);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--bd);box-shadow:0 10px 40px rgba(0,0,0,.5);width:100%;max-width:560px}
-nav button{flex:1;min-width:0;border:0;background:none;color:var(--mu);padding:9px 2px;border-radius:18px;font-size:.66rem;cursor:pointer;transition:.3s;display:flex;flex-direction:column;align-items:center;gap:3px;position:relative}
-nav button svg.i{font-size:1.4rem;transition:.3s}
-nav button.on{background:linear-gradient(135deg,var(--or),#ff6a3d);color:#1a1000;font-weight:700}
-nav button.on svg.i{transform:translateY(-2px) scale(1.12)}
-.badge{position:absolute;top:2px;right:8px;background:var(--rd);color:#fff;border-radius:99px;font-size:.65rem;padding:1px 6px;font-weight:700}
-.home{text-align:center;padding:22px 18px}
-.home .lbl{color:var(--mu);text-transform:uppercase;letter-spacing:.14em;font-size:.78rem}
-.home .promille{font-size:5rem;font-weight:900;letter-spacing:-.04em;line-height:1.05;margin:6px 0 4px;transition:color .4s;text-shadow:0 0 40px currentColor}
-.pie{position:relative;width:min(280px,72vw);aspect-ratio:1;margin:22px auto 14px;border-radius:50%;background:conic-gradient(var(--gr) 0%,rgba(255,255,255,.08) 0);box-shadow:0 0 0 8px rgba(255,255,255,.05),0 20px 60px rgba(0,0,0,.5);animation:breathe 4s ease-in-out infinite}
-.pie::after{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.22),transparent 55%);pointer-events:none}
-.pie .mic{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2;filter:drop-shadow(0 4px 10px rgba(0,0,0,.55));pointer-events:none}
-.pie .mic svg{width:34%;height:34%;color:#fff;stroke-width:1.7;animation:sway 2.5s ease-in-out infinite}
-@keyframes breathe{50%{transform:scale(1.025)}}
-.pieinfo b{font-size:2.2rem;font-weight:800}
-.pieinfo div{color:var(--mu);font-size:.9rem;margin-top:2px}
-.pieinfo .lvl{color:var(--tx);font-weight:600;font-size:1rem;margin-top:6px}
-.hint{margin-top:18px;font-size:.85rem;color:var(--mu)}
-.hint .btn{margin-top:10px}
-.ov{position:fixed;inset:0;z-index:50;background:rgba(3,6,15,.62);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;align-items:flex-end;justify-content:center}
-.ov.on{display:flex;animation:fade .25s}
-.sheet{width:100%;max-width:560px;max-height:88vh;max-height:88dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;background:#111833;border:1px solid var(--bd);border-radius:26px 26px 0 0;padding:18px 18px calc(26px + env(safe-area-inset-bottom));animation:sheet .35s cubic-bezier(.2,.8,.2,1);box-shadow:0 -10px 60px rgba(0,0,0,.6)}
-.sh-h{display:flex;align-items:center;gap:14px;margin-bottom:14px}
-.sh-h .dic{width:64px;height:64px}.sh-h .dic svg{width:52px;height:52px}
-.sh-h h3{margin:0;font-size:1.2rem;flex:1}
-.xbtn{flex:none;width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.1);color:#fff;font-size:1.2rem;display:flex;align-items:center;justify-content:center;cursor:pointer}
-.tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px}
-.tag{background:rgba(255,255,255,.08);border:1px solid var(--bd);border-radius:99px;padding:5px 11px;font-size:.75rem;color:var(--mu)}
-.sheet h4{margin:16px 0 8px;font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:var(--or)}
-.sheet ul,.sheet ol{margin:0;padding:0;list-style:none}
-.sheet li{display:flex;gap:12px;align-items:flex-start;padding:9px 12px;background:rgba(0,0,0,.25);border-radius:12px;margin-bottom:6px;font-size:.92rem;line-height:1.4;animation:inx .35s both}
-.sheet ul li::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--or);margin-top:6px}
-.sheet ol{counter-reset:s}.sheet ol li::before{counter-increment:s;content:counter(s);flex:none;width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,var(--or),#ff6a3d);color:#1a1000;font-weight:800;font-size:.8rem;display:flex;align-items:center;justify-content:center}
-.sh-n{font-size:.75rem;color:var(--mu);line-height:1.5;margin-top:12px}
-.me-row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.me-row b{font-size:1.05rem}
-.live{display:inline-flex;gap:7px;align-items:center;font-size:.78rem;color:var(--mu)}
-.live .dot{width:8px;height:8px}
-.live.on{color:var(--gr)}.live.off{color:var(--rd)}.live.off .dot{animation:none}
-.rk{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:16px;margin:6px 0;background:rgba(0,0,0,.22);border:1px solid transparent;animation:inx .4s both}
-.rk.me{border-color:rgba(192,132,252,.7);background:rgba(192,132,252,.1)}
-.pos{flex:none;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.95rem;background:rgba(255,255,255,.1);color:var(--mu)}
-.pos.p1{background:linear-gradient(135deg,#ffe27a,#f5a300);color:#3a2600;box-shadow:0 0 14px rgba(255,200,40,.55)}
-.pos.p2{background:linear-gradient(135deg,#f2f5ff,#aab4cc);color:#222a3a}
-.pos.p3{background:linear-gradient(135deg,#ffbf8a,#c8702a);color:#3a1c06}
-.rn{flex:1;min-width:0}
-.rn b{display:block;font-size:.98rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.you{background:var(--pu);color:#1a0b2e;border-radius:99px;font-size:.65rem;padding:1px 7px;font-weight:800;vertical-align:1px}
-.rb{height:6px;border-radius:99px;background:rgba(255,255,255,.08);margin-top:6px;overflow:hidden}
-.rb i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--or),var(--rd));transition:width .8s cubic-bezier(.2,.8,.2,1)}
-.rv{flex:none;font-weight:800;font-size:1.05rem;text-align:right}
-.empty{text-align:center;color:var(--mu);padding:18px 0;font-size:.9rem}
-.warn{background:rgba(255,77,94,.1);border:1px solid rgba(255,77,94,.4);border-radius:14px;padding:10px 12px;font-size:.8rem;color:#ffb3bb;line-height:1.45;margin-bottom:10px}
-.nameov{align-items:center;padding:18px}.nameov .sheet{border-radius:26px;max-width:420px;text-align:center}
-.nameov .logo2{width:64px;height:64px;margin:0 auto 6px}
-.nameov h3{margin:4px 0 6px;font-size:1.25rem}.nameov p{margin:0 0 14px;color:var(--mu);font-size:.88rem;line-height:1.45}
-.nameov .btn{width:100%;justify-content:center;margin-top:12px}
-.err{color:#ff8a94;font-size:.8rem;min-height:1.1em;margin-top:6px}
-.apill{display:none;margin:8px auto 0;width:max-content;align-items:center;gap:6px;padding:5px 12px;border-radius:99px;background:rgba(46,229,157,.14);color:var(--gr);font-size:.75rem;font-weight:700;cursor:pointer}
-@keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
-textarea{min-height:110px;resize:vertical;font-size:13px;font-family:ui-monospace,Menlo,monospace}
-.btn.dg{background:rgba(255,77,94,.18);color:#ff8a95}
-.sheet.shake{animation:shake .4s}
-.lockic{flex:none;width:56px;height:56px;border-radius:16px;background:rgba(255,176,32,.14);color:var(--or);display:flex;align-items:center;justify-content:center;font-size:1.8rem}
-.msg{min-height:20px;margin-top:8px;font-size:.85rem;color:#ff8a95}
-.arow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.tgl{display:flex;flex-wrap:wrap;gap:6px}
-.tg{border:1px solid var(--bd);background:rgba(0,0,0,.25);color:#fff;padding:6px 10px;border-radius:99px;font-size:.78rem;cursor:pointer;transition:.2s}
-.tg.off{opacity:.4;text-decoration:line-through}
-input:focus,textarea:focus{border-color:var(--or);box-shadow:0 0 0 3px rgba(255,176,32,.2)}
-textarea{width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--bd);background:rgba(0,0,0,.3);color:#fff;outline:0;font-family:ui-monospace,Menlo,monospace;-webkit-appearance:none;appearance:none}
-
-.smiley{display:flex;flex-direction:column;align-items:center;margin:0 0 8px}
-.smiley svg{width:min(150px,40vw);height:auto;overflow:visible;filter:drop-shadow(0 8px 18px rgba(255,176,32,.35))}
-.smcap{font-size:.84rem;color:var(--mu);margin-top:6px;font-weight:600;transition:color .4s}
-.smiley[data-lv="3"] .smcap{color:var(--or)}
-.face{transform-origin:60px 60px;animation:smbob 3.4s ease-in-out infinite}
-@keyframes smbob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-3px) rotate(2deg)}}
-.smiley[data-lv="3"] .face{animation:smlol .5s ease-in-out infinite}
-@keyframes smlol{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-4px) rotate(4deg)}}
-.smiley[data-lv="2"] .face{animation-duration:2.2s}
-.eye{transform-box:fill-box;transform-origin:center;animation:smblink 4.6s infinite}
-@keyframes smblink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.08)}}
-.mouthg{transform-origin:60px 80px}
-.smiley[data-lv="3"] .mouthg{animation:smha .5s ease-in-out infinite}
-@keyframes smha{50%{transform:scaleY(.8)}}
-.tear{animation:smtear 1.2s ease-in infinite;opacity:0}
-.tear.b{animation-delay:.5s}
-@keyframes smtear{0%{transform:translateY(0);opacity:0}20%{opacity:.9}100%{transform:translateY(18px);opacity:0}}
-@media(prefers-reduced-motion:reduce){.face,.eye,.mouthg,.tear{animation:none!important}}
-</style></head><body>
-<div class="bg"><i></i><i></i><i></i></div>
-<header><div class="logo" id="logo"></div><h1>Malle 2027 Bootcamp</h1><p>Promille · Getränkekarte · Liedtextsicherheit</p><div class="apill" id="apill" onclick="openAdmin()"><span data-ic="lock"></span>Admin aktiv</div></header>
-<main>
-
-<section id="home" class="tab on">
-<div class="card home">
-<div class="smiley" id="smiley" data-lv="0" role="img" aria-label="Stimmung passend zum Promillewert">
-<svg viewBox="0 0 120 120" aria-hidden="true"><defs>
-<radialGradient id="smg" cx="38%" cy="30%" r="80%"><stop offset="0" stop-color="#fff0a0"/><stop offset=".55" stop-color="#ffd23f"/><stop offset="1" stop-color="#ff9a1f"/></radialGradient>
-<clipPath id="smclip"><path id="smclipP" d=""/></clipPath></defs>
-<g class="face">
-<circle cx="60" cy="60" r="52" fill="url(#smg)" stroke="#d9780f" stroke-width="2.5"/>
-<ellipse cx="38" cy="30" rx="16" ry="9" fill="#fff" opacity=".28" transform="rotate(-25 38 30)"/>
-<circle id="smCL" cx="30" cy="70" r="9" fill="#ff6b81" opacity="0"/><circle id="smCR" cx="90" cy="70" r="9" fill="#ff6b81" opacity="0"/>
-<g id="smBrows" fill="none" stroke="#7a4a0a" stroke-width="3.4" stroke-linecap="round"><path d="M28 36Q38 31 48 35"/><path d="M72 35Q82 31 92 36"/></g>
-<g transform="translate(40 52)"><g class="eye"><circle id="smEL" r="6" fill="#3a2205"/><circle cx="-2" cy="-2" r="2" fill="#fff"/></g><path id="smAL" d="M-9 3Q0 -10 9 3" fill="none" stroke="#3a2205" stroke-width="4.2" stroke-linecap="round" opacity="0"/></g>
-<g transform="translate(80 52)"><g class="eye"><circle id="smER" r="6" fill="#3a2205"/><circle cx="-2" cy="-2" r="2" fill="#fff"/></g><path id="smAR" d="M-9 3Q0 -10 9 3" fill="none" stroke="#3a2205" stroke-width="4.2" stroke-linecap="round" opacity="0"/></g>
-<g id="smTears"><path class="tear" d="M32 62q-5 8 0 11q5-3 0-11z" fill="#6ec8ff"/><path class="tear b" d="M88 62q-5 8 0 11q5-3 0-11z" fill="#6ec8ff"/></g>
-<g class="mouthg"><path id="smMouth" d="" fill="#4a1220" stroke="#4a1220" stroke-width="3.4" stroke-linejoin="round" stroke-linecap="round"/>
-<g clip-path="url(#smclip)"><rect id="smTeeth" x="10" y="0" width="100" height="0" fill="#fff"/><ellipse id="smTongue" cx="60" cy="0" rx="12" ry="0" fill="#ff6b81"/></g></g>
-</g></svg><div class="smcap" id="smCap">Entspannt</div></div>
-<div class="lbl">Aktueller Promillewert</div>
-<div class="promille" id="hBac">0,00 ‰</div>
-<div class="pie" id="pie"><div class="mic"><span data-ic="mic"></span></div></div>
-<div class="pieinfo"><b id="hSafe">0 %</b><div>Liedtextsicherheit</div><div class="lvl" id="hLvl"></div><div id="hSub"></div></div>
-<div class="hint" id="hHint">Noch kein alkoholisches Getränk – die Liedtextsicherheit startet mit deinem ersten Drink.<br><button class="btn pr" onclick="go('menu')"><span data-ic="glass"></span>Zur Getränkekarte</button></div>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌴%3C/text%3E%3C/svg%3E">
+<style>:root{color-scheme:dark}html,body{margin:0;height:100%;background:#070b18}
+#lock{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:max(20px,env(safe-area-inset-top)) 16px max(20px,env(safe-area-inset-bottom));background:radial-gradient(900px 600px at 50% -10%,rgba(255,106,61,.28),transparent 60%),radial-gradient(700px 500px at 100% 100%,rgba(255,176,32,.14),transparent 60%),#070b18;color:#eef2ff;text-align:center;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;transition:opacity .8s}
+#lock.out{opacity:0;pointer-events:none}
+.lk-in{width:100%;max-width:560px}
+.lk-emoji{font-size:3.4rem;line-height:1;animation:lkfloat 3.2s ease-in-out infinite}
+@keyframes lkfloat{50%{transform:translateY(-8px)}}
+#lock h1{margin:.3em 0 .15em;font-size:clamp(1.7rem,7vw,2.6rem);font-weight:800;background:linear-gradient(90deg,#ffb020,#ff5d73,#c77dff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lk-sub{color:#9aa6c7;margin:0 0 26px;font-size:.98rem}
+.lk-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(6px,2vw,12px)}
+.lk-grid.nod{grid-template-columns:repeat(3,1fr)}
+.lk-grid.nod .lk-days{display:none}
+.lk-box{padding:clamp(12px,4vw,22px) 4px;border-radius:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(6px);transition:border-color .6s,box-shadow .6s}
+.lk-box b{display:block;font-size:clamp(1.7rem,9vw,3.4rem);line-height:1;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.lk-box span{display:block;margin-top:8px;font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:#9aa6c7}
+.lk-box.tick b{animation:lktick .35s ease-out}
+@keyframes lktick{0%{transform:translateY(-6px);opacity:.4}100%{transform:none;opacity:1}}
+.lk-src{margin-top:22px;font-size:.74rem;color:#6b7699}
+#lock.done .lk-box{border-color:#2ee59d;box-shadow:0 0 24px rgba(46,229,157,.35)}
+@media(prefers-reduced-motion:reduce){.lk-emoji,.lk-box.tick b{animation:none}}
+#appFrame{position:fixed;inset:0;width:100%;height:100%;border:0;box-sizing:border-box;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px);background:#070b18}</style></head><body>
+<iframe id="appFrame" title="Malle 2027 Bootcamp"></iframe>
+<div id="lock" role="timer" aria-label="Countdown"><div class="lk-in">
+<div class="lk-emoji">🌴</div>
+<h1 id="lkTitle"></h1>
+<p class="lk-sub" id="lkSub"></p>
+<div class="lk-grid" id="lkGrid">
+<div class="lk-box lk-days"><b id="lkD">00</b><span>Tage</span></div>
+<div class="lk-box"><b id="lkH">00</b><span>Stunden</span></div>
+<div class="lk-box"><b id="lkM">00</b><span>Minuten</span></div>
+<div class="lk-box"><b id="lkS">00</b><span>Sekunden</span></div>
 </div>
-</section>
-
-<section id="calc" class="tab">
-<div class="card"><h2><span data-ic="user"></span>Deine Daten</h2>
-<label>Geschlecht</label>
-<div class="seg" id="sexseg"><button class="on" data-v="0.7">Mann</button><button data-v="0.6">Frau</button></div>
-<div class="row"><div><label>Gewicht (kg)</label><input id="w" type="number" inputmode="decimal" value="80" min="30" max="250"></div>
-<div><label>Start (erstes Getränk)</label><input id="start" type="time" value="20:00"></div></div>
-<div class="row"><div><label>Jetzt-Uhrzeit</label><input id="now" type="time"></div><div></div></div>
-</div>
-
-<div class="card"><h2><span data-ic="chart"></span>Ergebnis</h2>
-<div class="hero">
-<div class="bacbig"><div class="n" id="bac">0,00 ‰</div><div class="pill" id="status"></div></div>
-<div class="gauge"><svg viewBox="0 0 200 200"><circle class="trk" cx="100" cy="100" r="86"/><circle class="val" id="ring" cx="100" cy="100" r="86" stroke-dasharray="540.4" stroke-dashoffset="540.4"/></svg>
-<div class="mid"><b id="safeBig">0%</b><span>Liedtext-<br>sicherheit</span></div></div></div>
-<div class="stats"><div class="stat"><small>Alkohol</small><b id="gr">0 g</b></div><div class="stat"><small>Unter 0,5 ‰ ab</small><b id="drive">–</b></div><div class="stat"><small>Nüchtern ab</small><b id="sober">–</b></div></div>
-</div>
-<div class="card info" id="infoc"><b>Promille:</b> Widmark-Formel: Alkohol (g) × 0,9 ÷ (Gewicht × r), r = 0,7 (Mann) / 0,6 (Frau), 10 % Resorptionsdefizit, Abbau 0,1 ‰ pro Stunde ab dem ersten Getränk. <b>Liedtextsicherheit:</b> ab dem ersten Getränk linear, nach 5 Stunden 100 %. Mix-Getränke sind Durchschnittswerte – Malle-Gläser sind oft stärker eingeschenkt. Nur Schätzung – nach Alkohol nicht fahren.</div>
-</section>
-
-<section id="menu" class="tab">
-<div class="card"><h2><span data-ic="glass"></span>Getränkekarte</h2>
-<div class="sum"><span class="pill" id="total">0 Getränke</span><span class="pill" id="totalg">0 g Alkohol</span><button class="btn" onclick="resetAll()"><span data-ic="trash"></span>Zurücksetzen</button></div>
-<br><div class="searchw"><span data-ic="search"></span><input id="q" placeholder="Getränk suchen …" autocomplete="off"></div>
-<div class="chips" id="chips"></div>
-<div id="list"></div></div>
-<div class="card"><h2><span data-ic="plus"></span>Eigenes Getränk</h2>
-<div class="addrow"><div class="nm2"><label>Name</label><input id="cn" placeholder="z. B. Hausmischung"></div><div><label>Menge (ml)</label><input id="cm" type="number" inputmode="numeric" value="300" min="1"></div><div><label>Vol.-%</label><input id="ca" type="number" inputmode="decimal" value="8" min="0" max="96" step="0.1"></div><button class="btn pr" onclick="addCustom()">Hinzufügen</button></div></div>
-</section>
-
-<section id="board" class="tab">
-<div class="card"><h2><span data-ic="trophy"></span>Scoreboard</h2>
-<div class="me-row"><div>Du bist: <b id="meName">–</b></div><button class="btn" onclick="openName(true)"><span data-ic="pen"></span>Name ändern</button></div>
-<div class="me-row" style="margin-top:10px"><span class="live off" id="live"><span class="dot"></span><span id="liveTxt">offline</span></span><span class="live" id="cntTxt"></span></div>
-<div class="seg" id="shareseg" style="margin-top:12px"><button class="on" data-s="1">Ich bin dabei</button><button data-s="0">Versteckt</button></div>
-</div>
-<div class="card"><div class="chips" id="modechips"><button class="chip on" data-m="drinks">Getränke</button><button class="chip" data-m="bac">Promille</button><button class="chip" data-m="lyric">Liedtextsicherheit</button></div>
-<div id="warnbox"></div><div id="rank"></div>
-<div class="info" style="margin-top:10px">Das Scoreboard aktualisiert sich live. Alle mit dem Link sehen die Namen und Werte. Promille und Liedtextsicherheit sind Schätzungen und laufen automatisch weiter.</div></div>
-</section>
-
-<section id="chart" class="tab">
-<div class="card"><h2><span data-ic="mic"></span>Liedtextsicherheit nach Uhrzeit</h2>
-<div class="row"><div><label>Start (erstes Getränk)</label><input id="start2" type="time" value="20:00"></div><div><label>Uhrzeit prüfen</label><input id="now2" type="time"></div></div>
-<br><canvas id="cv1" width="860" height="320"></canvas>
-<div class="legend"><span><i style="background:#c084fc"></i>Liedtextsicherheit in %</span><span><i style="background:#fff"></i>Gewählte Uhrzeit</span></div>
-<p class="info" id="sfNote"></p></div>
-<div class="card"><h2><span data-ic="trend"></span>Promille-Verlauf</h2><canvas id="cv2" width="860" height="320"></canvas>
-<div class="legend"><span><i style="background:var(--or)"></i>Promille</span><span><i style="background:var(--rd)"></i>0,5 ‰</span><span><i style="background:#eab308"></i>0,3 ‰</span></div></div>
-</section>
-</main>
-
-<nav><div>
-<button class="on" data-t="home"><span data-ic="home"></span>Home</button>
-<button data-t="calc"><span data-ic="calc"></span>Rechner</button>
-<button data-t="menu"><span data-ic="glass"></span>Getränke<b class="badge" id="badge" style="display:none">0</b></button>
-<button data-t="board"><span data-ic="trophy"></span>Rangliste</button>
-<button data-t="chart"><span data-ic="chart"></span>Diagramm</button>
-</div></nav>
-
-<div class="ov" id="ov"><div class="sheet" id="sheet"></div></div>
-
-<div class="ov nameov" id="nameov"><div class="sheet">
-<div class="logo2" id="logo2"></div>
-<h3>Wie heißt du?</h3>
-<p>Dein Name erscheint auf dem Scoreboard. Nutze am besten einen Spitznamen – alle mit dem Link können ihn sehen.</p>
-<input id="nameIn" maxlength="20" placeholder="Dein Name" autocomplete="off">
-<div class="err" id="nameErr"></div>
-<button class="btn pr" id="nameOk">Los geht's</button>
-<button class="btn" id="nameCancel" style="display:none">Abbrechen</button>
+<div class="lk-src" id="lkSrc"></div>
 </div></div>
-
+<script type="application/json" id="appData">"<!DOCTYPE html>\n<html lang=\"de\"><head><meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width,initial-scale=1,viewport-fit=cover\">\n<meta name=\"theme-color\" content=\"#070b18\"><meta name=\"apple-mobile-web-app-capable\" content=\"yes\"><meta name=\"mobile-web-app-capable\" content=\"yes\"><meta name=\"apple-mobile-web-app-title\" content=\"Malle 2027\">\n<title>Malle 2027 Bootcamp<\/title>\n<style>\n:root{--bg:#070b18;--card:rgba(255,255,255,.06);--bd:rgba(255,255,255,.12);--tx:#eef2ff;--mu:#9aa6c7;--or:#ffb020;--rd:#ff4d5e;--gr:#2ee59d;--pu:#c084fc}\n*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}\nhtml{-webkit-text-size-adjust:100%;text-size-adjust:100%;background:#070b18}\nbody{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;color:var(--tx);background:var(--bg);min-height:100vh;min-height:100dvh;padding-bottom:calc(96px + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch}\nbutton{touch-action:manipulation;font-family:inherit}\nsvg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.15em}\n.bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}\n.bg i{position:absolute;border-radius:50%;filter:blur(90px);opacity:.45;animation:float 16s ease-in-out infinite;will-change:transform}\n.bg i:nth-child(1){width:380px;height:380px;background:#ff6a3d;top:-100px;left:-80px}\n.bg i:nth-child(2){width:420px;height:420px;background:#7c3aed;bottom:-120px;right:-100px;animation-delay:-5s}\n.bg i:nth-child(3){width:300px;height:300px;background:#06b6d4;top:40%;left:55%;animation-delay:-9s;opacity:.3}\n@keyframes float{50%{transform:translate(40px,-50px) scale(1.15)}}\nheader{padding:calc(24px + env(safe-area-inset-top)) 18px 8px;text-align:center;animation:down .8s cubic-bezier(.2,.8,.2,1)}\nheader .logo{width:70px;height:70px;display:inline-block;animation:sway 3.5s ease-in-out infinite;transform-origin:50% 90%}\nheader h1{margin:2px 0 0;font-size:1.7rem;font-weight:800;letter-spacing:-.02em;background:linear-gradient(90deg,#ffb020,#ff4d5e,#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent}\nheader p{margin:4px 0 0;color:var(--mu);font-size:.9rem}\n@keyframes sway{50%{transform:rotate(6deg)}}\n@keyframes down{from{opacity:0;transform:translateY(-20px)}}\n@keyframes up{from{opacity:0;transform:translateY(24px)}}\n@keyframes inx{from{opacity:0;transform:translateX(-14px)}}\n@keyframes fade{from{opacity:0}}\n@keyframes sheet{from{transform:translateY(60px);opacity:0}}\nmain{max-width:880px;margin:auto;padding:12px 14px}\n.tab{display:none}.tab.on{display:block}\n.tab.on .card{animation:up .6s cubic-bezier(.2,.8,.2,1) both}\n.tab.on .card:nth-child(2){animation-delay:.08s}.tab.on .card:nth-child(3){animation-delay:.16s}\n.card{background:var(--card);border:1px solid var(--bd);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 10px 40px rgba(0,0,0,.35)}\nh2{margin:0 0 12px;font-size:1.05rem;font-weight:700;display:flex;gap:10px;align-items:center}\nh2 svg.i{color:var(--or);font-size:1.3em}\nlabel{display:block;font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mu);margin:10px 0 5px}\ninput{width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--bd);background:rgba(0,0,0,.3);color:#fff;font-size:16px;outline:0;transition:.2s;font-family:inherit;-webkit-appearance:none;appearance:none;min-height:46px}\ninput:focus{border-color:var(--or);box-shadow:0 0 0 3px rgba(255,176,32,.2)}\n.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}\n.seg{display:grid;grid-template-columns:1fr 1fr;background:rgba(0,0,0,.3);border-radius:14px;padding:4px;border:1px solid var(--bd)}\n.seg button{border:0;background:none;color:var(--mu);padding:10px;border-radius:10px;font-size:1rem;cursor:pointer;transition:.25s}\n.seg button.on{background:linear-gradient(135deg,var(--or),#ff6a3d);color:#1a1000;font-weight:700;box-shadow:0 4px 14px rgba(255,120,40,.4)}\n.hero{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:center}\n@media(max-width:560px){.hero{grid-template-columns:1fr}}\n.gauge{position:relative;width:200px;height:200px;margin:auto}\n.gauge svg{transform:rotate(-90deg);width:100%;height:100%}\n.gauge circle{fill:none;stroke-width:14;stroke-linecap:round}\n.gauge .trk{stroke:rgba(255,255,255,.08)}\n.gauge .val{stroke:var(--pu);filter:drop-shadow(0 0 8px var(--pu))}\n.gauge .mid{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}\n.gauge .mid b{font-size:2.6rem;font-weight:800;line-height:1}\n.gauge .mid span{font-size:.7rem;color:var(--mu);text-transform:uppercase;letter-spacing:.1em;margin-top:4px;text-align:center}\n.bacbig{text-align:center}\n.bacbig .n{font-size:3.4rem;font-weight:800;letter-spacing:-.03em;transition:color .4s}\n.pill{display:inline-flex;gap:8px;align-items:center;padding:7px 14px;border-radius:99px;font-size:.85rem;font-weight:600;margin-top:6px;transition:.4s}\n.dot{width:9px;height:9px;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor;animation:pulse 1.6s infinite}\n@keyframes pulse{50%{opacity:.4}}\n.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}\n.stat{background:rgba(0,0,0,.28);border:1px solid var(--bd);border-radius:16px;padding:12px;text-align:center}\n.stat small{display:block;color:var(--mu);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em}\n.stat b{font-size:1.25rem}\n.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 0 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;overscroll-behavior-x:contain}\n.chips::-webkit-scrollbar{display:none}\n.chip{flex:none;border:1px solid var(--bd);background:rgba(0,0,0,.25);color:var(--mu);padding:8px 14px;border-radius:99px;font-size:.85rem;cursor:pointer;transition:.25s}\n.chip.on{background:linear-gradient(135deg,var(--or),#ff6a3d);color:#1a1000;font-weight:700;border-color:transparent}\n.searchw{position:relative;margin-bottom:6px}.searchw svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--mu);font-size:1.1rem;pointer-events:none}\n.searchw input{padding-left:42px}\n.cat{font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--or);margin:16px 0 4px}\n.drink{display:flex;align-items:center;justify-content:space-between;padding:8px 12px 8px 8px;border-radius:18px;margin:6px 0;background:rgba(0,0,0,.22);border:1px solid transparent;transition:.25s;animation:inx .4s both}\n.drink.has{border-color:rgba(255,176,32,.55);background:rgba(255,176,32,.08)}\n.drink .l{display:flex;gap:12px;align-items:center;min-width:0}\n.dic{flex:none;width:52px;height:52px;border-radius:15px;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,.16),rgba(255,255,255,.04));border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;transition:.3s}\n.dic svg{width:42px;height:42px;overflow:visible}\n.drink.has .dic{transform:scale(1.08) rotate(-4deg)}\n.drink .nm{font-weight:600;font-size:.95rem}\n.drink small{display:block;color:var(--mu);font-size:.75rem;margin-top:1px}\n.rbtn{margin-top:5px;border:1px solid var(--bd);background:rgba(255,255,255,.07);color:var(--mu);border-radius:99px;padding:3px 10px 3px 8px;font-size:.72rem;cursor:pointer;display:inline-flex;gap:5px;align-items:center;transition:.2s}\n.rbtn:active{transform:scale(.93)}.rbtn:hover{color:#fff;border-color:var(--or)}\n.rbtn svg.i{font-size:1em;color:var(--or)}\n.ctr{display:flex;align-items:center;gap:10px;flex:none}\n.ctr button{width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.1);color:#fff;font-size:1.1rem;cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:center}\n.ctr button.p{background:linear-gradient(135deg,var(--or),#ff6a3d);color:#1a1000}\n.ctr button:active{transform:scale(.82)}\n.ctr span{min-width:24px;text-align:center;font-weight:800;font-size:1.1rem;display:inline-block}\n.pop{animation:pop .3s}@keyframes pop{50%{transform:scale(1.5)}}\n.sum{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}\n.sum .pill{margin:0;background:rgba(255,255,255,.1)}\n.addrow{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:8px;align-items:end}\n@media(max-width:560px){.addrow{grid-template-columns:1fr 1fr}.addrow .nm2{grid-column:1/-1}}\ncanvas{width:100%;height:300px;display:block;border-radius:16px;background:rgba(0,0,0,.25);touch-action:pan-y}\n.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.8rem;color:var(--mu);margin-top:10px}\n.legend i{display:inline-block;width:12px;height:12px;border-radius:4px;margin-right:5px;vertical-align:-1px}\n.info{font-size:.78rem;color:var(--mu);line-height:1.5}\n.btn{border:0;border-radius:14px;padding:12px 18px;background:rgba(255,255,255,.1);color:#fff;cursor:pointer;font-size:.95rem;transition:.2s;display:inline-flex;gap:8px;align-items:center;font-family:inherit}\n.btn:hover{background:rgba(255,255,255,.18)}\n.btn.pr{background:linear-gradient(135deg,var(--or),#ff6a3d);color:#1a1000;font-weight:700}\nnav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:center;padding:10px 10px calc(10px + env(safe-area-inset-bottom));z-index:10;pointer-events:none}\nnav div{pointer-events:auto;display:flex;gap:2px;padding:6px;border-radius:24px;background:rgba(15,20,40,.78);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--bd);box-shadow:0 10px 40px rgba(0,0,0,.5);width:100%;max-width:560px}\nnav button{flex:1;min-width:0;border:0;background:none;color:var(--mu);padding:9px 2px;border-radius:18px;font-size:.66rem;cursor:pointer;transition:.3s;display:flex;flex-direction:column;align-items:center;gap:3px;position:relative}\nnav button svg.i{font-size:1.4rem;transition:.3s}\nnav button.on{background:linear-gradient(135deg,var(--or),#ff6a3d);color:#1a1000;font-weight:700}\nnav button.on svg.i{transform:translateY(-2px) scale(1.12)}\n.badge{position:absolute;top:2px;right:8px;background:var(--rd);color:#fff;border-radius:99px;font-size:.65rem;padding:1px 6px;font-weight:700}\n.home{text-align:center;padding:22px 18px}\n.home .lbl{color:var(--mu);text-transform:uppercase;letter-spacing:.14em;font-size:.78rem}\n.home .promille{font-size:5rem;font-weight:900;letter-spacing:-.04em;line-height:1.05;margin:6px 0 4px;transition:color .4s;text-shadow:0 0 40px currentColor}\n.pie{position:relative;width:min(280px,72vw);aspect-ratio:1;margin:22px auto 14px;border-radius:50%;background:conic-gradient(var(--gr) 0%,rgba(255,255,255,.08) 0);box-shadow:0 0 0 8px rgba(255,255,255,.05),0 20px 60px rgba(0,0,0,.5);animation:breathe 4s ease-in-out infinite}\n.pie::after{content:\"\";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.22),transparent 55%);pointer-events:none}\n.pie .mic{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2;filter:drop-shadow(0 4px 10px rgba(0,0,0,.55));pointer-events:none}\n.pie .mic svg{width:34%;height:34%;color:#fff;stroke-width:1.7;animation:sway 2.5s ease-in-out infinite}\n@keyframes breathe{50%{transform:scale(1.025)}}\n.pieinfo b{font-size:2.2rem;font-weight:800}\n.pieinfo div{color:var(--mu);font-size:.9rem;margin-top:2px}\n.pieinfo .lvl{color:var(--tx);font-weight:600;font-size:1rem;margin-top:6px}\n.hint{margin-top:18px;font-size:.85rem;color:var(--mu)}\n.hint .btn{margin-top:10px}\n.ov{position:fixed;inset:0;z-index:50;background:rgba(3,6,15,.62);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;align-items:flex-end;justify-content:center}\n.ov.on{display:flex;animation:fade .25s}\n.sheet{width:100%;max-width:560px;max-height:88vh;max-height:88dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;background:#111833;border:1px solid var(--bd);border-radius:26px 26px 0 0;padding:18px 18px calc(26px + env(safe-area-inset-bottom));animation:sheet .35s cubic-bezier(.2,.8,.2,1);box-shadow:0 -10px 60px rgba(0,0,0,.6)}\n.sh-h{display:flex;align-items:center;gap:14px;margin-bottom:14px}\n.sh-h .dic{width:64px;height:64px}.sh-h .dic svg{width:52px;height:52px}\n.sh-h h3{margin:0;font-size:1.2rem;flex:1}\n.xbtn{flex:none;width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.1);color:#fff;font-size:1.2rem;display:flex;align-items:center;justify-content:center;cursor:pointer}\n.tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px}\n.tag{background:rgba(255,255,255,.08);border:1px solid var(--bd);border-radius:99px;padding:5px 11px;font-size:.75rem;color:var(--mu)}\n.sheet h4{margin:16px 0 8px;font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:var(--or)}\n.sheet ul,.sheet ol{margin:0;padding:0;list-style:none}\n.sheet li{display:flex;gap:12px;align-items:flex-start;padding:9px 12px;background:rgba(0,0,0,.25);border-radius:12px;margin-bottom:6px;font-size:.92rem;line-height:1.4;animation:inx .35s both}\n.sheet ul li::before{content:\"\";flex:none;width:8px;height:8px;border-radius:50%;background:var(--or);margin-top:6px}\n.sheet ol{counter-reset:s}.sheet ol li::before{counter-increment:s;content:counter(s);flex:none;width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,var(--or),#ff6a3d);color:#1a1000;font-weight:800;font-size:.8rem;display:flex;align-items:center;justify-content:center}\n.sh-n{font-size:.75rem;color:var(--mu);line-height:1.5;margin-top:12px}\n.me-row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}\n.me-row b{font-size:1.05rem}\n.live{display:inline-flex;gap:7px;align-items:center;font-size:.78rem;color:var(--mu)}\n.live .dot{width:8px;height:8px}\n.live.on{color:var(--gr)}.live.off{color:var(--rd)}.live.off .dot{animation:none}\n.rk{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:16px;margin:6px 0;background:rgba(0,0,0,.22);border:1px solid transparent;animation:inx .4s both}\n.rk.me{border-color:rgba(192,132,252,.7);background:rgba(192,132,252,.1)}\n.pos{flex:none;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.95rem;background:rgba(255,255,255,.1);color:var(--mu)}\n.pos.p1{background:linear-gradient(135deg,#ffe27a,#f5a300);color:#3a2600;box-shadow:0 0 14px rgba(255,200,40,.55)}\n.pos.p2{background:linear-gradient(135deg,#f2f5ff,#aab4cc);color:#222a3a}\n.pos.p3{background:linear-gradient(135deg,#ffbf8a,#c8702a);color:#3a1c06}\n.rn{flex:1;min-width:0}\n.rn b{display:block;font-size:.98rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}\n.you{background:var(--pu);color:#1a0b2e;border-radius:99px;font-size:.65rem;padding:1px 7px;font-weight:800;vertical-align:1px}\n.rb{height:6px;border-radius:99px;background:rgba(255,255,255,.08);margin-top:6px;overflow:hidden}\n.rb i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--or),var(--rd));transition:width .8s cubic-bezier(.2,.8,.2,1)}\n.rv{flex:none;font-weight:800;font-size:1.05rem;text-align:right}\n.empty{text-align:center;color:var(--mu);padding:18px 0;font-size:.9rem}\n.warn{background:rgba(255,77,94,.1);border:1px solid rgba(255,77,94,.4);border-radius:14px;padding:10px 12px;font-size:.8rem;color:#ffb3bb;line-height:1.45;margin-bottom:10px}\n.nameov{align-items:center;padding:18px}.nameov .sheet{border-radius:26px;max-width:420px;text-align:center}\n.nameov .logo2{width:64px;height:64px;margin:0 auto 6px}\n.nameov h3{margin:4px 0 6px;font-size:1.25rem}.nameov p{margin:0 0 14px;color:var(--mu);font-size:.88rem;line-height:1.45}\n.nameov .btn{width:100%;justify-content:center;margin-top:12px}\n.err{color:#ff8a94;font-size:.8rem;min-height:1.1em;margin-top:6px}\n.apill{display:none;margin:8px auto 0;width:max-content;align-items:center;gap:6px;padding:5px 12px;border-radius:99px;background:rgba(46,229,157,.14);color:var(--gr);font-size:.75rem;font-weight:700;cursor:pointer}\n@keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}\ntextarea{min-height:110px;resize:vertical;font-size:13px;font-family:ui-monospace,Menlo,monospace}\n.btn.dg{background:rgba(255,77,94,.18);color:#ff8a95}\n.sheet.shake{animation:shake .4s}\n.lockic{flex:none;width:56px;height:56px;border-radius:16px;background:rgba(255,176,32,.14);color:var(--or);display:flex;align-items:center;justify-content:center;font-size:1.8rem}\n.msg{min-height:20px;margin-top:8px;font-size:.85rem;color:#ff8a95}\n.arow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}\n.tgl{display:flex;flex-wrap:wrap;gap:6px}\n.tg{border:1px solid var(--bd);background:rgba(0,0,0,.25);color:#fff;padding:6px 10px;border-radius:99px;font-size:.78rem;cursor:pointer;transition:.2s}\n.tg.off{opacity:.4;text-decoration:line-through}\ninput:focus,textarea:focus{border-color:var(--or);box-shadow:0 0 0 3px rgba(255,176,32,.2)}\ntextarea{width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--bd);background:rgba(0,0,0,.3);color:#fff;outline:0;font-family:ui-monospace,Menlo,monospace;-webkit-appearance:none;appearance:none}\n\n.smiley{display:flex;flex-direction:column;align-items:center;margin:0 0 8px}\n.smiley svg{width:min(150px,40vw);height:auto;overflow:visible;filter:drop-shadow(0 8px 18px rgba(255,176,32,.35))}\n.smcap{font-size:.84rem;color:var(--mu);margin-top:6px;font-weight:600;transition:color .4s}\n.smiley[data-lv=\"3\"] .smcap{color:var(--or)}\n.face{transform-origin:60px 60px;animation:smbob 3.4s ease-in-out infinite}\n@keyframes smbob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-3px) rotate(2deg)}}\n.smiley[data-lv=\"3\"] .face{animation:smlol .5s ease-in-out infinite}\n@keyframes smlol{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-4px) rotate(4deg)}}\n.smiley[data-lv=\"2\"] .face{animation-duration:2.2s}\n.eye{transform-box:fill-box;transform-origin:center;animation:smblink 4.6s infinite}\n@keyframes smblink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.08)}}\n.mouthg{transform-origin:60px 80px}\n.smiley[data-lv=\"3\"] .mouthg{animation:smha .5s ease-in-out infinite}\n@keyframes smha{50%{transform:scaleY(.8)}}\n.tear{animation:smtear 1.2s ease-in infinite;opacity:0}\n.tear.b{animation-delay:.5s}\n@keyframes smtear{0%{transform:translateY(0);opacity:0}20%{opacity:.9}100%{transform:translateY(18px);opacity:0}}\n@media(prefers-reduced-motion:reduce){.face,.eye,.mouthg,.tear{animation:none!important}}\n<\/style><\/head><body>\n<div class=\"bg\"><i><\/i><i><\/i><i><\/i><\/div>\n<header><div class=\"logo\" id=\"logo\"><\/div><h1>Malle 2027 Bootcamp<\/h1><p>Promille · Getränkekarte · Liedtextsicherheit<\/p><div class=\"apill\" id=\"apill\" onclick=\"openAdmin()\"><span data-ic=\"lock\"><\/span>Admin aktiv<\/div><\/header>\n<main>\n\n<section id=\"home\" class=\"tab on\">\n<div class=\"card home\">\n<div class=\"smiley\" id=\"smiley\" data-lv=\"0\" role=\"img\" aria-label=\"Stimmung passend zum Promillewert\">\n<svg viewBox=\"0 0 120 120\" aria-hidden=\"true\"><defs>\n<radialGradient id=\"smg\" cx=\"38%\" cy=\"30%\" r=\"80%\"><stop offset=\"0\" stop-color=\"#fff0a0\"/><stop offset=\".55\" stop-color=\"#ffd23f\"/><stop offset=\"1\" stop-color=\"#ff9a1f\"/><\/radialGradient>\n<clipPath id=\"smclip\"><path id=\"smclipP\" d=\"\"/><\/clipPath><\/defs>\n<g class=\"face\">\n<circle cx=\"60\" cy=\"60\" r=\"52\" fill=\"url(#smg)\" stroke=\"#d9780f\" stroke-width=\"2.5\"/>\n<ellipse cx=\"38\" cy=\"30\" rx=\"16\" ry=\"9\" fill=\"#fff\" opacity=\".28\" transform=\"rotate(-25 38 30)\"/>\n<circle id=\"smCL\" cx=\"30\" cy=\"70\" r=\"9\" fill=\"#ff6b81\" opacity=\"0\"/><circle id=\"smCR\" cx=\"90\" cy=\"70\" r=\"9\" fill=\"#ff6b81\" opacity=\"0\"/>\n<g id=\"smBrows\" fill=\"none\" stroke=\"#7a4a0a\" stroke-width=\"3.4\" stroke-linecap=\"round\"><path d=\"M28 36Q38 31 48 35\"/><path d=\"M72 35Q82 31 92 36\"/><\/g>\n<g transform=\"translate(40 52)\"><g class=\"eye\"><circle id=\"smEL\" r=\"6\" fill=\"#3a2205\"/><circle cx=\"-2\" cy=\"-2\" r=\"2\" fill=\"#fff\"/><\/g><path id=\"smAL\" d=\"M-9 3Q0 -10 9 3\" fill=\"none\" stroke=\"#3a2205\" stroke-width=\"4.2\" stroke-linecap=\"round\" opacity=\"0\"/><\/g>\n<g transform=\"translate(80 52)\"><g class=\"eye\"><circle id=\"smER\" r=\"6\" fill=\"#3a2205\"/><circle cx=\"-2\" cy=\"-2\" r=\"2\" fill=\"#fff\"/><\/g><path id=\"smAR\" d=\"M-9 3Q0 -10 9 3\" fill=\"none\" stroke=\"#3a2205\" stroke-width=\"4.2\" stroke-linecap=\"round\" opacity=\"0\"/><\/g>\n<g id=\"smTears\"><path class=\"tear\" d=\"M32 62q-5 8 0 11q5-3 0-11z\" fill=\"#6ec8ff\"/><path class=\"tear b\" d=\"M88 62q-5 8 0 11q5-3 0-11z\" fill=\"#6ec8ff\"/><\/g>\n<g class=\"mouthg\"><path id=\"smMouth\" d=\"\" fill=\"#4a1220\" stroke=\"#4a1220\" stroke-width=\"3.4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>\n<g clip-path=\"url(#smclip)\"><rect id=\"smTeeth\" x=\"10\" y=\"0\" width=\"100\" height=\"0\" fill=\"#fff\"/><ellipse id=\"smTongue\" cx=\"60\" cy=\"0\" rx=\"12\" ry=\"0\" fill=\"#ff6b81\"/><\/g><\/g>\n<\/g><\/svg><div class=\"smcap\" id=\"smCap\">Entspannt<\/div><\/div>\n<div class=\"lbl\">Aktueller Promillewert<\/div>\n<div class=\"promille\" id=\"hBac\">0,00 ‰<\/div>\n<div class=\"pie\" id=\"pie\"><div class=\"mic\"><span data-ic=\"mic\"><\/span><\/div><\/div>\n<div class=\"pieinfo\"><b id=\"hSafe\">0 %<\/b><div>Liedtextsicherheit<\/div><div class=\"lvl\" id=\"hLvl\"><\/div><div id=\"hSub\"><\/div><\/div>\n<div class=\"hint\" id=\"hHint\">Noch kein alkoholisches Getränk – die Liedtextsicherheit startet mit deinem ersten Drink.<br><button class=\"btn pr\" onclick=\"go('menu')\"><span data-ic=\"glass\"><\/span>Zur Getränkekarte<\/button><\/div>\n<\/div>\n<\/section>\n\n<section id=\"calc\" class=\"tab\">\n<div class=\"card\"><h2><span data-ic=\"user\"><\/span>Deine Daten<\/h2>\n<label>Geschlecht<\/label>\n<div class=\"seg\" id=\"sexseg\"><button class=\"on\" data-v=\"0.7\">Mann<\/button><button data-v=\"0.6\">Frau<\/button><\/div>\n<div class=\"row\"><div><label>Gewicht (kg)<\/label><input id=\"w\" type=\"number\" inputmode=\"decimal\" value=\"80\" min=\"30\" max=\"250\"><\/div>\n<div><label>Start (erstes Getränk)<\/label><input id=\"start\" type=\"time\" value=\"20:00\"><\/div><\/div>\n<div class=\"row\"><div><label>Jetzt-Uhrzeit<\/label><input id=\"now\" type=\"time\"><\/div><div><\/div><\/div>\n<\/div>\n\n<div class=\"card\"><h2><span data-ic=\"chart\"><\/span>Ergebnis<\/h2>\n<div class=\"hero\">\n<div class=\"bacbig\"><div class=\"n\" id=\"bac\">0,00 ‰<\/div><div class=\"pill\" id=\"status\"><\/div><\/div>\n<div class=\"gauge\"><svg viewBox=\"0 0 200 200\"><circle class=\"trk\" cx=\"100\" cy=\"100\" r=\"86\"/><circle class=\"val\" id=\"ring\" cx=\"100\" cy=\"100\" r=\"86\" stroke-dasharray=\"540.4\" stroke-dashoffset=\"540.4\"/><\/svg>\n<div class=\"mid\"><b id=\"safeBig\">0%<\/b><span>Liedtext-<br>sicherheit<\/span><\/div><\/div><\/div>\n<div class=\"stats\"><div class=\"stat\"><small>Alkohol<\/small><b id=\"gr\">0 g<\/b><\/div><div class=\"stat\"><small>Unter 0,5 ‰ ab<\/small><b id=\"drive\">–<\/b><\/div><div class=\"stat\"><small>Nüchtern ab<\/small><b id=\"sober\">–<\/b><\/div><\/div>\n<\/div>\n<div class=\"card info\" id=\"infoc\"><b>Promille:<\/b> Widmark-Formel: Alkohol (g) × 0,9 ÷ (Gewicht × r), r = 0,7 (Mann) / 0,6 (Frau), 10 % Resorptionsdefizit, Abbau 0,1 ‰ pro Stunde ab dem ersten Getränk. <b>Liedtextsicherheit:<\/b> ab dem ersten Getränk linear, nach 5 Stunden 100 %. Mix-Getränke sind Durchschnittswerte – Malle-Gläser sind oft stärker eingeschenkt. Nur Schätzung – nach Alkohol nicht fahren.<\/div>\n<\/section>\n\n<section id=\"menu\" class=\"tab\">\n<div class=\"card\"><h2><span data-ic=\"glass\"><\/span>Getränkekarte<\/h2>\n<div class=\"sum\"><span class=\"pill\" id=\"total\">0 Getränke<\/span><span class=\"pill\" id=\"totalg\">0 g Alkohol<\/span><button class=\"btn\" onclick=\"resetAll()\"><span data-ic=\"trash\"><\/span>Zurücksetzen<\/button><\/div>\n<br><div class=\"searchw\"><span data-ic=\"search\"><\/span><input id=\"q\" placeholder=\"Getränk suchen …\" autocomplete=\"off\"><\/div>\n<div class=\"chips\" id=\"chips\"><\/div>\n<div id=\"list\"><\/div><\/div>\n<div class=\"card\"><h2><span data-ic=\"plus\"><\/span>Eigenes Getränk<\/h2>\n<div class=\"addrow\"><div class=\"nm2\"><label>Name<\/label><input id=\"cn\" placeholder=\"z. B. Hausmischung\"><\/div><div><label>Menge (ml)<\/label><input id=\"cm\" type=\"number\" inputmode=\"numeric\" value=\"300\" min=\"1\"><\/div><div><label>Vol.-%<\/label><input id=\"ca\" type=\"number\" inputmode=\"decimal\" value=\"8\" min=\"0\" max=\"96\" step=\"0.1\"><\/div><button class=\"btn pr\" onclick=\"addCustom()\">Hinzufügen<\/button><\/div><\/div>\n<\/section>\n\n<section id=\"board\" class=\"tab\">\n<div class=\"card\"><h2><span data-ic=\"trophy\"><\/span>Scoreboard<\/h2>\n<div class=\"me-row\"><div>Du bist: <b id=\"meName\">–<\/b><\/div><button class=\"btn\" onclick=\"openName(true)\"><span data-ic=\"pen\"><\/span>Name ändern<\/button><\/div>\n<div class=\"me-row\" style=\"margin-top:10px\"><span class=\"live off\" id=\"live\"><span class=\"dot\"><\/span><span id=\"liveTxt\">offline<\/span><\/span><span class=\"live\" id=\"cntTxt\"><\/span><\/div>\n<div class=\"seg\" id=\"shareseg\" style=\"margin-top:12px\"><button class=\"on\" data-s=\"1\">Ich bin dabei<\/button><button data-s=\"0\">Versteckt<\/button><\/div>\n<\/div>\n<div class=\"card\"><div class=\"chips\" id=\"modechips\"><button class=\"chip on\" data-m=\"drinks\">Getränke<\/button><button class=\"chip\" data-m=\"bac\">Promille<\/button><button class=\"chip\" data-m=\"lyric\">Liedtextsicherheit<\/button><\/div>\n<div id=\"warnbox\"><\/div><div id=\"rank\"><\/div>\n<div class=\"info\" style=\"margin-top:10px\">Das Scoreboard aktualisiert sich live. Alle mit dem Link sehen die Namen und Werte. Promille und Liedtextsicherheit sind Schätzungen und laufen automatisch weiter.<\/div><\/div>\n<\/section>\n\n<section id=\"chart\" class=\"tab\">\n<div class=\"card\"><h2><span data-ic=\"mic\"><\/span>Liedtextsicherheit nach Uhrzeit<\/h2>\n<div class=\"row\"><div><label>Start (erstes Getränk)<\/label><input id=\"start2\" type=\"time\" value=\"20:00\"><\/div><div><label>Uhrzeit prüfen<\/label><input id=\"now2\" type=\"time\"><\/div><\/div>\n<br><canvas id=\"cv1\" width=\"860\" height=\"320\"><\/canvas>\n<div class=\"legend\"><span><i style=\"background:#c084fc\"><\/i>Liedtextsicherheit in %<\/span><span><i style=\"background:#fff\"><\/i>Gewählte Uhrzeit<\/span><\/div>\n<p class=\"info\" id=\"sfNote\"><\/p><\/div>\n<div class=\"card\"><h2><span data-ic=\"trend\"><\/span>Promille-Verlauf<\/h2><canvas id=\"cv2\" width=\"860\" height=\"320\"><\/canvas>\n<div class=\"legend\"><span><i style=\"background:var(--or)\"><\/i>Promille<\/span><span><i style=\"background:var(--rd)\"><\/i>0,5 ‰<\/span><span><i style=\"background:#eab308\"><\/i>0,3 ‰<\/span><\/div><\/div>\n<\/section>\n<\/main>\n\n<nav><div>\n<button class=\"on\" data-t=\"home\"><span data-ic=\"home\"><\/span>Home<\/button>\n<button data-t=\"calc\"><span data-ic=\"calc\"><\/span>Rechner<\/button>\n<button data-t=\"menu\"><span data-ic=\"glass\"><\/span>Getränke<b class=\"badge\" id=\"badge\" style=\"display:none\">0<\/b><\/button>\n<button data-t=\"board\"><span data-ic=\"trophy\"><\/span>Rangliste<\/button>\n<button data-t=\"chart\"><span data-ic=\"chart\"><\/span>Diagramm<\/button>\n<\/div><\/nav>\n\n<div class=\"ov\" id=\"ov\"><div class=\"sheet\" id=\"sheet\"><\/div><\/div>\n\n<div class=\"ov nameov\" id=\"nameov\"><div class=\"sheet\">\n<div class=\"logo2\" id=\"logo2\"><\/div>\n<h3>Wie heißt du?<\/h3>\n<p>Dein Name erscheint auf dem Scoreboard. Nutze am besten einen Spitznamen – alle mit dem Link können ihn sehen.<\/p>\n<input id=\"nameIn\" maxlength=\"20\" placeholder=\"Dein Name\" autocomplete=\"off\">\n<div class=\"err\" id=\"nameErr\"><\/div>\n<button class=\"btn pr\" id=\"nameOk\">Los geht's<\/button>\n<button class=\"btn\" id=\"nameCancel\" style=\"display:none\">Abbrechen<\/button>\n<\/div><\/div>\n\n<script>\n/* ===== Scoreboard-Server: hier die Firebase-Realtime-Database-URL eintragen =====\n   z. B. \"https://dein-projekt-default-rtdb.europe-west1.firebasedatabase.app\"\n   (ohne Schrägstrich am Ende). Leer lassen = Scoreboard nur lokal. */\nconst DB_URL=\"\";\n\nconst $=id=>document.getElementById(id);\nconst esc=s=>String(s).replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'}[c]));\nfunction sha256(ascii){\nfunction rightRotate(v,a){return (v>>>a)|(v<<(32-a));}\nvar maxWord=Math.pow(2,32),result='',words=[],asciiBitLength=ascii.length*8,i,j;\nvar hash=[],k=[],primeCounter=0,isComposite={};\nfor(var candidate=2;primeCounter<64;candidate++){\nif(!isComposite[candidate]){for(i=0;i<313;i+=candidate)isComposite[i]=candidate;\nhash[primeCounter]=(Math.pow(candidate,.5)*maxWord)|0;k[primeCounter++]=(Math.pow(candidate,1/3)*maxWord)|0;}}\nascii+='\\x80';while(ascii.length%64-56)ascii+='\\x00';\nfor(i=0;i<ascii.length;i++){j=ascii.charCodeAt(i);if(j>>8)return '';words[i>>2]|=j<<((3-i)%4)*8;}\nwords[words.length]=((asciiBitLength/maxWord)|0);words[words.length]=(asciiBitLength);\nfor(j=0;j<words.length;){var w=words.slice(j,j+=16);var oldHash=hash;hash=hash.slice(0,8);\nfor(i=0;i<64;i++){var w15=w[i-15],w2=w[i-2];var a=hash[0],e=hash[4];\nvar temp1=hash[7]+(rightRotate(e,6)^rightRotate(e,11)^rightRotate(e,25))+((e&hash[5])^((~e)&hash[6]))+k[i]+(w[i]=(i<16)?w[i]:(w[i-16]+(rightRotate(w15,7)^rightRotate(w15,18)^(w15>>>3))+w[i-7]+(rightRotate(w2,17)^rightRotate(w2,19)^(w2>>>10)))|0);\nvar temp2=(rightRotate(a,2)^rightRotate(a,13)^rightRotate(a,22))+((a&hash[1])^(a&hash[2])^(hash[1]&hash[2]));\nhash=[(temp1+temp2)|0].concat(hash);hash[4]=(hash[4]+temp1)|0;}\nfor(i=0;i<8;i++)hash[i]=(hash[i]+oldHash[i])|0;}\nfor(i=0;i<8;i++)for(j=3;j+1;j--){var b=(hash[i]>>(j*8))&255;result+=((b<16)?0:'')+b.toString(16);}\nreturn result;}\nconst ADMIN_HASH='4e3728e4f3a9f724be3edc3ac53cc727442cc51101ca7f8c233be3be883150ca';\nconst UI={\nlock:'<rect x=\"5\" y=\"10.5\" width=\"14\" height=\"10\" rx=\"2.5\"/><path d=\"M8 10.5V8a4 4 0 0 1 8 0v2.5\"/><path d=\"M12 14.5v2.5\"/>',\nhome:'<path d=\"M3.5 11 12 3.5 20.5 11\"/><path d=\"M5.5 9.5V20a1 1 0 0 0 1 1H10v-6h4v6h3.5a1 1 0 0 0 1-1V9.5\"/>',\ncalc:'<rect x=\"5\" y=\"2.5\" width=\"14\" height=\"19\" rx=\"3\"/><rect x=\"8\" y=\"5.5\" width=\"8\" height=\"4\" rx=\"1\"/><path d=\"M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01\"/>',\nglass:'<path d=\"M4.5 4h15L12 12.5z\"/><path d=\"M12 12.5V20M8 20h8\"/><path d=\"M16 2.5 11 9\"/>',\nchart:'<rect x=\"4\" y=\"12\" width=\"4\" height=\"8\" rx=\"1.2\"/><rect x=\"10\" y=\"4\" width=\"4\" height=\"16\" rx=\"1.2\"/><rect x=\"16\" y=\"9\" width=\"4\" height=\"11\" rx=\"1.2\"/>',\ntrend:'<path d=\"M3 4v16h18\"/><path d=\"m6.5 15 4-5 3.5 3 5-7\"/>',\nmic:'<rect x=\"9\" y=\"2.5\" width=\"6\" height=\"11\" rx=\"3\"/><path d=\"M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5v4M8.5 21.5h7\"/>',\ntrash:'<path d=\"M4 7h16M9.5 7V4.5h5V7M6.5 7l1 13h9l1-13M10 11v6M14 11v6\"/>',\nuser:'<circle cx=\"12\" cy=\"8\" r=\"4\"/><path d=\"M4 21c0-4.5 3.6-7 8-7s8 2.5 8 7\"/>',\nplus:'<path d=\"M12 5v14M5 12h14\"/>',minus:'<path d=\"M5 12h14\"/>',\nsearch:'<circle cx=\"11\" cy=\"11\" r=\"6.5\"/><path d=\"m16 16 4.5 4.5\"/>',\nbook:'<path d=\"M4 5.5A1.5 1.5 0 0 1 5.5 4H12v16H5.5A1.5 1.5 0 0 0 4 21.5z\"/><path d=\"M20 5.5A1.5 1.5 0 0 0 18.5 4H12v16h6.5a1.5 1.5 0 0 1 1.5 1.5z\"/>',\nx:'<path d=\"M6 6l12 12M18 6 6 18\"/>',\ntrophy:'<path d=\"M8 3.5h8v6a4 4 0 0 1-8 0z\"/><path d=\"M8 5H5v1.8A3.2 3.2 0 0 0 8 10M16 5h3v1.8A3.2 3.2 0 0 1 16 10\"/><path d=\"M12 13.5V17M8.5 20.5h7M9.5 17h5\"/>',\npen:'<path d=\"M4 20h4L19 9l-4-4L4 16z\"/><path d=\"m13.5 6.5 4 4\"/>'};\nconst ic=n=>`<svg class=\"i\" viewBox=\"0 0 24 24\">${UI[n]}<\/svg>`;\nfunction hydrate(root=document){root.querySelectorAll('[data-ic]').forEach(e=>{e.outerHTML=ic(e.dataset.ic)})}\nconst LOGO=`<svg viewBox=\"0 0 80 80\"><defs><linearGradient id=\"sun\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ffd23f\"/><stop offset=\"1\" stop-color=\"#ff4d5e\"/><\/linearGradient><\/defs>\n<circle cx=\"52\" cy=\"30\" r=\"20\" fill=\"url(#sun)\" opacity=\".95\"/>\n<path d=\"M5 66q35-10 70 0\" stroke=\"#4dc3ff\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M14 72q26-7 52 0\" stroke=\"#4dc3ff\" stroke-width=\"2.5\" fill=\"none\" stroke-linecap=\"round\" opacity=\".6\"/>\n<path d=\"M38 64c1-14 0-26-4-38\" stroke=\"#7a4a21\" stroke-width=\"5\" fill=\"none\" stroke-linecap=\"round\"/>\n<g fill=\"#2ee59d\" stroke=\"#0e7a4f\" stroke-width=\"1.2\" stroke-linejoin=\"round\"><path d=\"M34 26C24 16 12 18 6 26c10-4 18-1 28 0z\"/><path d=\"M34 26C30 12 38 4 48 4c-6 6-8 14-14 22z\"/><path d=\"M34 26c8-8 20-8 28 0-10-2-18 0-28 0z\"/><path d=\"M34 26C22 28 16 38 18 46c4-9 10-14 16-20z\"/><path d=\"M34 26c10 3 16 12 14 20-4-8-8-14-14-20z\"/><\/g>\n<circle cx=\"31\" cy=\"29\" r=\"2.6\" fill=\"#7a4a21\"/><circle cx=\"37\" cy=\"30\" r=\"2.6\" fill=\"#7a4a21\"/><\/svg>`;\n$('logo').innerHTML=LOGO;$('logo2').innerHTML=LOGO.replace('id=\"sun\"','id=\"sun2\"').replace('url(#sun)','url(#sun2)');\nlet uid=0;\nconst LQ=(p,top,c)=>{const k='k'+(uid++);return `<clipPath id=\"${k}\"><path d=\"${p}\"/><\/clipPath><rect x=\"0\" y=\"${top}\" width=\"48\" height=\"48\" fill=\"${c}\" clip-path=\"url(#${k})\"/>`};\nconst G=p=>`<path d=\"${p}\" fill=\"rgba(255,255,255,.1)\" stroke=\"rgba(255,255,255,.92)\" stroke-width=\"1.8\" stroke-linejoin=\"round\"/>`;\nconst ST=(d,w=2)=>`<path d=\"${d}\" fill=\"none\" stroke=\"rgba(255,255,255,.92)\" stroke-width=\"${w}\" stroke-linecap=\"round\"/>`;\nconst BUB=(pts)=>pts.map(([x,y,r])=>`<circle cx=\"${x}\" cy=\"${y}\" r=\"${r||1}\" fill=\"rgba(255,255,255,.7)\"/>`).join('');\nconst ICE=(pts)=>pts.map(([x,y,r])=>`<rect x=\"${x}\" y=\"${y}\" width=\"6\" height=\"6\" rx=\"1.5\" fill=\"rgba(255,255,255,.45)\" transform=\"rotate(${r||12} ${x+3} ${y+3})\"/>`).join('');\nconst slice=(x,y,r,c)=>`<circle cx=\"${x}\" cy=\"${y}\" r=\"${r}\" fill=\"${c}\" stroke=\"rgba(255,255,255,.85)\" stroke-width=\"1.4\"/><path d=\"M${x-r} ${y}H${x+r}M${x} ${y-r}V${y+r}M${x-r*.7} ${y-r*.7}L${x+r*.7} ${y+r*.7}M${x+r*.7} ${y-r*.7}L${x-r*.7} ${y+r*.7}\" stroke=\"rgba(255,255,255,.6)\" stroke-width=\".8\"/>`;\nconst IC={\npils:(c,a)=>{const P=\"M15 6h18l-2.2 34.2a2 2 0 0 1-2 1.8h-9.6a2 2 0 0 1-2-1.8z\";return LQ(P,6,a)+LQ(P,13,c)+BUB([[21,30],[26,24],[24,35],[28,32]])+G(P)},\nweizen:(c,a)=>{const P=\"M13 5h22l-4.5 35.5a2 2 0 0 1-2 1.7h-9a2 2 0 0 1-2-1.7z\";return LQ(P,5,a)+LQ(P,13,c)+BUB([[21,28],[27,22],[25,34]])+G(P)},\nstange:(c,a)=>{const P=\"M17 6h14l-.6 34a2 2 0 0 1-2 2h-8.8a2 2 0 0 1-2-2z\";return LQ(P,6,a)+LQ(P,11,c)+BUB([[22,28],[26,22],[24,34]])+G(P)},\nmug:(c,a)=>{const P=\"M10 12h22v26a3 3 0 0 1-3 3H13a3 3 0 0 1-3-3z\";return ST(\"M32 17h3.5a4 4 0 0 1 4 4v9a4 4 0 0 1-4 4H32\",3)+LQ(P,12,a)+LQ(P,19,c)+`<circle cx=\"14.5\" cy=\"12\" r=\"4.5\" fill=\"${a}\"/><circle cx=\"22\" cy=\"9.5\" r=\"5.2\" fill=\"${a}\"/><circle cx=\"29\" cy=\"12\" r=\"4\" fill=\"${a}\"/>`+BUB([[17,30],[23,26],[20,35]])+G(P)},\nbottle:(c,a)=>{const P=\"M21 3h6v10c0 3 5 5 5 10v16a3 3 0 0 1-3 3H19a3 3 0 0 1-3-3V23c0-5 5-7 5-10z\";return LQ(P,14,c)+`<rect x=\"16.5\" y=\"26\" width=\"15\" height=\"11\" rx=\"1.5\" fill=\"${a}\"/><rect x=\"20.5\" y=\"1.8\" width=\"7\" height=\"3.2\" rx=\"1\" fill=\"${a}\"/>`+G(P)},\ncan:(c,a)=>{const P=\"M13 9h22v30a3 3 0 0 1-3 3H16a3 3 0 0 1-3-3z\";return `<path d=\"${P}\" fill=\"${c}\"/><rect x=\"13\" y=\"21\" width=\"22\" height=\"9\" fill=\"${a}\"/><ellipse cx=\"24\" cy=\"9\" rx=\"11\" ry=\"2.6\" fill=\"rgba(255,255,255,.55)\"/>`+G(P).replace('rgba(255,255,255,.1)','none')},\nbucket:(c,a)=>{const P=\"M9 18h30l-3.5 21a3 3 0 0 1-3 2.5h-17a3 3 0 0 1-3-2.5z\";return ST(\"M20 18 15 4M27 18 33 3\",2.6).replace(/rgba\\(255,255,255,.92\\)/,a)+LQ(P,22,c)+ICE([[14,24,-10],[22,27,14],[28,23,-6]])+G(P)+slice(37,17,5,a)},\nwine:(c,a)=>{const B=\"M14 5h20c1 12-3.5 20-10 20S13 17 14 5z\";return LQ(B,13,c)+G(B)+ST(\"M24 25v14\")+ST(\"M16.5 41.5h15\",2.6)},\nspritz:(c,a)=>{const B=\"M10 8h28c0 13-6 21-14 21S10 21 10 8z\";return LQ(B,13,c)+ICE([[16,14,-10],[24,16,14],[30,13,-6]])+G(B)+ST(\"M24 29v11\")+ST(\"M16.5 41.5h15\",2.6)+slice(37,9,6.2,a)},\nflute:(c,a)=>{const B=\"M19 4h10l-1.2 22c-.2 3-1.6 4.5-3.8 4.5S20.2 29 20 26z\";return LQ(B,9,c)+BUB([[23,24],[25,18],[24,13],[22,20]])+G(B)+ST(\"M24 30.5V40\")+ST(\"M17.5 41.5h13\",2.6)},\nmartini:(c,a)=>{const B=\"M7 8h34L24 27z\";return LQ(B,13,c)+G(B)+ST(\"M24 27v13\")+ST(\"M16.5 41.5h15\",2.6)+ST(\"M31 4 21 19\",1.6)+`<circle cx=\"21.5\" cy=\"18\" r=\"3.2\" fill=\"${a}\" stroke=\"rgba(255,255,255,.8)\" stroke-width=\"1\"/>`},\nhighball:(c,a)=>{const P=\"M14 6h20l-2.3 34.5a2 2 0 0 1-2 1.5H18.3a2 2 0 0 1-2-1.5z\";return ST(\"M29 2 26 28\",2.6).replace(/rgba\\(255,255,255,.92\\)/,a)+LQ(P,12,c)+ICE([[18,16,-8],[25,20,15],[19,27,6]])+G(P)+`<path d=\"M10 9a6 6 0 0 1 12 0z\" fill=\"${a}\" stroke=\"rgba(255,255,255,.8)\" stroke-width=\"1\" transform=\"translate(3 -1)\"/>`},\nhurricane:(c,a)=>{const P=\"M16 5h16c0 7 6 9 6 17 0 7-6 10-14 10S10 29 10 22c0-8 6-10 6-17z\";return LQ(P,11,c)+BUB([[20,22],[27,18]])+G(P)+ST(\"M24 32v8\")+ST(\"M16.5 41.5h15\",2.6)+`<circle cx=\"35\" cy=\"7\" r=\"4.4\" fill=\"${a}\" stroke=\"rgba(255,255,255,.8)\" stroke-width=\"1.2\"/><path d=\"M30 6 38 2\" stroke=\"rgba(255,255,255,.9)\" stroke-width=\"1.6\" stroke-linecap=\"round\"/>`},\nshot:(c,a)=>{const P=\"M15 14h18l-2.6 24.5a2.5 2.5 0 0 1-2.5 2.2H20.1a2.5 2.5 0 0 1-2.5-2.2z\";return LQ(P,19,c)+G(P)+`<path d=\"M18 40h12\" stroke=\"rgba(255,255,255,.5)\" stroke-width=\"1.4\"/>`+(a&&a!=='none'?`<path d=\"M30 10a4 4 0 1 1 8 0z\" fill=\"${a}\" stroke=\"rgba(255,255,255,.8)\" stroke-width=\"1\"/>`:'')},\nsnifter:(c,a)=>{const B=\"M15 14h18c5 5 4 20-9 20S10 19 15 14z\";return LQ(B,24,c)+G(B)+ST(\"M24 34v5\")+ST(\"M17.5 41h13\",2.6)},\njug:(c,a)=>{const P=\"M12 9h20v29a3 3 0 0 1-3 3H15a3 3 0 0 1-3-3z\";return ST(\"M32 14h3.5a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H32\",3)+LQ(P,16,c)+slice(20,24,3.4,a)+slice(26,31,3.4,a)+G(P)+`<path d=\"M10 9h24\" stroke=\"rgba(255,255,255,.92)\" stroke-width=\"2.4\" stroke-linecap=\"round\"/>`},\ncup:(c,a)=>{const P=\"M10 11h24l-2 28a3 3 0 0 1-3 2.5H15a3 3 0 0 1-3-2.5z\";return ST(\"M33 16h3a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4h-3.5\",3)+`<path d=\"${P}\" fill=\"${c}\"/><path d=\"M13 16h18\" stroke=\"rgba(255,255,255,.4)\" stroke-width=\"2\"/>`+G(P).replace('rgba(255,255,255,.1)','none')+`<path d=\"M10 4a8 8 0 0 1 16 0z\" fill=\"${a}\" stroke=\"rgba(255,255,255,.8)\" stroke-width=\"1\" transform=\"translate(5 5)\"/>`}\n};\nconst dsvg=(k,c,a)=>`<svg viewBox=\"0 0 48 48\">${(IC[k]||IC.highball)(c,a)}<\/svg>`;\nconst CATS=['Bier','Wein & Sekt','Cocktails','Longdrinks','Shots','Eimer & Party','Alkoholfrei','Eigene'];\nconst BASE=[\n['Bier','Kölsch Stange (0,2 l)',200,4.8,'stange','#f2c230','#fff7df'],\n['Bier','Pils klein (0,3 l)',300,4.9,'pils','#f5b82e','#fff7df'],\n['Bier','Pils (0,5 l)',500,4.9,'pils','#f5b82e','#fff7df'],\n['Bier','Helles (0,5 l)',500,5,'mug','#f7c948','#fff7df'],\n['Bier','Weizen (0,5 l)',500,5.4,'weizen','#e8a317','#fff3d1'],\n['Bier','Dunkles Weizen (0,5 l)',500,5.3,'weizen','#8a4a16','#f3dcb0'],\n['Bier','Radler (0,5 l)',500,2.5,'mug','#f2dc6b','#fffbe6'],\n['Bier','Bierflasche (0,33 l)',330,5,'bottle','#c98a1a','#f3e4b8'],\n['Bier','Dose Bier (0,5 l)',500,5,'can','#e0a82a','#3a86ff'],\n['Bier','Cerveza Jarra (1 l)',1000,5,'jug','#f5b82e','#ffe9a8'],\n['Wein & Sekt','Weißwein (0,2 l)',200,12,'wine','#f2e394','#fff'],\n['Wein & Sekt','Rotwein (0,2 l)',200,13,'wine','#8b1e3f','#fff'],\n['Wein & Sekt','Rosé (0,2 l)',200,12,'wine','#f29bb0','#fff'],\n['Wein & Sekt','Weinschorle (0,25 l)',250,6,'wine','#f2e394','#fff'],\n['Wein & Sekt','Sekt (0,1 l)',100,11,'flute','#f5e6a8','#fff'],\n['Wein & Sekt','Prosecco / Cava (0,1 l)',100,11,'flute','#f0e08c','#fff'],\n['Wein & Sekt','Sangria Glas (0,2 l)',200,8,'spritz','#b3192f','#ff9a2e'],\n['Cocktails','Aperol Spritz (0,25 l)',250,8,'spritz','#ff7a1a','#ff9a2e'],\n['Cocktails','Hugo (0,25 l)',250,7,'spritz','#e4f0a0','#8ee05a'],\n['Cocktails','Lillet Wild Berry (0,25 l)',250,5.5,'spritz','#d1305e','#ff4d8d'],\n['Cocktails','Mojito (0,3 l)',300,8,'highball','#cdeeb4','#52d17a'],\n['Cocktails','Caipirinha (0,3 l)',300,7,'highball','#e3f2a0','#9be15d'],\n['Cocktails','Caipi Vodka (0,3 l)',300,7,'highball','#eef7b8','#9be15d'],\n['Cocktails','Piña Colada (0,3 l)',300,7,'hurricane','#f6efc9','#ffd23f'],\n['Cocktails','Tequila Sunrise (0,3 l)',300,6,'hurricane','#ff8a1f','#ff3d5a'],\n['Cocktails','Sex on the Beach (0,3 l)',300,6,'hurricane','#ff6a5c','#ffb347'],\n['Cocktails','Long Island Iced Tea (0,4 l)',400,8,'highball','#c98a3a','#ffe066'],\n['Cocktails','Margarita (0,1 l)',100,20,'martini','#d9f08a','#9be15d'],\n['Cocktails','Cosmopolitan (0,1 l)',100,22,'martini','#ff5c8a','#ff9a2e'],\n['Cocktails','Espresso Martini (0,1 l)',100,24,'martini','#3a2113','#d9b38c'],\n['Longdrinks','Gin Tonic (0,25 l)',250,6.4,'highball','#dff3f7','#9be15d'],\n['Longdrinks','Vodka-Energy (0,3 l)',300,8,'highball','#d6f542','#8affc1'],\n['Longdrinks','Vodka-O (0,3 l)',300,8,'highball','#ffb12e','#ff8a1f'],\n['Longdrinks','Vodka Lemon (0,3 l)',300,8,'highball','#f6f09a','#ffe45e'],\n['Longdrinks','Cuba Libre (0,3 l)',300,8,'highball','#4a2511','#9be15d'],\n['Longdrinks','Whisky Cola (0,3 l)',300,7,'highball','#5a2d12','#9be15d'],\n['Longdrinks','Moscow Mule (0,3 l)',300,6,'cup','#c9753b','#9be15d'],\n['Longdrinks','Rum Cola Bacardi (0,3 l)',300,8,'highball','#5a2d12','#9be15d'],\n['Longdrinks','Jägerbomb (0,25 l)',250,5.6,'highball','#e8f04a','#7a3a14'],\n['Shots','Jägermeister (2 cl)',20,35,'shot','#3a1a0a','none'],\n['Shots','Kurzer / Vodka (2 cl)',20,38,'shot','#cfe9ff','none'],\n['Shots','Tequila (2 cl)',20,38,'shot','#e8b44a','#c9f07a'],\n['Shots','Sambuca (2 cl)',20,38,'shot','#e8f4ff','none'],\n['Shots','Berliner Luft (2 cl)',20,18,'shot','#7de3f0','none'],\n['Shots','Pfeffi (2 cl)',20,18,'shot','#6ee7c0','none'],\n['Shots','Underberg (2 cl)',20,44,'shot','#5a2d12','none'],\n['Shots','Averna (2 cl)',20,29,'shot','#4a2a14','none'],\n['Shots','Hierbas Mallorquinas (2 cl)',20,26,'shot','#b6d36a','none'],\n['Shots','Korn (2 cl)',20,32,'shot','#e6f0ff','none'],\n['Shots','Baileys (4 cl)',40,17,'snifter','#c9a27a','none'],\n['Shots','Whisky (4 cl)',40,40,'snifter','#c1761a','none'],\n['Shots','Rum (4 cl)',40,40,'snifter','#a8561a','none'],\n['Shots','Gin pur (4 cl)',40,40,'snifter','#e6f6ff','none'],\n['Eimer & Party','Sangria-Eimer (1 l)',1000,8,'bucket','#b3192f','#ff9a2e'],\n['Eimer & Party','Cocktail-Eimer (1 l)',1000,10,'bucket','#ff4d8d','#ffd23f'],\n['Eimer & Party','Vodka-Energy-Eimer (1 l)',1000,8,'bucket','#d6f542','#8affc1'],\n['Eimer & Party','Aperol-Eimer (1 l)',1000,8,'bucket','#ff7a1a','#ff9a2e'],\n['Eimer & Party','Sekt-Flasche (0,75 l)',750,11,'bottle','#c8b160','#fff'],\n['Eimer & Party','Weinflasche (0,75 l)',750,12.5,'bottle','#6e1830','#f5e6c8'],\n['Alkoholfrei','Wasser (0,5 l)',500,0,'bottle','#8fd3ff','#eaf8ff'],\n['Alkoholfrei','Sprudelwasser (0,3 l)',300,0,'highball','#bfe9ff','#ffffff'],\n['Alkoholfrei','Cola (0,3 l)',300,0,'highball','#4a2511','#f3e2cf'],\n['Alkoholfrei','Fanta / Orangenlimo (0,3 l)',300,0,'highball','#ff9a1f','#fff0d0'],\n['Alkoholfrei','Sprite / Zitronenlimo (0,3 l)',300,0,'highball','#e8f27a','#ffffff'],\n['Alkoholfrei','Apfelschorle (0,3 l)',300,0,'highball','#f0cf5a','#fff7d6'],\n['Alkoholfrei','Orangensaft (0,2 l)',200,0,'highball','#ffa733','#fff0d0'],\n['Alkoholfrei','Eistee (0,3 l)',300,0,'highball','#d9902f','#fff0d0'],\n['Alkoholfrei','Energy Drink (0,25 l)',250,0,'can','#c8f542','#f4ffd0'],\n['Alkoholfrei','Alkoholfreies Bier (0,5 l)',500,0,'pils','#f5b82e','#fff7df'],\n['Alkoholfrei','Virgin Colada (0,3 l)',300,0,'hurricane','#fff0c7','#ffffff'],\n['Alkoholfrei','Virgin Mojito (0,3 l)',300,0,'highball','#b7f0a0','#eaffdf'],\n['Alkoholfrei','Kaffee (0,2 l)',200,0,'cup','#4b2e1f','#f3e2cf'],\n];\nconst BEERP=['Glas kalt ausspülen und schräg (45°) halten.','Bier ohne Hahnberührung einlaufen lassen.','Glas aufrichten, Schaum kurz setzen lassen und nachzapfen, bis die Krone steht.'];\nconst R={\n'Kölsch Stange (0,2 l)':['Kölsch-Stange',['0,2 l Kölsch, kalt (6–8 °C)'],['Stange kalt ausspülen.','Glas leicht schräg unter den Hahn halten und zügig einlaufen lassen.','Aufrichten, bis eine feine Schaumkrone steht.']],\n'Pils klein (0,3 l)':['Pilstulpe',['0,3 l Pils, kalt'],BEERP],\n'Pils (0,5 l)':['Pilstulpe',['0,5 l Pils, kalt'],BEERP],\n'Helles (0,5 l)':['Maßkrug / Willibecher',['0,5 l Helles, kalt'],BEERP],\n'Weizen (0,5 l)':['Weizenglas',['0,5 l Weißbier, kalt'],['Weizenglas kalt ausspülen, nicht abtrocknen.','Glas schräg halten, Bier langsam einlaufen lassen und die Flasche dabei drehen.','Rest (ca. 2 cm) in der Flasche aufschwenken, Hefe lösen und oben aufgießen.']],\n'Dunkles Weizen (0,5 l)':['Weizenglas',['0,5 l dunkles Weißbier, kalt'],['Weizenglas kalt ausspülen.','Glas schräg halten, Bier langsam einlaufen lassen.','Rest in der Flasche aufschwenken und oben aufgießen.']],\n'Radler (0,5 l)':['Glaskrug',['0,25 l Bier (Pils oder Helles)','0,25 l Zitronenlimonade (1 : 1)'],['Bier schräg ins Glas einlaufen lassen.','Mit gut gekühlter Zitronenlimonade auffüllen.','Nicht umrühren – sofort servieren.']],\n'Bierflasche (0,33 l)':['Flasche',['0,33 l Bier, kalt'],['Gut gekühlt öffnen und direkt oder im Glas servieren.']],\n'Dose Bier (0,5 l)':['Dose',['0,5 l Bier, kalt'],['Gut gekühlt öffnen. Für mehr Aroma ins Glas gießen.']],\n'Cerveza Jarra (1 l)':['Jarra (1-l-Krug)',['1 l Bier vom Fass, kalt'],['Krug kalt ausspülen.','Schräg unter den Hahn halten und einlaufen lassen.','Aufrichten und Schaumkrone setzen lassen.']],\n'Weißwein (0,2 l)':['Weißweinglas',['0,2 l Weißwein, 8–10 °C'],['Wein gut kühlen.','Glas zu etwa einem Drittel füllen.','Am Stiel halten, damit der Wein kühl bleibt.']],\n'Rotwein (0,2 l)':['Rotweinglas',['0,2 l Rotwein, 16–18 °C'],['Raumtemperatur leicht gekühlt servieren.','Glas zu etwa einem Drittel füllen.','Kurz im Glas atmen lassen.']],\n'Rosé (0,2 l)':['Weinglas',['0,2 l Rosé, 8–10 °C'],['Gut gekühlt servieren.','Glas zu etwa einem Drittel füllen.']],\n'Weinschorle (0,25 l)':['Weinglas / Schorlenglas',['0,125 l Wein (weiß oder rot)','0,125 l Mineralwasser mit Kohlensäure (1 : 1)','Eiswürfel (optional)'],['Wein ins Glas geben.','Mit Mineralwasser auffüllen.','Nach Wunsch Eis dazugeben.']],\n'Sekt (0,1 l)':['Sektflöte',['0,1 l Sekt, 6–8 °C'],['Flasche gut kühlen und vorsichtig öffnen.','Flöte schräg halten und langsam einschenken.']],\n'Prosecco / Cava (0,1 l)':['Sektflöte',['0,1 l Prosecco oder Cava, 6–8 °C'],['Gut gekühlt öffnen.','Flöte schräg halten und langsam einschenken.']],\n'Sangria Glas (0,2 l)':['Weinglas (aus dem Krug)',['Für einen Krug (ca. 4 Gläser):','0,75 l Rotwein (jung, fruchtig)','1 Orange, 1 Zitrone, 1 Apfel in Stücken','2–3 EL Zucker','5 cl Brandy oder Orangenlikör','100 ml Orangensaft, Eis'],['Obst mit Zucker und Brandy in einen Krug geben und 30 Min. ziehen lassen.','Wein und Orangensaft dazugeben, umrühren.','Mindestens 2 Std. kalt stellen, mit Eis servieren. Optional mit Mineralwasser auffüllen.']],\n'Aperol Spritz (0,25 l)':['Weinglas / Tumbler',['9 cl Prosecco','6 cl Aperol','3 cl Sodawasser (3 : 2 : 1)','Eiswürfel','1 Orangenscheibe'],['Glas mit Eis füllen.','Erst Prosecco, dann Aperol eingießen.','Mit einem Schuss Soda auffüllen und einmal kurz umrühren.','Mit Orangenscheibe garnieren.']],\n'Hugo (0,25 l)':['Weinglas',['12 cl Prosecco','2 cl Holunderblütensirup','5 cl Sodawasser','6 Minzblätter, 2 Limettenscheiben','Eiswürfel'],['Minze und Limettenscheiben im Glas leicht andrücken.','Eis dazugeben, Sirup eingießen.','Mit Prosecco und Soda auffüllen, kurz umrühren.']],\n'Lillet Wild Berry (0,25 l)':['Weinglas',['8 cl Lillet Blanc','12 cl Tonic Water','Beeren (Himbeeren, Erdbeeren, Brombeeren)','1 Orangenscheibe, Eiswürfel'],['Glas mit Eis und Beeren füllen.','Lillet eingießen.','Mit Tonic auffüllen und mit Orangenscheibe garnieren.']],\n'Mojito (0,3 l)':['Highball-Glas',['4 cl weißer Rum','3 cl frischer Limettensaft','6 Minzzweige','2 TL weißer Zucker','Sodawasser, Crushed Ice'],['Minze mit Zucker und Limettensaft im Glas leicht andrücken.','Mit einem Schuss Soda und Crushed Ice füllen.','Rum eingießen, mit Soda auffüllen und kurz umrühren.','Mit Minzzweig garnieren.']],\n'Caipirinha (0,3 l)':['Tumbler',['5 cl Cachaça','1 Limette, in 8 Stücke geschnitten','2 TL Rohrzucker','Crushed Ice'],['Limettenstücke mit Zucker im Glas kräftig andrücken.','Mit Crushed Ice auffüllen.','Cachaça darübergeben und umrühren.']],\n'Caipi Vodka (0,3 l)':['Tumbler',['5 cl Vodka','1 Limette, in 8 Stücke geschnitten','2 TL Rohrzucker','Crushed Ice'],['Limettenstücke mit Zucker im Glas kräftig andrücken.','Mit Crushed Ice auffüllen.','Vodka darübergeben und umrühren.']],\n'Piña Colada (0,3 l)':['Hurricane-Glas',['5 cl weißer Rum','3 cl Kokoscreme','5 cl Ananassaft','Crushed Ice, Ananasstück'],['Alle Zutaten mit Eis im Mixer cremig mixen (oder kräftig shaken).','In ein gekühltes Hurricane-Glas füllen.','Mit Ananas garnieren.']],\n'Tequila Sunrise (0,3 l)':['Highball-Glas',['4,5 cl Tequila','9 cl Orangensaft','1,5 cl Grenadine','Eiswürfel'],['Glas mit Eis füllen, Tequila und Orangensaft eingießen.','Grenadine langsam am Glasrand einlaufen lassen – sie sinkt nach unten (Sonnenaufgang).','Nicht umrühren, mit Orangenscheibe garnieren.']],\n'Sex on the Beach (0,3 l)':['Highball-Glas',['4 cl Vodka','2 cl Pfirsichlikör','4 cl Orangensaft','4 cl Cranberrysaft','Eiswürfel'],['Glas mit Eis füllen.','Alle Zutaten dazugeben und kurz umrühren.','Mit Orangenscheibe garnieren.']],\n'Long Island Iced Tea (0,4 l)':['Longdrinkglas',['1,5 cl Gin','1,5 cl Wodka','1,5 cl weißer Rum','1,5 cl Tequila','1,5 cl Triple Sec','2,5 cl Limettensaft','3 cl Zuckersirup','Cola zum Auffüllen'],['Glas mit Eiswürfeln füllen.','Alle Spirituosen, Saft und Sirup hineingeben.','Mit einem Schuss Cola auffüllen und vorsichtig umrühren.','Mit Strohhalm und Zitronenscheibe servieren.']],\n'Margarita (0,1 l)':['Cocktailschale mit Salzrand',['3,5 cl Tequila','2 cl Cointreau','1,5 cl Limettensaft','Salz für den Rand, Eiswürfel'],['Glasrand mit Limette befeuchten und in Salz tauchen.','Alle Zutaten mit Eis im Shaker kräftig schütteln.','In die gekühlte Schale abseihen.']],\n'Cosmopolitan (0,1 l)':['Martiniglas',['4 cl Citron-Wodka','1,5 cl Cointreau','1,5 cl Limettensaft','3 cl Cranberrysaft','Eiswürfel'],['Alle Zutaten mit Eis im Shaker gut schütteln.','In ein gekühltes Martiniglas abseihen.','Mit Limettenscheibe garnieren.']],\n'Espresso Martini (0,1 l)':['Martiniglas',['5 cl Wodka','2 cl Kaffeelikör','3 cl frischer Espresso (abgekühlt)','1 cl Zuckersirup','Eiswürfel, 3 Kaffeebohnen'],['Alles mit viel Eis im Shaker kräftig schütteln, bis der Shaker beschlägt.','In ein gekühltes Martiniglas abseihen.','Mit 3 Kaffeebohnen garnieren (Richtwerte).']],\n'Gin Tonic (0,25 l)':['Tumbler / Ballonglas',['4 cl Gin','12 cl Tonic Water (1 : 3)','Eiswürfel','Limette oder Gurkenscheibe'],['Glas mit viel Eis füllen.','Gin eingießen.','Mit kaltem Tonic auffüllen, einmal vorsichtig umrühren und garnieren.']],\n'Vodka-Energy (0,3 l)':['Longdrinkglas',['6 cl Wodka','ca. 20 cl Energy Drink','Eiswürfel','Zitronenscheibe'],['Glas mit Eis füllen.','Wodka eingießen.','Mit Energy Drink auffüllen und kurz umrühren.']],\n'Vodka-O (0,3 l)':['Longdrinkglas',['6 cl Wodka','ca. 20 cl Orangensaft','Eiswürfel'],['Glas mit Eis füllen.','Wodka eingießen und mit Orangensaft auffüllen.','Kurz umrühren.']],\n'Vodka Lemon (0,3 l)':['Longdrinkglas',['6 cl Wodka','ca. 20 cl Bitter Lemon','Eiswürfel','Zitronenscheibe'],['Glas mit Eis füllen.','Wodka eingießen und mit Bitter Lemon auffüllen.','Kurz umrühren.']],\n'Cuba Libre (0,3 l)':['Highball-Glas',['5 cl weißer Rum','12 cl Cola','1 cl Limettensaft','Eiswürfel, Limettenstück'],['Glas mit Eis füllen.','Rum und Limettensaft eingießen.','Mit Cola auffüllen und umrühren, Limette ins Glas drücken.']],\n'Whisky Cola (0,3 l)':['Longdrinkglas',['5 cl Whisky','ca. 20 cl Cola','Eiswürfel'],['Glas mit Eis füllen.','Whisky eingießen und mit Cola auffüllen.','Kurz umrühren.']],\n'Moscow Mule (0,3 l)':['Kupferbecher',['4,5 cl Wodka','15 cl Ginger Beer','0,5 cl Limettensaft','Eiswürfel, Limettenscheibe'],['Becher mit Eis füllen.','Wodka und Limettensaft eingießen.','Mit kaltem Ginger Beer auffüllen und mit Limette garnieren.']],\n'Rum Cola Bacardi (0,3 l)':['Longdrinkglas',['6 cl Bacardi (weißer Rum)','ca. 20 cl Cola','Eiswürfel','Limettenstück'],['Glas mit Eis füllen.','Bacardi eingießen und mit Cola auffüllen.','Kurz umrühren, Limette dazugeben.']],\n'Jägerbomb (0,25 l)':['Glas + Shotglas',['4 cl Jägermeister','ca. 15 cl Energy Drink'],['Energy Drink ins Glas füllen.','Shotglas mit Jägermeister vorsichtig ins Glas gleiten lassen.','Sofort trinken.']],\n'Jägermeister (2 cl)':['Shotglas',['2 cl Jägermeister, eiskalt (ca. −18 °C)'],['Shotglas aus dem Gefrierfach nehmen.','2 cl einschenken, eiskalt servieren.']],\n'Kurzer / Vodka (2 cl)':['Shotglas',['2 cl Wodka, eiskalt'],['Wodka gut kühlen.','2 cl einschenken und eiskalt servieren.']],\n'Tequila (2 cl)':['Shotglas',['2 cl Tequila','Salz, Zitronen- oder Limettenspalte'],['Salz auf Handrücken oder Glasrand geben.','Salz lecken, Tequila trinken, in die Zitrone beißen.']],\n'Sambuca (2 cl)':['Shotglas',['2 cl Sambuca','3 Kaffeebohnen'],['Sambuca einschenken.','Mit 3 Kaffeebohnen garnieren und gekühlt servieren.']],\n'Berliner Luft (2 cl)':['Shotglas',['2 cl Berliner Luft, eisgekühlt'],['Eiskalt aus dem Gefrierfach einschenken.']],\n'Pfeffi (2 cl)':['Shotglas',['2 cl Pfefferminzlikör, gut gekühlt'],['Gut gekühlt einschenken und servieren.']],\n'Underberg (2 cl)':['Portionsfläschchen',['1 Fläschchen Underberg (2 cl)'],['Fläschchen öffnen und in einem Zug trinken.']],\n'Averna (2 cl)':['Digestifglas',['2 cl Averna','Eis oder Zitronenzeste (optional)'],['Gekühlt oder auf Eis servieren.']],\n'Hierbas Mallorquinas (2 cl)':['Digestifglas',['2 cl Hierbas (mallorquinischer Kräuterlikör)','Eis (optional)'],['Gekühlt oder auf Eis servieren – klassischer Digestif nach dem Essen.']],\n'Korn (2 cl)':['Schnapsglas',['2 cl Korn, eiskalt'],['Gut kühlen, einschenken und servieren.']],\n'Baileys (4 cl)':['Tumbler',['4 cl Baileys','Eiswürfel'],['Eiswürfel ins Glas geben.','Baileys eingießen und kurz schwenken.']],\n'Whisky (4 cl)':['Tumbler / Nosing-Glas',['4 cl Whisky','Eis oder Wasser (optional)'],['Pur oder mit etwas Wasser/Eis servieren.']],\n'Rum (4 cl)':['Tumbler / Snifter',['4 cl Rum','Eis (optional)'],['Pur oder auf Eis servieren.']],\n'Gin pur (4 cl)':['Tumbler',['4 cl Gin','Eis (optional)'],['Gut gekühlt, pur oder auf Eis servieren.']],\n'Sangria-Eimer (1 l)':['Strandeimer mit Strohhalmen',['ca. 0,5 l Rotwein','ca. 0,4 l Orangensaft/Limo und Obststücke','4 cl Brandy','Viel Eis, mehrere Strohhalme'],['Eimer zur Hälfte mit Eis füllen.','Rotwein, Brandy und Obststücke dazugeben.','Mit Orangensaft/Limo auffüllen, umrühren – zum Teilen gedacht.']],\n'Cocktail-Eimer (1 l)':['Strandeimer mit Strohhalmen',['je ca. 8 cl Wodka, Rum und Triple Sec','Fruchtsäfte (Orange, Ananas, Maracuja)','Grenadine, viel Eis'],['Eimer mit Eis füllen.','Spirituosen eingießen.','Mit Säften auffüllen und Grenadine dazugeben – zum Teilen gedacht.']],\n'Vodka-Energy-Eimer (1 l)':['Strandeimer mit Strohhalmen',['ca. 20 cl Wodka','Energy Drink zum Auffüllen','Viel Eis'],['Eimer mit Eis füllen.','Wodka eingießen.','Mit Energy Drink auffüllen und umrühren – zum Teilen gedacht.']],\n'Aperol-Eimer (1 l)':['Strandeimer mit Strohhalmen',['ca. 40 cl Prosecco','ca. 20 cl Aperol','Sodawasser, Orangenscheiben, Eis'],['Eimer mit Eis und Orangenscheiben füllen.','Aperol und Prosecco eingießen.','Mit Soda auffüllen – zum Teilen gedacht.']],\n'Sekt-Flasche (0,75 l)':['Sektflöte',['0,75 l Sekt, 6–8 °C'],['Flasche gut kühlen, vorsichtig öffnen.','Flöten schräg halten und langsam einschenken.']],\n'Weinflasche (0,75 l)':['Weinglas',['0,75 l Wein, passend gekühlt'],['Weißwein 8–10 °C, Rotwein 16–18 °C servieren.','Gläser zu einem Drittel füllen.']]\n};\nlet items=[],filterCat='Alle',query='';\nBASE.forEach(b=>items.push({cat:b[0],name:b[1],ml:b[2],abv:b[3],ic:b[4],col:b[5],acc:b[6],cnt:0}));\nconst gOf=it=>it.ml*it.abv/100*.8;\nconst f=(x,d=2)=>x.toFixed(d).replace('.',',');\nconst hm=h=>{const m=Math.round((((h%24)+24)%24)*60);return String(Math.floor(m/60)%24).padStart(2,'0')+':'+String(m%60).padStart(2,'0')};\nconst toH=s=>{const [a,b]=s.split(':').map(Number);return a+b/60};\nconst clock=()=>{const d=new Date();return hm(d.getHours()+d.getMinutes()/60)};\nconst total=()=>items.reduce((a,i)=>a+i.cnt,0);\nconst alcTotal=()=>items.reduce((a,i)=>a+(i.abv>0?i.cnt:0),0);\nlet cfg={rate:.15,def:.2,safe:5,hidden:[]};\nfunction loadCfg(){try{const c=JSON.parse(localStorage.getItem('m27a')||'null');if(c)cfg={...cfg,...c}}catch(e){}applyCfg()}\nfunction saveCfg(){try{localStorage.setItem('m27a',JSON.stringify(cfg))}catch(e){}}\nfunction applyCfg(){RATE=cfg.rate;DEF=cfg.def;SAFE_H=cfg.safe;\n$('infoc').innerHTML=`<b>Promille:<\/b> Widmark-Formel: Alkohol (g) × ${f(1-DEF,2)} ÷ (Gewicht × r), r = 0,7 (Mann) / 0,6 (Frau), ${Math.round(DEF*100)} % Resorptionsdefizit. Die Getränke werden gleichmäßig von deiner Startzeit bis zum letzten Tippen auf + verteilt, jedes gelangt über ca. ${Math.round(ABS_H*60)} Min. ins Blut; Abbau ${f(RATE,2)} ‰ pro Stunde. „Unter 0,5 ‰ ab“ und „Nüchtern ab“ sind bewusst vorsichtig gerechnet (schwächerer Abbau, geringeres Defizit). <b>Liedtextsicherheit:<\/b> ab dem ersten Getränk linear, nach ${SAFE_H} Stunden 100 %. Mix-Getränke sind Durchschnittswerte – Malle-Gläser sind oft stärker eingeschenkt. Nur Schätzung (± 0,3 ‰) – nach Alkohol nicht fahren.`}\nconst vis=it=>!cfg.hidden.includes(it.name);\nfunction renderChips(){const cats=['Alle',...CATS.filter(c=>items.some(i=>i.cat===c&&vis(i)))];\nif(!cats.includes(filterCat))filterCat='Alle';\n$('chips').innerHTML=cats.map(c=>`<button class=\"chip${c===filterCat?' on':''}\" data-c=\"${esc(c)}\">${esc(c)}<\/button>`).join('');\n$('chips').querySelectorAll('.chip').forEach(b=>b.onclick=()=>{filterCat=b.dataset.c;renderChips();renderList()})}\nfunction renderList(){const L=$('list');L.innerHTML='';let k=0;\nCATS.forEach(cat=>{if(filterCat!=='Alle'&&filterCat!==cat)return;\nconst arr=items.map((it,i)=>[it,i]).filter(([it])=>it.cat===cat&&vis(it)&&it.name.toLowerCase().includes(query));\nif(!arr.length)return;L.insertAdjacentHTML('beforeend',`<div class=\"cat\">${cat}<\/div>`);\narr.forEach(([it,i])=>{L.insertAdjacentHTML('beforeend',`<div class=\"drink${it.cnt?' has':''}\" id=\"d${i}\" style=\"animation-delay:${Math.min(k++,14)*25}ms\"><div class=\"l\"><div class=\"dic\">${dsvg(it.ic,it.col,it.acc)}<\/div><div><div class=\"nm\">${esc(it.name)}<\/div><small>${String(it.abv).replace('.',',')} Vol.-% · ${f(gOf(it),1)} g Alkohol<\/small>${it.custom?'':`<button class=\"rbtn\" onclick=\"openR(${i})\" aria-label=\"Rezept\">${ic('book')}Rezept<\/button>`}<\/div><\/div><div class=\"ctr\"><button onclick=\"chg(${i},-1)\" aria-label=\"weniger\">${ic('minus')}<\/button><span id=\"c${i}\">${it.cnt}<\/span><button class=\"p\" onclick=\"chg(${i},1)\" aria-label=\"mehr\">${ic('plus')}<\/button><\/div><\/div>`)})});\nif(!L.children.length)L.innerHTML='<p class=\"info\">Nichts gefunden – füge unten ein eigenes Getränk hinzu.<\/p>'}\nfunction openR(i){const it=items[i];const r=R[it.name]||['Glas',['Zutaten nach Geschmack'],['Gut gekühlt servieren.']];\n$('sheet').className='sheet';\n$('sheet').innerHTML=`<div class=\"sh-h\"><div class=\"dic\">${dsvg(it.ic,it.col,it.acc)}<\/div><h3>${esc(it.name)}<\/h3><button class=\"xbtn\" onclick=\"closeR()\" aria-label=\"Schließen\">${ic('x')}<\/button><\/div>\n<div class=\"tags\"><span class=\"tag\">${r[0]}<\/span><span class=\"tag\">${String(it.abv).replace('.',',')} Vol.-%<\/span><span class=\"tag\">${f(gOf(it),1)} g Alkohol<\/span><\/div>\n<h4>Zutaten<\/h4><ul>${r[1].map((z,k)=>`<li style=\"animation-delay:${k*40}ms\">${z}<\/li>`).join('')}<\/ul>\n<h4>Zubereitung<\/h4><ol>${r[2].map((z,k)=>`<li style=\"animation-delay:${120+k*60}ms\">${z}<\/li>`).join('')}<\/ol>\n<div class=\"sh-n\">Richtwerte nach gängigen Standardrezepten (u. a. IBA). Auf Malle werden Drinks oft stärker oder anders gemischt – die Alkoholwerte der App sind Durchschnittswerte.<\/div>`;\n$('sheet').scrollTop=0;$('ov').classList.add('on')}\nfunction closeR(){$('ov').classList.remove('on')}\n$('ov').addEventListener('click',e=>{if(e.target.id==='ov')closeR()});\ndocument.addEventListener('keydown',e=>{if(e.key==='Escape')closeR()});\nfunction chg(i,n){const before=alcTotal();const it=items[i];it.cnt=Math.max(0,it.cnt+n);\nif(it.abv>0&&before===0&&it.cnt>0){$('start').value=clock();$('now').value=clock();delete $('now').dataset.m}\nif(n>0&&it.abv>0)lastTap=clock();\nconst s=$('c'+i);if(s){s.textContent=it.cnt;s.classList.remove('pop');void s.offsetWidth;s.classList.add('pop');$('d'+i).classList.toggle('has',it.cnt>0)}calc()}\nfunction resetAll(){delete $('now').dataset.m;lastTap=null;items.forEach(i=>i.cnt=0);renderList();calc()}\nfunction addCustom(){const n=$('cn').value.trim().slice(0,40)||'Eigenes Getränk',ml=+$('cm').value,ab=+$('ca').value;\nif(!(ml>0)||!(ab>=0))return;items.push({cat:'Eigene',name:n,ml,abv:ab,ic:'highball',col:'#8ab4ff',acc:'#ffffff',cnt:0,custom:1});\n$('cn').value='';filterCat='Eigene';renderChips();renderList();save()}\n$('q').oninput=e=>{query=e.target.value.toLowerCase();renderList()};\nfunction go(t){document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('on',x.dataset.t===t));\ndocument.querySelectorAll('.tab').forEach(s=>s.classList.toggle('on',s.id===t));\nwindow.scrollTo(0,0);calc();if(t==='board')renderBoard()}\ndocument.querySelectorAll('nav button').forEach(b=>b.onclick=()=>go(b.dataset.t));\ndocument.querySelectorAll('#sexseg button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#sexseg button').forEach(x=>x.classList.toggle('on',x===b));calc()});\nlet RATE=.15,DEF=.2,SAFE_H=5,lastTap=null;const ABS_H=.75;\nconst sex=()=>+document.querySelector('#sexseg .on').dataset.v;\nconst clampN=(v,a,b)=>Math.max(a,Math.min(b,v));\nfunction drinkTimes(tl){const arr=[];items.forEach(it=>{if(it.cnt>0){const g=gOf(it);for(let j=0;j<it.cnt;j++)arr.push({p:(j+.5)/it.cnt,g})}});\narr.sort((x,y)=>x.p-y.p);const N=arr.length;arr.forEach((d,i)=>d.t=N>1?tl*i/(N-1):0);return arr}\nfunction simBac(dr,k,rate,tl){const dt=1/60,gt=dr.reduce((q,d)=>q+d.g,0);if(!gt)return {arr:[0],dt};\nconst T=Math.min(72,tl+ABS_H+gt*k/rate+2),steps=Math.ceil(T/dt),arr=new Float32Array(steps+1);let b=0;\nfor(let i=0;i<steps;i++){const t=i*dt;let inc=0;\nfor(const d of dr){if(t+dt<=d.t||t>=d.t+ABS_H)continue;inc+=d.g*(clampN((t+dt-d.t)/ABS_H,0,1)-clampN((t-d.t)/ABS_H,0,1))}\nb+=inc*k;if(b>0)b=Math.max(0,b-rate*dt);arr[i+1]=b}\nreturn {arr,dt}}\nconst atT=(S,t)=>{if(t<=0)return 0;const x=t/S.dt,i=Math.floor(x);if(i>=S.arr.length-1)return S.arr[S.arr.length-1];return S.arr[i]+(S.arr[i+1]-S.arr[i])*(x-i)};\nlet _mk='',_mv=null;\nfunction model(){const grams=items.reduce((q,it)=>q+it.cnt*gOf(it),0);\nconst w=Math.max(30,+$('w').value||80),r=sex(),s=toH($('start').value||'20:00');\nlet tl=toH(lastTap||clock())-s;if(tl<-12)tl+=24;tl=clampN(tl,0,24);\nconst key=[items.map(i=>i.cnt).join(','),w,r,s,tl.toFixed(3),RATE,DEF].join('|');\nif(key===_mk&&_mv)return _mv;\nconst W=grams*(1-DEF)/(w*r);\nif(!(grams>0)){_mv={grams:0,W:0,peak:0,bac:()=>0,tSober:0,tSoberR:0,tLim:0};_mk=key;return _mv}\nconst dr=drinkTimes(tl),R=simBac(dr,(1-DEF)/(w*r),RATE,tl);\nconst defC=Math.min(DEF,.1),rateC=Math.min(RATE,.1),C=simBac(dr,(1-defC)/(w*r),rateC,tl);\nlet last=-1;for(let i=0;i<C.arr.length;i++)if(C.arr[i]>.5)last=i;\nconst tLim=last<0?0:(last+1)*C.dt;\nlet lastPos=0;for(let i=0;i<C.arr.length;i++)if(C.arr[i]>0)lastPos=i;\nconst tSober=(lastPos+1)*C.dt;\nlet peak=0;for(let i=0;i<R.arr.length;i++)if(R.arr[i]>peak)peak=R.arr[i];\nlet lpR=0;for(let i=0;i<R.arr.length;i++)if(R.arr[i]>0)lpR=i;const tSoberR=(lpR+1)*R.dt;\n_mv={grams,W,peak,bac:t=>atT(R,t),tSober,tSoberR,tLim};_mk=key;return _mv}\nconst lyricT=(t,g)=>g>0?Math.max(0,Math.min(100,t/SAFE_H*100)):0;\nconst level=p=>p<=0?'':p<20?'Nur Refrain-Summen':p<45?'Erste Strophe sitzt':p<75?'Refrain laut mitgrölen':p<100?'Fast textsicher':'Ballermann-Profi: 100 % textsicher';\nlet anim={};\nfunction tween(key,to,cb){const from=anim[key]??0;const t0=performance.now();cancelAnimationFrame(anim[key+'r']);\nconst step=t=>{const p=Math.min(1,(t-t0)/800),e=1-Math.pow(1-p,3);const v=from+(to-from)*e;anim[key]=v;cb(v);if(p<1)anim[key+'r']=requestAnimationFrame(step)};anim[key+'r']=requestAnimationFrame(step)}\nfunction calc(){\nconst m=model();const s=toH($('start').value||'20:00');\nif(!$('now').value)$('now').value=clock();\nlet tn=toH($('now').value)-s;if(tn<-12)tn+=24;if(tn<0)tn=0;\nconst b=m.bac(tn),sf=lyricT(tn,m.grams);\nconst col=b<.3?'#2ee59d':b<.5?'#ffd23f':b<1.1?'#ff8a3d':'#ff4d5e';\ntween('bac',b,v=>$('bac').textContent=f(v)+' ‰');\ntween('sf',sf,v=>{$('safeBig').textContent=Math.round(v)+'%';$('ring').style.strokeDashoffset=540.4*(1-v/100)});\n$('bac').style.color=col;\nconst txt=b<.3?'Unter 0,3 ‰':b<.5?'Ab 0,3 ‰ – Vorsicht':b<1.1?'Über 0,5 ‰ – nicht fahren!':'Ab 1,1 ‰ – absolut fahruntüchtig';\nconst st=$('status');st.innerHTML=`<span class=\"dot\"><\/span>${txt}`;st.style.background=col+'26';st.style.color=col;\n$('gr').textContent=Math.round(m.grams)+' g';\n$('sober').textContent=m.grams>0&&m.W>0?hm(s+m.tSober):'–';\n$('drive').textContent=m.grams>0?(m.tLim<=0?'sofort':hm(s+m.tLim)):'–';\nsetMood(b);tween('hb',b,v=>$('hBac').textContent=f(v)+' ‰');$('hBac').style.color=col;\ntween('hs',sf,v=>{const c=v>=99.5?'#2ee59d':v<34?'#ff4d5e':v<67?'#ff8a3d':'#a3e635';\n$('pie').style.background=`conic-gradient(${c} ${v}%,rgba(255,255,255,.08) 0)`;\n$('pie').style.boxShadow=`0 0 0 8px rgba(255,255,255,.05),0 20px 60px rgba(0,0,0,.5),0 0 60px ${c}55`;\n$('hSafe').textContent=Math.round(v)+' %'});\n$('hLvl').textContent=level(sf);\n$('hSub').textContent=m.grams>0?(sf>=100?'':'100 % um '+hm(s+SAFE_H)+' · erstes Getränk '+hm(s)):'';\n$('hHint').style.display=m.grams>0?'none':'block';\nconst n=total();$('total').textContent=n+(n===1?' Getränk':' Getränke');$('totalg').textContent=Math.round(m.grams)+' g Alkohol';\n$('badge').style.display=n?'inline':'none';$('badge').textContent=n;\n$('start2').value=$('start').value;$('now2').value=$('now').value;\ndrawAll(m,s,tn);save();schedulePush();if($('board').classList.contains('on'))renderBoard()}\nfunction payload(){return {custom:items.filter(i=>i.custom).map(i=>({...i,cnt:0})),cnt:items.filter(i=>i.cnt).map(i=>[i.name,i.cnt]),start:$('start').value,last:lastTap,w:$('w').value,sex:sex()}}\nfunction save(){try{localStorage.setItem('m27',JSON.stringify(payload()))}catch(e){}}\nfunction applyData(d){lastTap=d.last||null;items=items.filter(i=>!i.custom);items.forEach(i=>i.cnt=0);\n(d.custom||[]).forEach(c=>items.push(c));(d.cnt||[]).forEach(([n,c])=>{const it=items.find(i=>i.name===n);if(it)it.cnt=c});\n$('start').value=d.start||'20:00';$('w').value=d.w||80;\ndocument.querySelectorAll('#sexseg button').forEach(b=>b.classList.toggle('on',+b.dataset.v===(d.sex||0.7)))}\nfunction load(){try{const d=JSON.parse(localStorage.getItem('m27')||'null');if(d)applyData(d)}catch(e){}}\n/* ===== Name + Scoreboard ===== */\nlet U={};try{U=JSON.parse(localStorage.getItem('m27u')||'{}')||{}}catch(e){U={}}\nif(!U.id)U.id=Math.random().toString(36).slice(2,10)+Date.now().toString(36).slice(-4);\nif(U.share===undefined)U.share=true;\nfunction saveU(){try{localStorage.setItem('m27u',JSON.stringify(U))}catch(e){}}\nlet nameEditing=false;\nfunction openName(edit){nameEditing=!!edit;$('nameIn').value=edit?(U.name||''):(U.name||'');$('nameErr').textContent='';$('nameCancel').style.display=edit&&U.name?'flex':'none';$('nameov').classList.add('on');setTimeout(()=>$('nameIn').focus(),150)}\nfunction submitName(){const v=$('nameIn').value.trim().replace(/\\s+/g,' ');\nif(v.length<2){$('nameErr').textContent='Bitte mindestens 2 Zeichen eingeben.';return}\nU.name=v.slice(0,20);saveU();$('nameov').classList.remove('on');updateMe();pushScore(true);renderBoard()}\n$('nameOk').onclick=submitName;\n$('nameIn').addEventListener('keydown',e=>{if(e.key==='Enter')submitName()});\n$('nameCancel').onclick=()=>$('nameov').classList.remove('on');\nfunction updateMe(){$('meName').textContent=U.name||'–';\ndocument.querySelectorAll('#shareseg button').forEach(b=>b.classList.toggle('on',(b.dataset.s==='1')===U.share))}\ndocument.querySelectorAll('#shareseg button').forEach(b=>b.onclick=()=>{U.share=b.dataset.s==='1';saveU();updateMe();if(U.share)pushScore(true);else delScore();renderBoard()});\nlet board={},mode='drinks',conn=false,pushT=null;\nfunction myEntry(){const m=model();const n=alcTotal();let t0=null;\nif(m.grams>0){const s=toH($('start').value||'20:00');const d=new Date();d.setHours(Math.floor(s),Math.round((s%1)*60),0,0);if(d.getTime()>Date.now()+6*3600e3)d.setDate(d.getDate()-1);t0=d.getTime()}\nconst e={name:U.name||'',drinks:n,g:Math.round(m.grams*10)/10,W:Math.round(m.W*1000)/1000,ts:Date.now()};if(t0)e.t0=t0;return e}\nfunction schedulePush(){clearTimeout(pushT);pushT=setTimeout(()=>pushScore(false),1500)}\nfunction pushScore(){if(!DB_URL||!U.name||!U.share)return;\nfetch(`${DB_URL}/scores/${U.id}.json`,{method:'PUT',body:JSON.stringify(myEntry())}).then(r=>{if(!r.ok)throw 0;setConn(true)}).catch(()=>setConn(false))}\nfunction delScore(){if(!DB_URL)return;fetch(`${DB_URL}/scores/${U.id}.json`,{method:'DELETE'}).catch(()=>{})}\nfunction setConn(v){conn=v;const l=$('live');l.className='live '+(v?'on':'off');$('liveTxt').textContent=!DB_URL?'nicht verbunden':v?'live':'offline'}\nfunction apply(path,data,merge){\nif(path==='/'){board=merge?Object.assign(board,data||{}):(data||{})}\nelse{const p=path.split('/').filter(Boolean);const id=p[0];\nif(p.length===1){if(data===null)delete board[id];else board[id]=merge?Object.assign(board[id]||{},data):data}\nelse{board[id]=board[id]||{};board[id][p[1]]=data}}\nrenderBoard()}\nlet es=null;\nfunction connect(){if(!DB_URL||!window.EventSource)return;\ntry{es=new EventSource(`${DB_URL}/scores.json`);\nes.addEventListener('put',e=>{try{const d=JSON.parse(e.data);apply(d.path,d.data,false)}catch(x){}});\nes.addEventListener('patch',e=>{try{const d=JSON.parse(e.data);apply(d.path,d.data,true)}catch(x){}});\nes.onopen=()=>setConn(true);es.onerror=()=>setConn(false)}catch(e){setConn(false)}}\nfunction poll(){if(!DB_URL)return;fetch(`${DB_URL}/scores.json`).then(r=>r.json()).then(d=>{board=d||{};setConn(true);renderBoard()}).catch(()=>setConn(false))}\nconst num=x=>{x=Number(x);return isFinite(x)?x:0};\nfunction calcEntry(e){const g=num(e.g),W=num(e.W),drinks=num(e.drinks);let bac=0,lyric=0;\nif(g>0&&e.t0){const h=Math.max(0,(Date.now()-num(e.t0))/3600000);bac=Math.max(0,W*Math.min(1,h/ABS_H)-RATE*h);lyric=Math.min(100,h/SAFE_H*100)}\nreturn {name:String(e.name||'?').slice(0,20),drinks,bac,lyric}}\nfunction renderBoard(){\nif(!$('board').classList.contains('on'))return;\nupdateMe();setConn(conn);\nconst all={...board};delete all[U.id];\nconst list=[];Object.entries(all).forEach(([id,e])=>{if(!e||typeof e!=='object'||!e.name)return;if(Date.now()-num(e.ts)>36*3600e3)return;list.push({id,me:false,...calcEntry(e)})});\nif(U.name&&U.share)list.push({id:U.id,me:true,...calcEntry(myEntry())});\nlist.sort((a,b)=>b[mode]-a[mode]||a.name.localeCompare(b.name));\nconst mx=Math.max(...list.map(x=>x[mode]),0.0001);\nconst val=x=>mode==='drinks'?x.drinks+(x.drinks===1?' Getränk':' Getränke'):mode==='bac'?f(x.bac)+' ‰':Math.round(x.lyric)+' %';\n$('warnbox').innerHTML=!DB_URL?'<div class=\"warn\">Das Scoreboard ist noch nicht mit einem Server verbunden. Du siehst nur deinen eigenen Eintrag.<\/div>':'';\n$('cntTxt').textContent=list.length+(list.length===1?' Teilnehmer':' Teilnehmer');\n$('rank').innerHTML=list.length?list.map((x,i)=>`<div class=\"rk${x.me?' me':''}\" style=\"animation-delay:${Math.min(i,12)*30}ms\"><div class=\"pos p${i<3?i+1:0}\">${i+1}<\/div><div class=\"rn\"><b>${esc(x.name)}${x.me?' <span class=\"you\">Du<\/span>':''}<\/b><div class=\"rb\"><i style=\"width:${Math.max(3,x[mode]/mx*100)}%\"><\/i><\/div><\/div><div class=\"rv\">${val(x)}<\/div><\/div>`).join(''):'<div class=\"empty\">Noch niemand auf dem Scoreboard.<\/div>'}\ndocument.querySelectorAll('#modechips .chip').forEach(b=>b.onclick=()=>{mode=b.dataset.m;document.querySelectorAll('#modechips .chip').forEach(x=>x.classList.toggle('on',x===b));renderBoard()});\n/* ===== Diagramme ===== */\nfunction setup(c){const r=c.getBoundingClientRect(),dp=window.devicePixelRatio||1;if(!r.width)return null;c.width=r.width*dp;c.height=r.height*dp;const x=c.getContext('2d');x.scale(dp,dp);return {x,W:r.width,H:r.height}}\nlet prog={};\nfunction drawAll(m,s,tn){if(!$('chart').classList.contains('on'))return;\nconst t0=performance.now();cancelAnimationFrame(prog.r);\nconst run=t=>{const p=Math.min(1,(t-t0)/1100),e=1-Math.pow(1-p,3);drawSafe(m,s,tn,e);drawBac(m,s,tn,e);if(p<1)prog.r=requestAnimationFrame(run)};prog.r=requestAnimationFrame(run)}\nfunction axes(x,W,H,end,s,yl){const pl=44,pr=16,pt=16,pb=30;\nx.clearRect(0,0,W,H);x.font='11px system-ui';x.fillStyle='#9aa6c7';x.strokeStyle='rgba(255,255,255,.08)';x.lineWidth=1;\nyl.forEach(([lab,p])=>{const y=pt+(H-pt-pb)*(1-p);x.beginPath();x.moveTo(pl,y);x.lineTo(W-pr,y);x.stroke();x.textAlign='right';x.fillText(lab,pl-6,y+4)});\nconst step=end>12?3:end>6?2:1;x.textAlign='center';\nfor(let t=0;t<=end;t+=step)x.fillText(hm(s+t),pl+(W-pl-pr)*t/end,H-10);\nreturn {pl,pr,pt,pb,X:t=>pl+(W-pl-pr)*t/end,Y:p=>pt+(H-pt-pb)*(1-p)}}\nconst endT=(m,tn)=>Math.max(m.tSoberR+1,SAFE_H+1,tn+1);\nfunction marker(x,a,H,tt){x.strokeStyle='rgba(255,255,255,.85)';x.setLineDash([4,4]);x.lineWidth=1.5;x.beginPath();x.moveTo(a.X(tt),a.pt);x.lineTo(a.X(tt),H-a.pb);x.stroke();x.setLineDash([])}\nfunction curve(x,a,pts,fn,col,fill){if(pts.length<2)return;const g=x.createLinearGradient(0,a.pt,0,a.Y(0));g.addColorStop(0,fill);g.addColorStop(1,'rgba(0,0,0,0)');\nx.beginPath();pts.forEach(([t,v],i)=>i?x.lineTo(a.X(t),a.Y(fn(v))):x.moveTo(a.X(t),a.Y(fn(v))));x.lineTo(a.X(pts[pts.length-1][0]),a.Y(0));x.lineTo(a.X(0),a.Y(0));x.closePath();x.fillStyle=g;x.fill();\nx.beginPath();pts.forEach(([t,v],i)=>i?x.lineTo(a.X(t),a.Y(fn(v))):x.moveTo(a.X(t),a.Y(fn(v))));x.strokeStyle=col;x.lineWidth=3;x.lineJoin='round';x.shadowColor=col;x.shadowBlur=12;x.stroke();x.shadowBlur=0}\nfunction drawSafe(m,s,tn,e){const c=setup($('cv1'));if(!c)return;const {x,W,H}=c;const end=endT(m,tn);\nconst a=axes(x,W,H,end,s,[0,25,50,75,100].map(v=>[v+'%',v/100]));\nconst N=240,lim=end*e,pts=[];for(let i=0;i<=N;i++){const t=end*i/N;if(t>lim)break;pts.push([t,lyricT(t,1)])}\ncurve(x,a,pts,v=>v/100,'#c084fc','rgba(192,132,252,.45)');\nconst tt=Math.min(tn,end);marker(x,a,H,tt);\nconst sv=lyricT(tt,1);x.fillStyle='#fff';x.beginPath();x.arc(a.X(tt),a.Y(sv/100),6,0,7);x.fill();\nx.font='bold 13px system-ui';const right=a.X(tt)>W-100;x.textAlign=right?'right':'left';x.fillText(Math.round(sv)+'% · '+hm(s+tt),a.X(tt)+(right?-10:10),a.Y(sv/100)-10);\n$('sfNote').textContent=`Um ${hm(s+tt)} sitzen ${Math.round(sv)} % der Malle-Lyrics. 100 % Liedtextsicherheit gibt es um ${hm(s+SAFE_H)} (${SAFE_H} Std. nach dem ersten Getränk).`}\nfunction drawBac(m,s,tn,e){const c=setup($('cv2'));if(!c)return;const {x,W,H}=c;const end=endT(m,tn);\nconst mx=Math.max(m.peak*1.15,.7);\nconst a=axes(x,W,H,end,s,[0,1,2,3,4].map(i=>[f(mx*i/4,1)+'‰',i/4]));\n[[.5,'#ff4d5e'],[.3,'#eab308']].forEach(([v,col])=>{x.strokeStyle=col;x.setLineDash([5,4]);x.beginPath();x.moveTo(a.pl,a.Y(v/mx));x.lineTo(W-a.pr,a.Y(v/mx));x.stroke();x.setLineDash([])});\nconst lim=end*e,N=240,pts=[];for(let i=0;i<=N;i++){const t=end*i/N;if(t>lim)break;pts.push([t,m.bac(t)])}\ncurve(x,a,pts,v=>v/mx,'#ffb020','rgba(255,176,32,.4)');\nconst tt=Math.min(tn,end);marker(x,a,H,tt);\nx.fillStyle='#fff';x.beginPath();x.arc(a.X(tt),a.Y(m.bac(tt)/mx),6,0,7);x.fill()}\n/* ---------- Smiley ---------- */\nlet moodCur=0,moodTgt=0,moodRaf=0;\nconst SM_CAP=['Entspannt','Gute Laune','Breites Grinsen','Lachanfall'];\nfunction drawMood(m){\n const s=clampN(m/.35,0,1),o=Math.pow(clampN((m-.3)/.7,0,1),.85),sq=clampN((m-.66)/.12,0,1),tr=clampN((m-.82)/.18,0,1);\n const hw=14+15*s+7*o,cy=80-6*s-4*o,cu=cy+1+13*s,cl=cu+3+46*o,x0=60-hw,x1=60+hw;\n const d=`M${x0.toFixed(1)} ${cy.toFixed(1)}Q60 ${cu.toFixed(1)} ${x1.toFixed(1)} ${cy.toFixed(1)}Q60 ${cl.toFixed(1)} ${x0.toFixed(1)} ${cy.toFixed(1)}Z`;\n $('smMouth').setAttribute('d',d);$('smclipP').setAttribute('d',d);\n const top=cy-2;$('smTeeth').setAttribute('y',top);$('smTeeth').setAttribute('height',(o>.12?8+7*o:0).toFixed(1));\n const bot=cy+(cl-cy)/2;$('smTongue').setAttribute('cy',(bot-1).toFixed(1));$('smTongue').setAttribute('ry',(o>.35?9*o:0).toFixed(1));$('smTongue').setAttribute('rx',(hw*.55).toFixed(1));\n ['smEL','smER'].forEach(i=>$(i).parentNode.style.opacity=1-sq);['smAL','smAR'].forEach(i=>$(i).setAttribute('opacity',sq));\n $('smBrows').setAttribute('transform','translate(0 '+(-5*m).toFixed(1)+')');\n $('smCL').setAttribute('opacity',(.55*clampN(m*1.6,0,1)).toFixed(2));$('smCR').setAttribute('opacity',(.55*clampN(m*1.6,0,1)).toFixed(2));\n $('smTears').style.opacity=tr;\n const lv=m<.08?0:m<.3?1:m<.6?2:3,sm=$('smiley');\n if(sm.dataset.lv!==String(lv)){sm.dataset.lv=lv;$('smCap').textContent=SM_CAP[lv]}}\nfunction moodStep(){const d=moodTgt-moodCur;if(Math.abs(d)<.002){moodCur=moodTgt;drawMood(moodCur);moodRaf=0;return}\n moodCur+=d*.08;drawMood(moodCur);moodRaf=requestAnimationFrame(moodStep)}\nfunction setMood(b){moodTgt=clampN((+b||0)/1.2,0,1);if(!moodRaf)moodRaf=requestAnimationFrame(moodStep)}\n/* ---------- Admin-Modus (versteckt) ---------- */\nconst isAdmin=()=>{try{return sessionStorage.getItem('m27adm')==='1'}catch(e){return false}};\nlet taps=0,tapT,fails=0,lockUntil=0;\n$('logo').addEventListener('click',()=>{clearTimeout(tapT);taps++;tapT=setTimeout(()=>taps=0,1800);\nif(taps>=5){taps=0;isAdmin()?openAdmin():openLogin()}});\nfunction showAdminPill(){$('apill').style.display=isAdmin()?'flex':'none'}\nfunction openLogin(){$('sheet').className='sheet';\n$('sheet').innerHTML=`<div class=\"sh-h\"><div class=\"lockic\">${ic('lock')}<\/div><h3>Admin-Zugang<\/h3><button class=\"xbtn\" onclick=\"closeR()\" aria-label=\"Schließen\">${ic('x')}<\/button><\/div>\n<label>Passwort<\/label><input id=\"pw\" type=\"password\" autocomplete=\"off\" autocapitalize=\"off\" autocorrect=\"off\" spellcheck=\"false\" placeholder=\"Passwort eingeben\">\n<div class=\"msg\" id=\"pwmsg\"><\/div><div class=\"arow\"><button class=\"btn pr\" onclick=\"checkPw()\">Entsperren<\/button><\/div>`;\n$('ov').classList.add('on');$('pw').addEventListener('keydown',e=>{if(e.key==='Enter')checkPw()});setTimeout(()=>$('pw')&&$('pw').focus(),300)}\nfunction checkPw(){const now=Date.now();\nif(now<lockUntil){$('pwmsg').textContent='Zu viele Versuche – bitte '+Math.ceil((lockUntil-now)/1000)+' s warten.';return}\nconst ok=sha256('m27|'+$('pw').value)===ADMIN_HASH;\nif(ok){try{sessionStorage.setItem('m27adm','1')}catch(e){}fails=0;showAdminPill();openAdmin()}\nelse{fails++;if(fails>=5){lockUntil=now+30000;fails=0}\n$('pwmsg').textContent='Falsches Passwort.';$('pw').value='';const s=$('sheet');s.classList.remove('shake');void s.offsetWidth;s.classList.add('shake')}}\nfunction openAdmin(){if(!isAdmin())return openLogin();\nconst hidden=cfg.hidden;\n$('sheet').className='sheet';\n$('sheet').innerHTML=`<div class=\"sh-h\"><div class=\"lockic\">${ic('lock')}<\/div><h3>Admin-Modus<\/h3><button class=\"xbtn\" onclick=\"closeR()\" aria-label=\"Schließen\">${ic('x')}<\/button><\/div>\n<div class=\"sh-n\" style=\"margin-top:0\">Alle Änderungen gelten nur für dieses Gerät und diesen Browser.<\/div>\n<h4>Rechner-Einstellungen<\/h4>\n<div class=\"row\"><div><label>Abbau (‰ pro Std.)<\/label><input id=\"aRate\" type=\"number\" inputmode=\"decimal\" step=\"0.01\" min=\"0.05\" max=\"0.3\" value=\"${cfg.rate}\"><\/div>\n<div><label>Resorptionsdefizit (%)<\/label><input id=\"aDef\" type=\"number\" inputmode=\"decimal\" step=\"1\" min=\"0\" max=\"30\" value=\"${Math.round(cfg.def*100)}\"><\/div><\/div>\n<label>Liedtextsicherheit: 100 % nach (Std.)<\/label><input id=\"aSafe\" type=\"number\" inputmode=\"decimal\" step=\"0.5\" min=\"1\" max=\"12\" value=\"${cfg.safe}\">\n<div class=\"arow\"><button class=\"btn pr\" onclick=\"saveAdminCfg()\">Übernehmen<\/button><button class=\"btn\" onclick=\"defaultCfg()\">Standard (0,1 / 10 / 5)<\/button><\/div>\n<div class=\"msg\" id=\"amsg\" style=\"color:var(--gr)\"><\/div>\n<h4>Getränke ein-/ausblenden<\/h4>\n<div class=\"tgl\" id=\"tgl\">${items.filter(i=>!i.custom).map(i=>`<button class=\"tg${hidden.includes(i.name)?' off':''}\" data-n=\"${i.name.replace(/\"/g,'&quot;')}\">${i.name}<\/button>`).join('')}<\/div>\n<h4>Sicherung<\/h4>\n<textarea id=\"bk\" placeholder=\"Hier erscheint die Sicherung (JSON) – oder zum Importieren einfügen.\"><\/textarea>\n<div class=\"arow\"><button class=\"btn\" onclick=\"bkExport()\">Exportieren<\/button><button class=\"btn\" onclick=\"bkImport()\">Importieren<\/button><\/div>\n<h4>Gefahrenzone<\/h4>\n<div class=\"arow\"><button class=\"btn dg\" onclick=\"wipeAll()\">${ic('trash')}Alle Daten auf diesem Gerät löschen<\/button><button class=\"btn\" onclick=\"adminLogout()\">Abmelden<\/button><\/div>`;\n$('sheet').querySelectorAll('.tg').forEach(b=>b.onclick=()=>{const n=b.dataset.n;const k=cfg.hidden.indexOf(n);\nif(k>=0)cfg.hidden.splice(k,1);else cfg.hidden.push(n);b.classList.toggle('off',k<0);saveCfg();renderChips();renderList()});\n$('sheet').scrollTop=0;$('ov').classList.add('on')}\nfunction saveAdminCfg(){let r=parseFloat($('aRate').value),d=parseFloat($('aDef').value),s=parseFloat($('aSafe').value);\nif(!(r>=.05&&r<=.3)||!(d>=0&&d<=30)||!(s>=1&&s<=12)){$('amsg').style.color='#ff8a95';$('amsg').textContent='Werte außerhalb des erlaubten Bereichs.';return}\ncfg.rate=r;cfg.def=d/100;cfg.safe=s;saveCfg();applyCfg();calc();$('amsg').style.color='var(--gr)';$('amsg').textContent='Gespeichert.'}\nfunction defaultCfg(){cfg.rate=.1;cfg.def=.1;cfg.safe=5;saveCfg();applyCfg();calc();openAdmin()}\nfunction bkExport(){$('bk').value=JSON.stringify(payload());$('bk').focus();$('bk').select()}\nfunction bkImport(){try{const d=JSON.parse($('bk').value);if(!d||typeof d!=='object')throw 0;applyData(d);renderChips();renderList();calc();$('amsg').style.color='var(--gr)';$('amsg').textContent='Import erfolgreich.'}catch(e){$('amsg').style.color='#ff8a95';$('amsg').textContent='Ungültige Sicherung.'}}\nfunction wipeAll(){if(!confirm('Wirklich alle gespeicherten Daten auf diesem Gerät löschen?'))return;\ntry{localStorage.removeItem('m27');localStorage.removeItem('m27a')}catch(e){}\ncfg={rate:.15,def:.2,safe:5,hidden:[]};applyCfg();applyData({});items=items.filter(i=>!i.custom);renderChips();renderList();calc();closeR()}\nfunction adminLogout(){try{sessionStorage.removeItem('m27adm')}catch(e){}showAdminPill();closeR()}\n['w','start'].forEach(id=>$(id).oninput=()=>calc());\n$('start2').oninput=()=>{$('start').value=$('start2').value;calc()};\n$('now').oninput=()=>{$('now').dataset.m=1;calc()};\n$('now2').oninput=()=>{$('now').value=$('now2').value;$('now').dataset.m=1;calc()};\nsetInterval(()=>{if(!$('now').dataset.m){$('now').value=clock();calc()}},30000);\nsetInterval(renderBoard,30000);setInterval(poll,20000);\nlet rz;window.addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(calc,150)});\ndrawMood(0);hydrate();loadCfg();load();showAdminPill();renderChips();renderList();updateMe();setConn(false);\nif(!U.name)openName(false);\ncalc();connect();poll();if(U.name)pushScore();\n<\/script><\/body><\/html>"</script>
 <script>
-/* ===== Scoreboard-Server: hier die Firebase-Realtime-Database-URL eintragen =====
-   z. B. "https://dein-projekt-default-rtdb.europe-west1.firebasedatabase.app"
-   (ohne Schrägstrich am Ende). Leer lassen = Scoreboard nur lokal. */
-const DB_URL="https://malle2027-default-rtdb.europe-west1.firebasedatabase.app";
-
+/* Scoreboard: Firebase-Realtime-Database-URL hier eintragen (ohne Schrägstrich am Ende). Leer = nur lokal. */
+const DB_URL="";
+/* ===== Einstellungen ===== */
+const TARGET="2026-12-19T08:00:00+01:00"; /* Zielzeit; +01:00 = MEZ (Deutschland/Mallorca im Winter) */
+const TITLE="Malle 2027 Bootcamp";
+const SHOW_DAYS=true; /* false = nur Stunden/Minuten/Sekunden, Stunden zählen dann über 24 hinaus */
+const LOCK_SUB="Die App öffnet am";
+window.onUnlock=function(){
+ const l=document.getElementById('lock');l.classList.add('out');setTimeout(()=>l.remove(),900);
+ document.getElementById('appFrame').srcdoc=JSON.parse(document.getElementById('appData').textContent).replace('const DB_URL="";','const DB_URL='+JSON.stringify(DB_URL)+';')};
+(function(){
 const $=id=>document.getElementById(id);
-const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function sha256(ascii){
-function rightRotate(v,a){return (v>>>a)|(v<<(32-a));}
-var maxWord=Math.pow(2,32),result='',words=[],asciiBitLength=ascii.length*8,i,j;
-var hash=[],k=[],primeCounter=0,isComposite={};
-for(var candidate=2;primeCounter<64;candidate++){
-if(!isComposite[candidate]){for(i=0;i<313;i+=candidate)isComposite[i]=candidate;
-hash[primeCounter]=(Math.pow(candidate,.5)*maxWord)|0;k[primeCounter++]=(Math.pow(candidate,1/3)*maxWord)|0;}}
-ascii+='\x80';while(ascii.length%64-56)ascii+='\x00';
-for(i=0;i<ascii.length;i++){j=ascii.charCodeAt(i);if(j>>8)return '';words[i>>2]|=j<<((3-i)%4)*8;}
-words[words.length]=((asciiBitLength/maxWord)|0);words[words.length]=(asciiBitLength);
-for(j=0;j<words.length;){var w=words.slice(j,j+=16);var oldHash=hash;hash=hash.slice(0,8);
-for(i=0;i<64;i++){var w15=w[i-15],w2=w[i-2];var a=hash[0],e=hash[4];
-var temp1=hash[7]+(rightRotate(e,6)^rightRotate(e,11)^rightRotate(e,25))+((e&hash[5])^((~e)&hash[6]))+k[i]+(w[i]=(i<16)?w[i]:(w[i-16]+(rightRotate(w15,7)^rightRotate(w15,18)^(w15>>>3))+w[i-7]+(rightRotate(w2,17)^rightRotate(w2,19)^(w2>>>10)))|0);
-var temp2=(rightRotate(a,2)^rightRotate(a,13)^rightRotate(a,22))+((a&hash[1])^(a&hash[2])^(hash[1]&hash[2]));
-hash=[(temp1+temp2)|0].concat(hash);hash[4]=(hash[4]+temp1)|0;}
-for(i=0;i<8;i++)hash[i]=(hash[i]+oldHash[i])|0;}
-for(i=0;i<8;i++)for(j=3;j+1;j--){var b=(hash[i]>>(j*8))&255;result+=((b<16)?0:'')+b.toString(16);}
-return result;}
-const ADMIN_HASH='4e3728e4f3a9f724be3edc3ac53cc727442cc51101ca7f8c233be3be883150ca';
-const UI={
-lock:'<rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/><path d="M12 14.5v2.5"/>',
-home:'<path d="M3.5 11 12 3.5 20.5 11"/><path d="M5.5 9.5V20a1 1 0 0 0 1 1H10v-6h4v6h3.5a1 1 0 0 0 1-1V9.5"/>',
-calc:'<rect x="5" y="2.5" width="14" height="19" rx="3"/><rect x="8" y="5.5" width="8" height="4" rx="1"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01"/>',
-glass:'<path d="M4.5 4h15L12 12.5z"/><path d="M12 12.5V20M8 20h8"/><path d="M16 2.5 11 9"/>',
-chart:'<rect x="4" y="12" width="4" height="8" rx="1.2"/><rect x="10" y="4" width="4" height="16" rx="1.2"/><rect x="16" y="9" width="4" height="11" rx="1.2"/>',
-trend:'<path d="M3 4v16h18"/><path d="m6.5 15 4-5 3.5 3 5-7"/>',
-mic:'<rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5v4M8.5 21.5h7"/>',
-trash:'<path d="M4 7h16M9.5 7V4.5h5V7M6.5 7l1 13h9l1-13M10 11v6M14 11v6"/>',
-user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.5 3.6-7 8-7s8 2.5 8 7"/>',
-plus:'<path d="M12 5v14M5 12h14"/>',minus:'<path d="M5 12h14"/>',
-search:'<circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/>',
-book:'<path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H12v16H5.5A1.5 1.5 0 0 0 4 21.5z"/><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H12v16h6.5a1.5 1.5 0 0 1 1.5 1.5z"/>',
-x:'<path d="M6 6l12 12M18 6 6 18"/>',
-trophy:'<path d="M8 3.5h8v6a4 4 0 0 1-8 0z"/><path d="M8 5H5v1.8A3.2 3.2 0 0 0 8 10M16 5h3v1.8A3.2 3.2 0 0 1 16 10"/><path d="M12 13.5V17M8.5 20.5h7M9.5 17h5"/>',
-pen:'<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/>'};
-const ic=n=>`<svg class="i" viewBox="0 0 24 24">${UI[n]}</svg>`;
-function hydrate(root=document){root.querySelectorAll('[data-ic]').forEach(e=>{e.outerHTML=ic(e.dataset.ic)})}
-const LOGO=`<svg viewBox="0 0 80 80"><defs><linearGradient id="sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd23f"/><stop offset="1" stop-color="#ff4d5e"/></linearGradient></defs>
-<circle cx="52" cy="30" r="20" fill="url(#sun)" opacity=".95"/>
-<path d="M5 66q35-10 70 0" stroke="#4dc3ff" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M14 72q26-7 52 0" stroke="#4dc3ff" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".6"/>
-<path d="M38 64c1-14 0-26-4-38" stroke="#7a4a21" stroke-width="5" fill="none" stroke-linecap="round"/>
-<g fill="#2ee59d" stroke="#0e7a4f" stroke-width="1.2" stroke-linejoin="round"><path d="M34 26C24 16 12 18 6 26c10-4 18-1 28 0z"/><path d="M34 26C30 12 38 4 48 4c-6 6-8 14-14 22z"/><path d="M34 26c8-8 20-8 28 0-10-2-18 0-28 0z"/><path d="M34 26C22 28 16 38 18 46c4-9 10-14 16-20z"/><path d="M34 26c10 3 16 12 14 20-4-8-8-14-14-20z"/></g>
-<circle cx="31" cy="29" r="2.6" fill="#7a4a21"/><circle cx="37" cy="30" r="2.6" fill="#7a4a21"/></svg>`;
-$('logo').innerHTML=LOGO;$('logo2').innerHTML=LOGO.replace('id="sun"','id="sun2"').replace('url(#sun)','url(#sun2)');
-let uid=0;
-const LQ=(p,top,c)=>{const k='k'+(uid++);return `<clipPath id="${k}"><path d="${p}"/></clipPath><rect x="0" y="${top}" width="48" height="48" fill="${c}" clip-path="url(#${k})"/>`};
-const G=p=>`<path d="${p}" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.92)" stroke-width="1.8" stroke-linejoin="round"/>`;
-const ST=(d,w=2)=>`<path d="${d}" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="${w}" stroke-linecap="round"/>`;
-const BUB=(pts)=>pts.map(([x,y,r])=>`<circle cx="${x}" cy="${y}" r="${r||1}" fill="rgba(255,255,255,.7)"/>`).join('');
-const ICE=(pts)=>pts.map(([x,y,r])=>`<rect x="${x}" y="${y}" width="6" height="6" rx="1.5" fill="rgba(255,255,255,.45)" transform="rotate(${r||12} ${x+3} ${y+3})"/>`).join('');
-const slice=(x,y,r,c)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${c}" stroke="rgba(255,255,255,.85)" stroke-width="1.4"/><path d="M${x-r} ${y}H${x+r}M${x} ${y-r}V${y+r}M${x-r*.7} ${y-r*.7}L${x+r*.7} ${y+r*.7}M${x+r*.7} ${y-r*.7}L${x-r*.7} ${y+r*.7}" stroke="rgba(255,255,255,.6)" stroke-width=".8"/>`;
-const IC={
-pils:(c,a)=>{const P="M15 6h18l-2.2 34.2a2 2 0 0 1-2 1.8h-9.6a2 2 0 0 1-2-1.8z";return LQ(P,6,a)+LQ(P,13,c)+BUB([[21,30],[26,24],[24,35],[28,32]])+G(P)},
-weizen:(c,a)=>{const P="M13 5h22l-4.5 35.5a2 2 0 0 1-2 1.7h-9a2 2 0 0 1-2-1.7z";return LQ(P,5,a)+LQ(P,13,c)+BUB([[21,28],[27,22],[25,34]])+G(P)},
-stange:(c,a)=>{const P="M17 6h14l-.6 34a2 2 0 0 1-2 2h-8.8a2 2 0 0 1-2-2z";return LQ(P,6,a)+LQ(P,11,c)+BUB([[22,28],[26,22],[24,34]])+G(P)},
-mug:(c,a)=>{const P="M10 12h22v26a3 3 0 0 1-3 3H13a3 3 0 0 1-3-3z";return ST("M32 17h3.5a4 4 0 0 1 4 4v9a4 4 0 0 1-4 4H32",3)+LQ(P,12,a)+LQ(P,19,c)+`<circle cx="14.5" cy="12" r="4.5" fill="${a}"/><circle cx="22" cy="9.5" r="5.2" fill="${a}"/><circle cx="29" cy="12" r="4" fill="${a}"/>`+BUB([[17,30],[23,26],[20,35]])+G(P)},
-bottle:(c,a)=>{const P="M21 3h6v10c0 3 5 5 5 10v16a3 3 0 0 1-3 3H19a3 3 0 0 1-3-3V23c0-5 5-7 5-10z";return LQ(P,14,c)+`<rect x="16.5" y="26" width="15" height="11" rx="1.5" fill="${a}"/><rect x="20.5" y="1.8" width="7" height="3.2" rx="1" fill="${a}"/>`+G(P)},
-can:(c,a)=>{const P="M13 9h22v30a3 3 0 0 1-3 3H16a3 3 0 0 1-3-3z";return `<path d="${P}" fill="${c}"/><rect x="13" y="21" width="22" height="9" fill="${a}"/><ellipse cx="24" cy="9" rx="11" ry="2.6" fill="rgba(255,255,255,.55)"/>`+G(P).replace('rgba(255,255,255,.1)','none')},
-bucket:(c,a)=>{const P="M9 18h30l-3.5 21a3 3 0 0 1-3 2.5h-17a3 3 0 0 1-3-2.5z";return ST("M20 18 15 4M27 18 33 3",2.6).replace(/rgba\(255,255,255,.92\)/,a)+LQ(P,22,c)+ICE([[14,24,-10],[22,27,14],[28,23,-6]])+G(P)+slice(37,17,5,a)},
-wine:(c,a)=>{const B="M14 5h20c1 12-3.5 20-10 20S13 17 14 5z";return LQ(B,13,c)+G(B)+ST("M24 25v14")+ST("M16.5 41.5h15",2.6)},
-spritz:(c,a)=>{const B="M10 8h28c0 13-6 21-14 21S10 21 10 8z";return LQ(B,13,c)+ICE([[16,14,-10],[24,16,14],[30,13,-6]])+G(B)+ST("M24 29v11")+ST("M16.5 41.5h15",2.6)+slice(37,9,6.2,a)},
-flute:(c,a)=>{const B="M19 4h10l-1.2 22c-.2 3-1.6 4.5-3.8 4.5S20.2 29 20 26z";return LQ(B,9,c)+BUB([[23,24],[25,18],[24,13],[22,20]])+G(B)+ST("M24 30.5V40")+ST("M17.5 41.5h13",2.6)},
-martini:(c,a)=>{const B="M7 8h34L24 27z";return LQ(B,13,c)+G(B)+ST("M24 27v13")+ST("M16.5 41.5h15",2.6)+ST("M31 4 21 19",1.6)+`<circle cx="21.5" cy="18" r="3.2" fill="${a}" stroke="rgba(255,255,255,.8)" stroke-width="1"/>`},
-highball:(c,a)=>{const P="M14 6h20l-2.3 34.5a2 2 0 0 1-2 1.5H18.3a2 2 0 0 1-2-1.5z";return ST("M29 2 26 28",2.6).replace(/rgba\(255,255,255,.92\)/,a)+LQ(P,12,c)+ICE([[18,16,-8],[25,20,15],[19,27,6]])+G(P)+`<path d="M10 9a6 6 0 0 1 12 0z" fill="${a}" stroke="rgba(255,255,255,.8)" stroke-width="1" transform="translate(3 -1)"/>`},
-hurricane:(c,a)=>{const P="M16 5h16c0 7 6 9 6 17 0 7-6 10-14 10S10 29 10 22c0-8 6-10 6-17z";return LQ(P,11,c)+BUB([[20,22],[27,18]])+G(P)+ST("M24 32v8")+ST("M16.5 41.5h15",2.6)+`<circle cx="35" cy="7" r="4.4" fill="${a}" stroke="rgba(255,255,255,.8)" stroke-width="1.2"/><path d="M30 6 38 2" stroke="rgba(255,255,255,.9)" stroke-width="1.6" stroke-linecap="round"/>`},
-shot:(c,a)=>{const P="M15 14h18l-2.6 24.5a2.5 2.5 0 0 1-2.5 2.2H20.1a2.5 2.5 0 0 1-2.5-2.2z";return LQ(P,19,c)+G(P)+`<path d="M18 40h12" stroke="rgba(255,255,255,.5)" stroke-width="1.4"/>`+(a&&a!=='none'?`<path d="M30 10a4 4 0 1 1 8 0z" fill="${a}" stroke="rgba(255,255,255,.8)" stroke-width="1"/>`:'')},
-snifter:(c,a)=>{const B="M15 14h18c5 5 4 20-9 20S10 19 15 14z";return LQ(B,24,c)+G(B)+ST("M24 34v5")+ST("M17.5 41h13",2.6)},
-jug:(c,a)=>{const P="M12 9h20v29a3 3 0 0 1-3 3H15a3 3 0 0 1-3-3z";return ST("M32 14h3.5a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H32",3)+LQ(P,16,c)+slice(20,24,3.4,a)+slice(26,31,3.4,a)+G(P)+`<path d="M10 9h24" stroke="rgba(255,255,255,.92)" stroke-width="2.4" stroke-linecap="round"/>`},
-cup:(c,a)=>{const P="M10 11h24l-2 28a3 3 0 0 1-3 2.5H15a3 3 0 0 1-3-2.5z";return ST("M33 16h3a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4h-3.5",3)+`<path d="${P}" fill="${c}"/><path d="M13 16h18" stroke="rgba(255,255,255,.4)" stroke-width="2"/>`+G(P).replace('rgba(255,255,255,.1)','none')+`<path d="M10 4a8 8 0 0 1 16 0z" fill="${a}" stroke="rgba(255,255,255,.8)" stroke-width="1" transform="translate(5 5)"/>`}
-};
-const dsvg=(k,c,a)=>`<svg viewBox="0 0 48 48">${(IC[k]||IC.highball)(c,a)}</svg>`;
-const CATS=['Bier','Wein & Sekt','Cocktails','Longdrinks','Shots','Eimer & Party','Alkoholfrei','Eigene'];
-const BASE=[
-['Bier','Kölsch Stange (0,2 l)',200,4.8,'stange','#f2c230','#fff7df'],
-['Bier','Pils klein (0,3 l)',300,4.9,'pils','#f5b82e','#fff7df'],
-['Bier','Pils (0,5 l)',500,4.9,'pils','#f5b82e','#fff7df'],
-['Bier','Helles (0,5 l)',500,5,'mug','#f7c948','#fff7df'],
-['Bier','Weizen (0,5 l)',500,5.4,'weizen','#e8a317','#fff3d1'],
-['Bier','Dunkles Weizen (0,5 l)',500,5.3,'weizen','#8a4a16','#f3dcb0'],
-['Bier','Radler (0,5 l)',500,2.5,'mug','#f2dc6b','#fffbe6'],
-['Bier','Bierflasche (0,33 l)',330,5,'bottle','#c98a1a','#f3e4b8'],
-['Bier','Dose Bier (0,5 l)',500,5,'can','#e0a82a','#3a86ff'],
-['Bier','Cerveza Jarra (1 l)',1000,5,'jug','#f5b82e','#ffe9a8'],
-['Wein & Sekt','Weißwein (0,2 l)',200,12,'wine','#f2e394','#fff'],
-['Wein & Sekt','Rotwein (0,2 l)',200,13,'wine','#8b1e3f','#fff'],
-['Wein & Sekt','Rosé (0,2 l)',200,12,'wine','#f29bb0','#fff'],
-['Wein & Sekt','Weinschorle (0,25 l)',250,6,'wine','#f2e394','#fff'],
-['Wein & Sekt','Sekt (0,1 l)',100,11,'flute','#f5e6a8','#fff'],
-['Wein & Sekt','Prosecco / Cava (0,1 l)',100,11,'flute','#f0e08c','#fff'],
-['Wein & Sekt','Sangria Glas (0,2 l)',200,8,'spritz','#b3192f','#ff9a2e'],
-['Cocktails','Aperol Spritz (0,25 l)',250,8,'spritz','#ff7a1a','#ff9a2e'],
-['Cocktails','Hugo (0,25 l)',250,7,'spritz','#e4f0a0','#8ee05a'],
-['Cocktails','Lillet Wild Berry (0,25 l)',250,5.5,'spritz','#d1305e','#ff4d8d'],
-['Cocktails','Mojito (0,3 l)',300,8,'highball','#cdeeb4','#52d17a'],
-['Cocktails','Caipirinha (0,3 l)',300,7,'highball','#e3f2a0','#9be15d'],
-['Cocktails','Caipi Vodka (0,3 l)',300,7,'highball','#eef7b8','#9be15d'],
-['Cocktails','Piña Colada (0,3 l)',300,7,'hurricane','#f6efc9','#ffd23f'],
-['Cocktails','Tequila Sunrise (0,3 l)',300,6,'hurricane','#ff8a1f','#ff3d5a'],
-['Cocktails','Sex on the Beach (0,3 l)',300,6,'hurricane','#ff6a5c','#ffb347'],
-['Cocktails','Long Island Iced Tea (0,4 l)',400,8,'highball','#c98a3a','#ffe066'],
-['Cocktails','Margarita (0,1 l)',100,20,'martini','#d9f08a','#9be15d'],
-['Cocktails','Cosmopolitan (0,1 l)',100,22,'martini','#ff5c8a','#ff9a2e'],
-['Cocktails','Espresso Martini (0,1 l)',100,24,'martini','#3a2113','#d9b38c'],
-['Longdrinks','Gin Tonic (0,25 l)',250,6.4,'highball','#dff3f7','#9be15d'],
-['Longdrinks','Vodka-Energy (0,3 l)',300,8,'highball','#d6f542','#8affc1'],
-['Longdrinks','Vodka-O (0,3 l)',300,8,'highball','#ffb12e','#ff8a1f'],
-['Longdrinks','Vodka Lemon (0,3 l)',300,8,'highball','#f6f09a','#ffe45e'],
-['Longdrinks','Cuba Libre (0,3 l)',300,8,'highball','#4a2511','#9be15d'],
-['Longdrinks','Whisky Cola (0,3 l)',300,7,'highball','#5a2d12','#9be15d'],
-['Longdrinks','Moscow Mule (0,3 l)',300,6,'cup','#c9753b','#9be15d'],
-['Longdrinks','Rum Cola Bacardi (0,3 l)',300,8,'highball','#5a2d12','#9be15d'],
-['Longdrinks','Jägerbomb (0,25 l)',250,5.6,'highball','#e8f04a','#7a3a14'],
-['Shots','Jägermeister (2 cl)',20,35,'shot','#3a1a0a','none'],
-['Shots','Kurzer / Vodka (2 cl)',20,38,'shot','#cfe9ff','none'],
-['Shots','Tequila (2 cl)',20,38,'shot','#e8b44a','#c9f07a'],
-['Shots','Sambuca (2 cl)',20,38,'shot','#e8f4ff','none'],
-['Shots','Berliner Luft (2 cl)',20,18,'shot','#7de3f0','none'],
-['Shots','Pfeffi (2 cl)',20,18,'shot','#6ee7c0','none'],
-['Shots','Underberg (2 cl)',20,44,'shot','#5a2d12','none'],
-['Shots','Averna (2 cl)',20,29,'shot','#4a2a14','none'],
-['Shots','Hierbas Mallorquinas (2 cl)',20,26,'shot','#b6d36a','none'],
-['Shots','Korn (2 cl)',20,32,'shot','#e6f0ff','none'],
-['Shots','Baileys (4 cl)',40,17,'snifter','#c9a27a','none'],
-['Shots','Whisky (4 cl)',40,40,'snifter','#c1761a','none'],
-['Shots','Rum (4 cl)',40,40,'snifter','#a8561a','none'],
-['Shots','Gin pur (4 cl)',40,40,'snifter','#e6f6ff','none'],
-['Eimer & Party','Sangria-Eimer (1 l)',1000,8,'bucket','#b3192f','#ff9a2e'],
-['Eimer & Party','Cocktail-Eimer (1 l)',1000,10,'bucket','#ff4d8d','#ffd23f'],
-['Eimer & Party','Vodka-Energy-Eimer (1 l)',1000,8,'bucket','#d6f542','#8affc1'],
-['Eimer & Party','Aperol-Eimer (1 l)',1000,8,'bucket','#ff7a1a','#ff9a2e'],
-['Eimer & Party','Sekt-Flasche (0,75 l)',750,11,'bottle','#c8b160','#fff'],
-['Eimer & Party','Weinflasche (0,75 l)',750,12.5,'bottle','#6e1830','#f5e6c8'],
-['Alkoholfrei','Wasser (0,5 l)',500,0,'bottle','#8fd3ff','#eaf8ff'],
-['Alkoholfrei','Sprudelwasser (0,3 l)',300,0,'highball','#bfe9ff','#ffffff'],
-['Alkoholfrei','Cola (0,3 l)',300,0,'highball','#4a2511','#f3e2cf'],
-['Alkoholfrei','Fanta / Orangenlimo (0,3 l)',300,0,'highball','#ff9a1f','#fff0d0'],
-['Alkoholfrei','Sprite / Zitronenlimo (0,3 l)',300,0,'highball','#e8f27a','#ffffff'],
-['Alkoholfrei','Apfelschorle (0,3 l)',300,0,'highball','#f0cf5a','#fff7d6'],
-['Alkoholfrei','Orangensaft (0,2 l)',200,0,'highball','#ffa733','#fff0d0'],
-['Alkoholfrei','Eistee (0,3 l)',300,0,'highball','#d9902f','#fff0d0'],
-['Alkoholfrei','Energy Drink (0,25 l)',250,0,'can','#c8f542','#f4ffd0'],
-['Alkoholfrei','Alkoholfreies Bier (0,5 l)',500,0,'pils','#f5b82e','#fff7df'],
-['Alkoholfrei','Virgin Colada (0,3 l)',300,0,'hurricane','#fff0c7','#ffffff'],
-['Alkoholfrei','Virgin Mojito (0,3 l)',300,0,'highball','#b7f0a0','#eaffdf'],
-['Alkoholfrei','Kaffee (0,2 l)',200,0,'cup','#4b2e1f','#f3e2cf'],
-];
-const BEERP=['Glas kalt ausspülen und schräg (45°) halten.','Bier ohne Hahnberührung einlaufen lassen.','Glas aufrichten, Schaum kurz setzen lassen und nachzapfen, bis die Krone steht.'];
-const R={
-'Kölsch Stange (0,2 l)':['Kölsch-Stange',['0,2 l Kölsch, kalt (6–8 °C)'],['Stange kalt ausspülen.','Glas leicht schräg unter den Hahn halten und zügig einlaufen lassen.','Aufrichten, bis eine feine Schaumkrone steht.']],
-'Pils klein (0,3 l)':['Pilstulpe',['0,3 l Pils, kalt'],BEERP],
-'Pils (0,5 l)':['Pilstulpe',['0,5 l Pils, kalt'],BEERP],
-'Helles (0,5 l)':['Maßkrug / Willibecher',['0,5 l Helles, kalt'],BEERP],
-'Weizen (0,5 l)':['Weizenglas',['0,5 l Weißbier, kalt'],['Weizenglas kalt ausspülen, nicht abtrocknen.','Glas schräg halten, Bier langsam einlaufen lassen und die Flasche dabei drehen.','Rest (ca. 2 cm) in der Flasche aufschwenken, Hefe lösen und oben aufgießen.']],
-'Dunkles Weizen (0,5 l)':['Weizenglas',['0,5 l dunkles Weißbier, kalt'],['Weizenglas kalt ausspülen.','Glas schräg halten, Bier langsam einlaufen lassen.','Rest in der Flasche aufschwenken und oben aufgießen.']],
-'Radler (0,5 l)':['Glaskrug',['0,25 l Bier (Pils oder Helles)','0,25 l Zitronenlimonade (1 : 1)'],['Bier schräg ins Glas einlaufen lassen.','Mit gut gekühlter Zitronenlimonade auffüllen.','Nicht umrühren – sofort servieren.']],
-'Bierflasche (0,33 l)':['Flasche',['0,33 l Bier, kalt'],['Gut gekühlt öffnen und direkt oder im Glas servieren.']],
-'Dose Bier (0,5 l)':['Dose',['0,5 l Bier, kalt'],['Gut gekühlt öffnen. Für mehr Aroma ins Glas gießen.']],
-'Cerveza Jarra (1 l)':['Jarra (1-l-Krug)',['1 l Bier vom Fass, kalt'],['Krug kalt ausspülen.','Schräg unter den Hahn halten und einlaufen lassen.','Aufrichten und Schaumkrone setzen lassen.']],
-'Weißwein (0,2 l)':['Weißweinglas',['0,2 l Weißwein, 8–10 °C'],['Wein gut kühlen.','Glas zu etwa einem Drittel füllen.','Am Stiel halten, damit der Wein kühl bleibt.']],
-'Rotwein (0,2 l)':['Rotweinglas',['0,2 l Rotwein, 16–18 °C'],['Raumtemperatur leicht gekühlt servieren.','Glas zu etwa einem Drittel füllen.','Kurz im Glas atmen lassen.']],
-'Rosé (0,2 l)':['Weinglas',['0,2 l Rosé, 8–10 °C'],['Gut gekühlt servieren.','Glas zu etwa einem Drittel füllen.']],
-'Weinschorle (0,25 l)':['Weinglas / Schorlenglas',['0,125 l Wein (weiß oder rot)','0,125 l Mineralwasser mit Kohlensäure (1 : 1)','Eiswürfel (optional)'],['Wein ins Glas geben.','Mit Mineralwasser auffüllen.','Nach Wunsch Eis dazugeben.']],
-'Sekt (0,1 l)':['Sektflöte',['0,1 l Sekt, 6–8 °C'],['Flasche gut kühlen und vorsichtig öffnen.','Flöte schräg halten und langsam einschenken.']],
-'Prosecco / Cava (0,1 l)':['Sektflöte',['0,1 l Prosecco oder Cava, 6–8 °C'],['Gut gekühlt öffnen.','Flöte schräg halten und langsam einschenken.']],
-'Sangria Glas (0,2 l)':['Weinglas (aus dem Krug)',['Für einen Krug (ca. 4 Gläser):','0,75 l Rotwein (jung, fruchtig)','1 Orange, 1 Zitrone, 1 Apfel in Stücken','2–3 EL Zucker','5 cl Brandy oder Orangenlikör','100 ml Orangensaft, Eis'],['Obst mit Zucker und Brandy in einen Krug geben und 30 Min. ziehen lassen.','Wein und Orangensaft dazugeben, umrühren.','Mindestens 2 Std. kalt stellen, mit Eis servieren. Optional mit Mineralwasser auffüllen.']],
-'Aperol Spritz (0,25 l)':['Weinglas / Tumbler',['9 cl Prosecco','6 cl Aperol','3 cl Sodawasser (3 : 2 : 1)','Eiswürfel','1 Orangenscheibe'],['Glas mit Eis füllen.','Erst Prosecco, dann Aperol eingießen.','Mit einem Schuss Soda auffüllen und einmal kurz umrühren.','Mit Orangenscheibe garnieren.']],
-'Hugo (0,25 l)':['Weinglas',['12 cl Prosecco','2 cl Holunderblütensirup','5 cl Sodawasser','6 Minzblätter, 2 Limettenscheiben','Eiswürfel'],['Minze und Limettenscheiben im Glas leicht andrücken.','Eis dazugeben, Sirup eingießen.','Mit Prosecco und Soda auffüllen, kurz umrühren.']],
-'Lillet Wild Berry (0,25 l)':['Weinglas',['8 cl Lillet Blanc','12 cl Tonic Water','Beeren (Himbeeren, Erdbeeren, Brombeeren)','1 Orangenscheibe, Eiswürfel'],['Glas mit Eis und Beeren füllen.','Lillet eingießen.','Mit Tonic auffüllen und mit Orangenscheibe garnieren.']],
-'Mojito (0,3 l)':['Highball-Glas',['4 cl weißer Rum','3 cl frischer Limettensaft','6 Minzzweige','2 TL weißer Zucker','Sodawasser, Crushed Ice'],['Minze mit Zucker und Limettensaft im Glas leicht andrücken.','Mit einem Schuss Soda und Crushed Ice füllen.','Rum eingießen, mit Soda auffüllen und kurz umrühren.','Mit Minzzweig garnieren.']],
-'Caipirinha (0,3 l)':['Tumbler',['5 cl Cachaça','1 Limette, in 8 Stücke geschnitten','2 TL Rohrzucker','Crushed Ice'],['Limettenstücke mit Zucker im Glas kräftig andrücken.','Mit Crushed Ice auffüllen.','Cachaça darübergeben und umrühren.']],
-'Caipi Vodka (0,3 l)':['Tumbler',['5 cl Vodka','1 Limette, in 8 Stücke geschnitten','2 TL Rohrzucker','Crushed Ice'],['Limettenstücke mit Zucker im Glas kräftig andrücken.','Mit Crushed Ice auffüllen.','Vodka darübergeben und umrühren.']],
-'Piña Colada (0,3 l)':['Hurricane-Glas',['5 cl weißer Rum','3 cl Kokoscreme','5 cl Ananassaft','Crushed Ice, Ananasstück'],['Alle Zutaten mit Eis im Mixer cremig mixen (oder kräftig shaken).','In ein gekühltes Hurricane-Glas füllen.','Mit Ananas garnieren.']],
-'Tequila Sunrise (0,3 l)':['Highball-Glas',['4,5 cl Tequila','9 cl Orangensaft','1,5 cl Grenadine','Eiswürfel'],['Glas mit Eis füllen, Tequila und Orangensaft eingießen.','Grenadine langsam am Glasrand einlaufen lassen – sie sinkt nach unten (Sonnenaufgang).','Nicht umrühren, mit Orangenscheibe garnieren.']],
-'Sex on the Beach (0,3 l)':['Highball-Glas',['4 cl Vodka','2 cl Pfirsichlikör','4 cl Orangensaft','4 cl Cranberrysaft','Eiswürfel'],['Glas mit Eis füllen.','Alle Zutaten dazugeben und kurz umrühren.','Mit Orangenscheibe garnieren.']],
-'Long Island Iced Tea (0,4 l)':['Longdrinkglas',['1,5 cl Gin','1,5 cl Wodka','1,5 cl weißer Rum','1,5 cl Tequila','1,5 cl Triple Sec','2,5 cl Limettensaft','3 cl Zuckersirup','Cola zum Auffüllen'],['Glas mit Eiswürfeln füllen.','Alle Spirituosen, Saft und Sirup hineingeben.','Mit einem Schuss Cola auffüllen und vorsichtig umrühren.','Mit Strohhalm und Zitronenscheibe servieren.']],
-'Margarita (0,1 l)':['Cocktailschale mit Salzrand',['3,5 cl Tequila','2 cl Cointreau','1,5 cl Limettensaft','Salz für den Rand, Eiswürfel'],['Glasrand mit Limette befeuchten und in Salz tauchen.','Alle Zutaten mit Eis im Shaker kräftig schütteln.','In die gekühlte Schale abseihen.']],
-'Cosmopolitan (0,1 l)':['Martiniglas',['4 cl Citron-Wodka','1,5 cl Cointreau','1,5 cl Limettensaft','3 cl Cranberrysaft','Eiswürfel'],['Alle Zutaten mit Eis im Shaker gut schütteln.','In ein gekühltes Martiniglas abseihen.','Mit Limettenscheibe garnieren.']],
-'Espresso Martini (0,1 l)':['Martiniglas',['5 cl Wodka','2 cl Kaffeelikör','3 cl frischer Espresso (abgekühlt)','1 cl Zuckersirup','Eiswürfel, 3 Kaffeebohnen'],['Alles mit viel Eis im Shaker kräftig schütteln, bis der Shaker beschlägt.','In ein gekühltes Martiniglas abseihen.','Mit 3 Kaffeebohnen garnieren (Richtwerte).']],
-'Gin Tonic (0,25 l)':['Tumbler / Ballonglas',['4 cl Gin','12 cl Tonic Water (1 : 3)','Eiswürfel','Limette oder Gurkenscheibe'],['Glas mit viel Eis füllen.','Gin eingießen.','Mit kaltem Tonic auffüllen, einmal vorsichtig umrühren und garnieren.']],
-'Vodka-Energy (0,3 l)':['Longdrinkglas',['6 cl Wodka','ca. 20 cl Energy Drink','Eiswürfel','Zitronenscheibe'],['Glas mit Eis füllen.','Wodka eingießen.','Mit Energy Drink auffüllen und kurz umrühren.']],
-'Vodka-O (0,3 l)':['Longdrinkglas',['6 cl Wodka','ca. 20 cl Orangensaft','Eiswürfel'],['Glas mit Eis füllen.','Wodka eingießen und mit Orangensaft auffüllen.','Kurz umrühren.']],
-'Vodka Lemon (0,3 l)':['Longdrinkglas',['6 cl Wodka','ca. 20 cl Bitter Lemon','Eiswürfel','Zitronenscheibe'],['Glas mit Eis füllen.','Wodka eingießen und mit Bitter Lemon auffüllen.','Kurz umrühren.']],
-'Cuba Libre (0,3 l)':['Highball-Glas',['5 cl weißer Rum','12 cl Cola','1 cl Limettensaft','Eiswürfel, Limettenstück'],['Glas mit Eis füllen.','Rum und Limettensaft eingießen.','Mit Cola auffüllen und umrühren, Limette ins Glas drücken.']],
-'Whisky Cola (0,3 l)':['Longdrinkglas',['5 cl Whisky','ca. 20 cl Cola','Eiswürfel'],['Glas mit Eis füllen.','Whisky eingießen und mit Cola auffüllen.','Kurz umrühren.']],
-'Moscow Mule (0,3 l)':['Kupferbecher',['4,5 cl Wodka','15 cl Ginger Beer','0,5 cl Limettensaft','Eiswürfel, Limettenscheibe'],['Becher mit Eis füllen.','Wodka und Limettensaft eingießen.','Mit kaltem Ginger Beer auffüllen und mit Limette garnieren.']],
-'Rum Cola Bacardi (0,3 l)':['Longdrinkglas',['6 cl Bacardi (weißer Rum)','ca. 20 cl Cola','Eiswürfel','Limettenstück'],['Glas mit Eis füllen.','Bacardi eingießen und mit Cola auffüllen.','Kurz umrühren, Limette dazugeben.']],
-'Jägerbomb (0,25 l)':['Glas + Shotglas',['4 cl Jägermeister','ca. 15 cl Energy Drink'],['Energy Drink ins Glas füllen.','Shotglas mit Jägermeister vorsichtig ins Glas gleiten lassen.','Sofort trinken.']],
-'Jägermeister (2 cl)':['Shotglas',['2 cl Jägermeister, eiskalt (ca. −18 °C)'],['Shotglas aus dem Gefrierfach nehmen.','2 cl einschenken, eiskalt servieren.']],
-'Kurzer / Vodka (2 cl)':['Shotglas',['2 cl Wodka, eiskalt'],['Wodka gut kühlen.','2 cl einschenken und eiskalt servieren.']],
-'Tequila (2 cl)':['Shotglas',['2 cl Tequila','Salz, Zitronen- oder Limettenspalte'],['Salz auf Handrücken oder Glasrand geben.','Salz lecken, Tequila trinken, in die Zitrone beißen.']],
-'Sambuca (2 cl)':['Shotglas',['2 cl Sambuca','3 Kaffeebohnen'],['Sambuca einschenken.','Mit 3 Kaffeebohnen garnieren und gekühlt servieren.']],
-'Berliner Luft (2 cl)':['Shotglas',['2 cl Berliner Luft, eisgekühlt'],['Eiskalt aus dem Gefrierfach einschenken.']],
-'Pfeffi (2 cl)':['Shotglas',['2 cl Pfefferminzlikör, gut gekühlt'],['Gut gekühlt einschenken und servieren.']],
-'Underberg (2 cl)':['Portionsfläschchen',['1 Fläschchen Underberg (2 cl)'],['Fläschchen öffnen und in einem Zug trinken.']],
-'Averna (2 cl)':['Digestifglas',['2 cl Averna','Eis oder Zitronenzeste (optional)'],['Gekühlt oder auf Eis servieren.']],
-'Hierbas Mallorquinas (2 cl)':['Digestifglas',['2 cl Hierbas (mallorquinischer Kräuterlikör)','Eis (optional)'],['Gekühlt oder auf Eis servieren – klassischer Digestif nach dem Essen.']],
-'Korn (2 cl)':['Schnapsglas',['2 cl Korn, eiskalt'],['Gut kühlen, einschenken und servieren.']],
-'Baileys (4 cl)':['Tumbler',['4 cl Baileys','Eiswürfel'],['Eiswürfel ins Glas geben.','Baileys eingießen und kurz schwenken.']],
-'Whisky (4 cl)':['Tumbler / Nosing-Glas',['4 cl Whisky','Eis oder Wasser (optional)'],['Pur oder mit etwas Wasser/Eis servieren.']],
-'Rum (4 cl)':['Tumbler / Snifter',['4 cl Rum','Eis (optional)'],['Pur oder auf Eis servieren.']],
-'Gin pur (4 cl)':['Tumbler',['4 cl Gin','Eis (optional)'],['Gut gekühlt, pur oder auf Eis servieren.']],
-'Sangria-Eimer (1 l)':['Strandeimer mit Strohhalmen',['ca. 0,5 l Rotwein','ca. 0,4 l Orangensaft/Limo und Obststücke','4 cl Brandy','Viel Eis, mehrere Strohhalme'],['Eimer zur Hälfte mit Eis füllen.','Rotwein, Brandy und Obststücke dazugeben.','Mit Orangensaft/Limo auffüllen, umrühren – zum Teilen gedacht.']],
-'Cocktail-Eimer (1 l)':['Strandeimer mit Strohhalmen',['je ca. 8 cl Wodka, Rum und Triple Sec','Fruchtsäfte (Orange, Ananas, Maracuja)','Grenadine, viel Eis'],['Eimer mit Eis füllen.','Spirituosen eingießen.','Mit Säften auffüllen und Grenadine dazugeben – zum Teilen gedacht.']],
-'Vodka-Energy-Eimer (1 l)':['Strandeimer mit Strohhalmen',['ca. 20 cl Wodka','Energy Drink zum Auffüllen','Viel Eis'],['Eimer mit Eis füllen.','Wodka eingießen.','Mit Energy Drink auffüllen und umrühren – zum Teilen gedacht.']],
-'Aperol-Eimer (1 l)':['Strandeimer mit Strohhalmen',['ca. 40 cl Prosecco','ca. 20 cl Aperol','Sodawasser, Orangenscheiben, Eis'],['Eimer mit Eis und Orangenscheiben füllen.','Aperol und Prosecco eingießen.','Mit Soda auffüllen – zum Teilen gedacht.']],
-'Sekt-Flasche (0,75 l)':['Sektflöte',['0,75 l Sekt, 6–8 °C'],['Flasche gut kühlen, vorsichtig öffnen.','Flöten schräg halten und langsam einschenken.']],
-'Weinflasche (0,75 l)':['Weinglas',['0,75 l Wein, passend gekühlt'],['Weißwein 8–10 °C, Rotwein 16–18 °C servieren.','Gläser zu einem Drittel füllen.']]
-};
-let items=[],filterCat='Alle',query='';
-BASE.forEach(b=>items.push({cat:b[0],name:b[1],ml:b[2],abv:b[3],ic:b[4],col:b[5],acc:b[6],cnt:0}));
-const gOf=it=>it.ml*it.abv/100*.8;
-const f=(x,d=2)=>x.toFixed(d).replace('.',',');
-const hm=h=>{const m=Math.round((((h%24)+24)%24)*60);return String(Math.floor(m/60)%24).padStart(2,'0')+':'+String(m%60).padStart(2,'0')};
-const toH=s=>{const [a,b]=s.split(':').map(Number);return a+b/60};
-const clock=()=>{const d=new Date();return hm(d.getHours()+d.getMinutes()/60)};
-const total=()=>items.reduce((a,i)=>a+i.cnt,0);
-const alcTotal=()=>items.reduce((a,i)=>a+(i.abv>0?i.cnt:0),0);
-let cfg={rate:.15,def:.2,safe:5,hidden:[]};
-function loadCfg(){try{const c=JSON.parse(localStorage.getItem('m27a')||'null');if(c)cfg={...cfg,...c}}catch(e){}applyCfg()}
-function saveCfg(){try{localStorage.setItem('m27a',JSON.stringify(cfg))}catch(e){}}
-function applyCfg(){RATE=cfg.rate;DEF=cfg.def;SAFE_H=cfg.safe;
-$('infoc').innerHTML=`<b>Promille:</b> Widmark-Formel: Alkohol (g) × ${f(1-DEF,2)} ÷ (Gewicht × r), r = 0,7 (Mann) / 0,6 (Frau), ${Math.round(DEF*100)} % Resorptionsdefizit. Die Getränke werden gleichmäßig von deiner Startzeit bis zum letzten Tippen auf + verteilt, jedes gelangt über ca. ${Math.round(ABS_H*60)} Min. ins Blut; Abbau ${f(RATE,2)} ‰ pro Stunde. „Unter 0,5 ‰ ab“ und „Nüchtern ab“ sind bewusst vorsichtig gerechnet (schwächerer Abbau, geringeres Defizit). <b>Liedtextsicherheit:</b> ab dem ersten Getränk linear, nach ${SAFE_H} Stunden 100 %. Mix-Getränke sind Durchschnittswerte – Malle-Gläser sind oft stärker eingeschenkt. Nur Schätzung (± 0,3 ‰) – nach Alkohol nicht fahren.`}
-const vis=it=>!cfg.hidden.includes(it.name);
-function renderChips(){const cats=['Alle',...CATS.filter(c=>items.some(i=>i.cat===c&&vis(i)))];
-if(!cats.includes(filterCat))filterCat='Alle';
-$('chips').innerHTML=cats.map(c=>`<button class="chip${c===filterCat?' on':''}" data-c="${esc(c)}">${esc(c)}</button>`).join('');
-$('chips').querySelectorAll('.chip').forEach(b=>b.onclick=()=>{filterCat=b.dataset.c;renderChips();renderList()})}
-function renderList(){const L=$('list');L.innerHTML='';let k=0;
-CATS.forEach(cat=>{if(filterCat!=='Alle'&&filterCat!==cat)return;
-const arr=items.map((it,i)=>[it,i]).filter(([it])=>it.cat===cat&&vis(it)&&it.name.toLowerCase().includes(query));
-if(!arr.length)return;L.insertAdjacentHTML('beforeend',`<div class="cat">${cat}</div>`);
-arr.forEach(([it,i])=>{L.insertAdjacentHTML('beforeend',`<div class="drink${it.cnt?' has':''}" id="d${i}" style="animation-delay:${Math.min(k++,14)*25}ms"><div class="l"><div class="dic">${dsvg(it.ic,it.col,it.acc)}</div><div><div class="nm">${esc(it.name)}</div><small>${String(it.abv).replace('.',',')} Vol.-% · ${f(gOf(it),1)} g Alkohol</small>${it.custom?'':`<button class="rbtn" onclick="openR(${i})" aria-label="Rezept">${ic('book')}Rezept</button>`}</div></div><div class="ctr"><button onclick="chg(${i},-1)" aria-label="weniger">${ic('minus')}</button><span id="c${i}">${it.cnt}</span><button class="p" onclick="chg(${i},1)" aria-label="mehr">${ic('plus')}</button></div></div>`)})});
-if(!L.children.length)L.innerHTML='<p class="info">Nichts gefunden – füge unten ein eigenes Getränk hinzu.</p>'}
-function openR(i){const it=items[i];const r=R[it.name]||['Glas',['Zutaten nach Geschmack'],['Gut gekühlt servieren.']];
-$('sheet').className='sheet';
-$('sheet').innerHTML=`<div class="sh-h"><div class="dic">${dsvg(it.ic,it.col,it.acc)}</div><h3>${esc(it.name)}</h3><button class="xbtn" onclick="closeR()" aria-label="Schließen">${ic('x')}</button></div>
-<div class="tags"><span class="tag">${r[0]}</span><span class="tag">${String(it.abv).replace('.',',')} Vol.-%</span><span class="tag">${f(gOf(it),1)} g Alkohol</span></div>
-<h4>Zutaten</h4><ul>${r[1].map((z,k)=>`<li style="animation-delay:${k*40}ms">${z}</li>`).join('')}</ul>
-<h4>Zubereitung</h4><ol>${r[2].map((z,k)=>`<li style="animation-delay:${120+k*60}ms">${z}</li>`).join('')}</ol>
-<div class="sh-n">Richtwerte nach gängigen Standardrezepten (u. a. IBA). Auf Malle werden Drinks oft stärker oder anders gemischt – die Alkoholwerte der App sind Durchschnittswerte.</div>`;
-$('sheet').scrollTop=0;$('ov').classList.add('on')}
-function closeR(){$('ov').classList.remove('on')}
-$('ov').addEventListener('click',e=>{if(e.target.id==='ov')closeR()});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeR()});
-function chg(i,n){const before=alcTotal();const it=items[i];it.cnt=Math.max(0,it.cnt+n);
-if(it.abv>0&&before===0&&it.cnt>0){$('start').value=clock();$('now').value=clock();delete $('now').dataset.m}
-if(n>0&&it.abv>0)lastTap=clock();
-const s=$('c'+i);if(s){s.textContent=it.cnt;s.classList.remove('pop');void s.offsetWidth;s.classList.add('pop');$('d'+i).classList.toggle('has',it.cnt>0)}calc()}
-function resetAll(){delete $('now').dataset.m;lastTap=null;items.forEach(i=>i.cnt=0);renderList();calc()}
-function addCustom(){const n=$('cn').value.trim().slice(0,40)||'Eigenes Getränk',ml=+$('cm').value,ab=+$('ca').value;
-if(!(ml>0)||!(ab>=0))return;items.push({cat:'Eigene',name:n,ml,abv:ab,ic:'highball',col:'#8ab4ff',acc:'#ffffff',cnt:0,custom:1});
-$('cn').value='';filterCat='Eigene';renderChips();renderList();save()}
-$('q').oninput=e=>{query=e.target.value.toLowerCase();renderList()};
-function go(t){document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('on',x.dataset.t===t));
-document.querySelectorAll('.tab').forEach(s=>s.classList.toggle('on',s.id===t));
-window.scrollTo(0,0);calc();if(t==='board')renderBoard()}
-document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>go(b.dataset.t));
-document.querySelectorAll('#sexseg button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#sexseg button').forEach(x=>x.classList.toggle('on',x===b));calc()});
-let RATE=.15,DEF=.2,SAFE_H=5,lastTap=null;const ABS_H=.75;
-const sex=()=>+document.querySelector('#sexseg .on').dataset.v;
-const clampN=(v,a,b)=>Math.max(a,Math.min(b,v));
-function drinkTimes(tl){const arr=[];items.forEach(it=>{if(it.cnt>0){const g=gOf(it);for(let j=0;j<it.cnt;j++)arr.push({p:(j+.5)/it.cnt,g})}});
-arr.sort((x,y)=>x.p-y.p);const N=arr.length;arr.forEach((d,i)=>d.t=N>1?tl*i/(N-1):0);return arr}
-function simBac(dr,k,rate,tl){const dt=1/60,gt=dr.reduce((q,d)=>q+d.g,0);if(!gt)return {arr:[0],dt};
-const T=Math.min(72,tl+ABS_H+gt*k/rate+2),steps=Math.ceil(T/dt),arr=new Float32Array(steps+1);let b=0;
-for(let i=0;i<steps;i++){const t=i*dt;let inc=0;
-for(const d of dr){if(t+dt<=d.t||t>=d.t+ABS_H)continue;inc+=d.g*(clampN((t+dt-d.t)/ABS_H,0,1)-clampN((t-d.t)/ABS_H,0,1))}
-b+=inc*k;if(b>0)b=Math.max(0,b-rate*dt);arr[i+1]=b}
-return {arr,dt}}
-const atT=(S,t)=>{if(t<=0)return 0;const x=t/S.dt,i=Math.floor(x);if(i>=S.arr.length-1)return S.arr[S.arr.length-1];return S.arr[i]+(S.arr[i+1]-S.arr[i])*(x-i)};
-let _mk='',_mv=null;
-function model(){const grams=items.reduce((q,it)=>q+it.cnt*gOf(it),0);
-const w=Math.max(30,+$('w').value||80),r=sex(),s=toH($('start').value||'20:00');
-let tl=toH(lastTap||clock())-s;if(tl<-12)tl+=24;tl=clampN(tl,0,24);
-const key=[items.map(i=>i.cnt).join(','),w,r,s,tl.toFixed(3),RATE,DEF].join('|');
-if(key===_mk&&_mv)return _mv;
-const W=grams*(1-DEF)/(w*r);
-if(!(grams>0)){_mv={grams:0,W:0,peak:0,bac:()=>0,tSober:0,tSoberR:0,tLim:0};_mk=key;return _mv}
-const dr=drinkTimes(tl),R=simBac(dr,(1-DEF)/(w*r),RATE,tl);
-const defC=Math.min(DEF,.1),rateC=Math.min(RATE,.1),C=simBac(dr,(1-defC)/(w*r),rateC,tl);
-let last=-1;for(let i=0;i<C.arr.length;i++)if(C.arr[i]>.5)last=i;
-const tLim=last<0?0:(last+1)*C.dt;
-let lastPos=0;for(let i=0;i<C.arr.length;i++)if(C.arr[i]>0)lastPos=i;
-const tSober=(lastPos+1)*C.dt;
-let peak=0;for(let i=0;i<R.arr.length;i++)if(R.arr[i]>peak)peak=R.arr[i];
-let lpR=0;for(let i=0;i<R.arr.length;i++)if(R.arr[i]>0)lpR=i;const tSoberR=(lpR+1)*R.dt;
-_mv={grams,W,peak,bac:t=>atT(R,t),tSober,tSoberR,tLim};_mk=key;return _mv}
-const lyricT=(t,g)=>g>0?Math.max(0,Math.min(100,t/SAFE_H*100)):0;
-const level=p=>p<=0?'':p<20?'Nur Refrain-Summen':p<45?'Erste Strophe sitzt':p<75?'Refrain laut mitgrölen':p<100?'Fast textsicher':'Ballermann-Profi: 100 % textsicher';
-let anim={};
-function tween(key,to,cb){const from=anim[key]??0;const t0=performance.now();cancelAnimationFrame(anim[key+'r']);
-const step=t=>{const p=Math.min(1,(t-t0)/800),e=1-Math.pow(1-p,3);const v=from+(to-from)*e;anim[key]=v;cb(v);if(p<1)anim[key+'r']=requestAnimationFrame(step)};anim[key+'r']=requestAnimationFrame(step)}
-function calc(){
-const m=model();const s=toH($('start').value||'20:00');
-if(!$('now').value)$('now').value=clock();
-let tn=toH($('now').value)-s;if(tn<-12)tn+=24;if(tn<0)tn=0;
-const b=m.bac(tn),sf=lyricT(tn,m.grams);
-const col=b<.3?'#2ee59d':b<.5?'#ffd23f':b<1.1?'#ff8a3d':'#ff4d5e';
-tween('bac',b,v=>$('bac').textContent=f(v)+' ‰');
-tween('sf',sf,v=>{$('safeBig').textContent=Math.round(v)+'%';$('ring').style.strokeDashoffset=540.4*(1-v/100)});
-$('bac').style.color=col;
-const txt=b<.3?'Unter 0,3 ‰':b<.5?'Ab 0,3 ‰ – Vorsicht':b<1.1?'Über 0,5 ‰ – nicht fahren!':'Ab 1,1 ‰ – absolut fahruntüchtig';
-const st=$('status');st.innerHTML=`<span class="dot"></span>${txt}`;st.style.background=col+'26';st.style.color=col;
-$('gr').textContent=Math.round(m.grams)+' g';
-$('sober').textContent=m.grams>0&&m.W>0?hm(s+m.tSober):'–';
-$('drive').textContent=m.grams>0?(m.tLim<=0?'sofort':hm(s+m.tLim)):'–';
-setMood(b);tween('hb',b,v=>$('hBac').textContent=f(v)+' ‰');$('hBac').style.color=col;
-tween('hs',sf,v=>{const c=v>=99.5?'#2ee59d':v<34?'#ff4d5e':v<67?'#ff8a3d':'#a3e635';
-$('pie').style.background=`conic-gradient(${c} ${v}%,rgba(255,255,255,.08) 0)`;
-$('pie').style.boxShadow=`0 0 0 8px rgba(255,255,255,.05),0 20px 60px rgba(0,0,0,.5),0 0 60px ${c}55`;
-$('hSafe').textContent=Math.round(v)+' %'});
-$('hLvl').textContent=level(sf);
-$('hSub').textContent=m.grams>0?(sf>=100?'':'100 % um '+hm(s+SAFE_H)+' · erstes Getränk '+hm(s)):'';
-$('hHint').style.display=m.grams>0?'none':'block';
-const n=total();$('total').textContent=n+(n===1?' Getränk':' Getränke');$('totalg').textContent=Math.round(m.grams)+' g Alkohol';
-$('badge').style.display=n?'inline':'none';$('badge').textContent=n;
-$('start2').value=$('start').value;$('now2').value=$('now').value;
-drawAll(m,s,tn);save();schedulePush();if($('board').classList.contains('on'))renderBoard()}
-function payload(){return {custom:items.filter(i=>i.custom).map(i=>({...i,cnt:0})),cnt:items.filter(i=>i.cnt).map(i=>[i.name,i.cnt]),start:$('start').value,last:lastTap,w:$('w').value,sex:sex()}}
-function save(){try{localStorage.setItem('m27',JSON.stringify(payload()))}catch(e){}}
-function applyData(d){lastTap=d.last||null;items=items.filter(i=>!i.custom);items.forEach(i=>i.cnt=0);
-(d.custom||[]).forEach(c=>items.push(c));(d.cnt||[]).forEach(([n,c])=>{const it=items.find(i=>i.name===n);if(it)it.cnt=c});
-$('start').value=d.start||'20:00';$('w').value=d.w||80;
-document.querySelectorAll('#sexseg button').forEach(b=>b.classList.toggle('on',+b.dataset.v===(d.sex||0.7)))}
-function load(){try{const d=JSON.parse(localStorage.getItem('m27')||'null');if(d)applyData(d)}catch(e){}}
-/* ===== Name + Scoreboard ===== */
-let U={};try{U=JSON.parse(localStorage.getItem('m27u')||'{}')||{}}catch(e){U={}}
-if(!U.id)U.id=Math.random().toString(36).slice(2,10)+Date.now().toString(36).slice(-4);
-if(U.share===undefined)U.share=true;
-function saveU(){try{localStorage.setItem('m27u',JSON.stringify(U))}catch(e){}}
-let nameEditing=false;
-function openName(edit){nameEditing=!!edit;$('nameIn').value=edit?(U.name||''):(U.name||'');$('nameErr').textContent='';$('nameCancel').style.display=edit&&U.name?'flex':'none';$('nameov').classList.add('on');setTimeout(()=>$('nameIn').focus(),150)}
-function submitName(){const v=$('nameIn').value.trim().replace(/\s+/g,' ');
-if(v.length<2){$('nameErr').textContent='Bitte mindestens 2 Zeichen eingeben.';return}
-U.name=v.slice(0,20);saveU();$('nameov').classList.remove('on');updateMe();pushScore(true);renderBoard()}
-$('nameOk').onclick=submitName;
-$('nameIn').addEventListener('keydown',e=>{if(e.key==='Enter')submitName()});
-$('nameCancel').onclick=()=>$('nameov').classList.remove('on');
-function updateMe(){$('meName').textContent=U.name||'–';
-document.querySelectorAll('#shareseg button').forEach(b=>b.classList.toggle('on',(b.dataset.s==='1')===U.share))}
-document.querySelectorAll('#shareseg button').forEach(b=>b.onclick=()=>{U.share=b.dataset.s==='1';saveU();updateMe();if(U.share)pushScore(true);else delScore();renderBoard()});
-let board={},mode='drinks',conn=false,pushT=null;
-function myEntry(){const m=model();const n=alcTotal();let t0=null;
-if(m.grams>0){const s=toH($('start').value||'20:00');const d=new Date();d.setHours(Math.floor(s),Math.round((s%1)*60),0,0);if(d.getTime()>Date.now()+6*3600e3)d.setDate(d.getDate()-1);t0=d.getTime()}
-const e={name:U.name||'',drinks:n,g:Math.round(m.grams*10)/10,W:Math.round(m.W*1000)/1000,ts:Date.now()};if(t0)e.t0=t0;return e}
-function schedulePush(){clearTimeout(pushT);pushT=setTimeout(()=>pushScore(false),1500)}
-function pushScore(){if(!DB_URL||!U.name||!U.share)return;
-fetch(`${DB_URL}/scores/${U.id}.json`,{method:'PUT',body:JSON.stringify(myEntry())}).then(r=>{if(!r.ok)throw 0;setConn(true)}).catch(()=>setConn(false))}
-function delScore(){if(!DB_URL)return;fetch(`${DB_URL}/scores/${U.id}.json`,{method:'DELETE'}).catch(()=>{})}
-function setConn(v){conn=v;const l=$('live');l.className='live '+(v?'on':'off');$('liveTxt').textContent=!DB_URL?'nicht verbunden':v?'live':'offline'}
-function apply(path,data,merge){
-if(path==='/'){board=merge?Object.assign(board,data||{}):(data||{})}
-else{const p=path.split('/').filter(Boolean);const id=p[0];
-if(p.length===1){if(data===null)delete board[id];else board[id]=merge?Object.assign(board[id]||{},data):data}
-else{board[id]=board[id]||{};board[id][p[1]]=data}}
-renderBoard()}
-let es=null;
-function connect(){if(!DB_URL||!window.EventSource)return;
-try{es=new EventSource(`${DB_URL}/scores.json`);
-es.addEventListener('put',e=>{try{const d=JSON.parse(e.data);apply(d.path,d.data,false)}catch(x){}});
-es.addEventListener('patch',e=>{try{const d=JSON.parse(e.data);apply(d.path,d.data,true)}catch(x){}});
-es.onopen=()=>setConn(true);es.onerror=()=>setConn(false)}catch(e){setConn(false)}}
-function poll(){if(!DB_URL)return;fetch(`${DB_URL}/scores.json`).then(r=>r.json()).then(d=>{board=d||{};setConn(true);renderBoard()}).catch(()=>setConn(false))}
-const num=x=>{x=Number(x);return isFinite(x)?x:0};
-function calcEntry(e){const g=num(e.g),W=num(e.W),drinks=num(e.drinks);let bac=0,lyric=0;
-if(g>0&&e.t0){const h=Math.max(0,(Date.now()-num(e.t0))/3600000);bac=Math.max(0,W*Math.min(1,h/ABS_H)-RATE*h);lyric=Math.min(100,h/SAFE_H*100)}
-return {name:String(e.name||'?').slice(0,20),drinks,bac,lyric}}
-function renderBoard(){
-if(!$('board').classList.contains('on'))return;
-updateMe();setConn(conn);
-const all={...board};delete all[U.id];
-const list=[];Object.entries(all).forEach(([id,e])=>{if(!e||typeof e!=='object'||!e.name)return;if(Date.now()-num(e.ts)>36*3600e3)return;list.push({id,me:false,...calcEntry(e)})});
-if(U.name&&U.share)list.push({id:U.id,me:true,...calcEntry(myEntry())});
-list.sort((a,b)=>b[mode]-a[mode]||a.name.localeCompare(b.name));
-const mx=Math.max(...list.map(x=>x[mode]),0.0001);
-const val=x=>mode==='drinks'?x.drinks+(x.drinks===1?' Getränk':' Getränke'):mode==='bac'?f(x.bac)+' ‰':Math.round(x.lyric)+' %';
-$('warnbox').innerHTML=!DB_URL?'<div class="warn">Das Scoreboard ist noch nicht mit einem Server verbunden. Du siehst nur deinen eigenen Eintrag.</div>':'';
-$('cntTxt').textContent=list.length+(list.length===1?' Teilnehmer':' Teilnehmer');
-$('rank').innerHTML=list.length?list.map((x,i)=>`<div class="rk${x.me?' me':''}" style="animation-delay:${Math.min(i,12)*30}ms"><div class="pos p${i<3?i+1:0}">${i+1}</div><div class="rn"><b>${esc(x.name)}${x.me?' <span class="you">Du</span>':''}</b><div class="rb"><i style="width:${Math.max(3,x[mode]/mx*100)}%"></i></div></div><div class="rv">${val(x)}</div></div>`).join(''):'<div class="empty">Noch niemand auf dem Scoreboard.</div>'}
-document.querySelectorAll('#modechips .chip').forEach(b=>b.onclick=()=>{mode=b.dataset.m;document.querySelectorAll('#modechips .chip').forEach(x=>x.classList.toggle('on',x===b));renderBoard()});
-/* ===== Diagramme ===== */
-function setup(c){const r=c.getBoundingClientRect(),dp=window.devicePixelRatio||1;if(!r.width)return null;c.width=r.width*dp;c.height=r.height*dp;const x=c.getContext('2d');x.scale(dp,dp);return {x,W:r.width,H:r.height}}
-let prog={};
-function drawAll(m,s,tn){if(!$('chart').classList.contains('on'))return;
-const t0=performance.now();cancelAnimationFrame(prog.r);
-const run=t=>{const p=Math.min(1,(t-t0)/1100),e=1-Math.pow(1-p,3);drawSafe(m,s,tn,e);drawBac(m,s,tn,e);if(p<1)prog.r=requestAnimationFrame(run)};prog.r=requestAnimationFrame(run)}
-function axes(x,W,H,end,s,yl){const pl=44,pr=16,pt=16,pb=30;
-x.clearRect(0,0,W,H);x.font='11px system-ui';x.fillStyle='#9aa6c7';x.strokeStyle='rgba(255,255,255,.08)';x.lineWidth=1;
-yl.forEach(([lab,p])=>{const y=pt+(H-pt-pb)*(1-p);x.beginPath();x.moveTo(pl,y);x.lineTo(W-pr,y);x.stroke();x.textAlign='right';x.fillText(lab,pl-6,y+4)});
-const step=end>12?3:end>6?2:1;x.textAlign='center';
-for(let t=0;t<=end;t+=step)x.fillText(hm(s+t),pl+(W-pl-pr)*t/end,H-10);
-return {pl,pr,pt,pb,X:t=>pl+(W-pl-pr)*t/end,Y:p=>pt+(H-pt-pb)*(1-p)}}
-const endT=(m,tn)=>Math.max(m.tSoberR+1,SAFE_H+1,tn+1);
-function marker(x,a,H,tt){x.strokeStyle='rgba(255,255,255,.85)';x.setLineDash([4,4]);x.lineWidth=1.5;x.beginPath();x.moveTo(a.X(tt),a.pt);x.lineTo(a.X(tt),H-a.pb);x.stroke();x.setLineDash([])}
-function curve(x,a,pts,fn,col,fill){if(pts.length<2)return;const g=x.createLinearGradient(0,a.pt,0,a.Y(0));g.addColorStop(0,fill);g.addColorStop(1,'rgba(0,0,0,0)');
-x.beginPath();pts.forEach(([t,v],i)=>i?x.lineTo(a.X(t),a.Y(fn(v))):x.moveTo(a.X(t),a.Y(fn(v))));x.lineTo(a.X(pts[pts.length-1][0]),a.Y(0));x.lineTo(a.X(0),a.Y(0));x.closePath();x.fillStyle=g;x.fill();
-x.beginPath();pts.forEach(([t,v],i)=>i?x.lineTo(a.X(t),a.Y(fn(v))):x.moveTo(a.X(t),a.Y(fn(v))));x.strokeStyle=col;x.lineWidth=3;x.lineJoin='round';x.shadowColor=col;x.shadowBlur=12;x.stroke();x.shadowBlur=0}
-function drawSafe(m,s,tn,e){const c=setup($('cv1'));if(!c)return;const {x,W,H}=c;const end=endT(m,tn);
-const a=axes(x,W,H,end,s,[0,25,50,75,100].map(v=>[v+'%',v/100]));
-const N=240,lim=end*e,pts=[];for(let i=0;i<=N;i++){const t=end*i/N;if(t>lim)break;pts.push([t,lyricT(t,1)])}
-curve(x,a,pts,v=>v/100,'#c084fc','rgba(192,132,252,.45)');
-const tt=Math.min(tn,end);marker(x,a,H,tt);
-const sv=lyricT(tt,1);x.fillStyle='#fff';x.beginPath();x.arc(a.X(tt),a.Y(sv/100),6,0,7);x.fill();
-x.font='bold 13px system-ui';const right=a.X(tt)>W-100;x.textAlign=right?'right':'left';x.fillText(Math.round(sv)+'% · '+hm(s+tt),a.X(tt)+(right?-10:10),a.Y(sv/100)-10);
-$('sfNote').textContent=`Um ${hm(s+tt)} sitzen ${Math.round(sv)} % der Malle-Lyrics. 100 % Liedtextsicherheit gibt es um ${hm(s+SAFE_H)} (${SAFE_H} Std. nach dem ersten Getränk).`}
-function drawBac(m,s,tn,e){const c=setup($('cv2'));if(!c)return;const {x,W,H}=c;const end=endT(m,tn);
-const mx=Math.max(m.peak*1.15,.7);
-const a=axes(x,W,H,end,s,[0,1,2,3,4].map(i=>[f(mx*i/4,1)+'‰',i/4]));
-[[.5,'#ff4d5e'],[.3,'#eab308']].forEach(([v,col])=>{x.strokeStyle=col;x.setLineDash([5,4]);x.beginPath();x.moveTo(a.pl,a.Y(v/mx));x.lineTo(W-a.pr,a.Y(v/mx));x.stroke();x.setLineDash([])});
-const lim=end*e,N=240,pts=[];for(let i=0;i<=N;i++){const t=end*i/N;if(t>lim)break;pts.push([t,m.bac(t)])}
-curve(x,a,pts,v=>v/mx,'#ffb020','rgba(255,176,32,.4)');
-const tt=Math.min(tn,end);marker(x,a,H,tt);
-x.fillStyle='#fff';x.beginPath();x.arc(a.X(tt),a.Y(m.bac(tt)/mx),6,0,7);x.fill()}
-/* ---------- Smiley ---------- */
-let moodCur=0,moodTgt=0,moodRaf=0;
-const SM_CAP=['Entspannt','Gute Laune','Breites Grinsen','Lachanfall'];
-function drawMood(m){
- const s=clampN(m/.35,0,1),o=Math.pow(clampN((m-.3)/.7,0,1),.85),sq=clampN((m-.66)/.12,0,1),tr=clampN((m-.82)/.18,0,1);
- const hw=14+15*s+7*o,cy=80-6*s-4*o,cu=cy+1+13*s,cl=cu+3+46*o,x0=60-hw,x1=60+hw;
- const d=`M${x0.toFixed(1)} ${cy.toFixed(1)}Q60 ${cu.toFixed(1)} ${x1.toFixed(1)} ${cy.toFixed(1)}Q60 ${cl.toFixed(1)} ${x0.toFixed(1)} ${cy.toFixed(1)}Z`;
- $('smMouth').setAttribute('d',d);$('smclipP').setAttribute('d',d);
- const top=cy-2;$('smTeeth').setAttribute('y',top);$('smTeeth').setAttribute('height',(o>.12?8+7*o:0).toFixed(1));
- const bot=cy+(cl-cy)/2;$('smTongue').setAttribute('cy',(bot-1).toFixed(1));$('smTongue').setAttribute('ry',(o>.35?9*o:0).toFixed(1));$('smTongue').setAttribute('rx',(hw*.55).toFixed(1));
- ['smEL','smER'].forEach(i=>$(i).parentNode.style.opacity=1-sq);['smAL','smAR'].forEach(i=>$(i).setAttribute('opacity',sq));
- $('smBrows').setAttribute('transform','translate(0 '+(-5*m).toFixed(1)+')');
- $('smCL').setAttribute('opacity',(.55*clampN(m*1.6,0,1)).toFixed(2));$('smCR').setAttribute('opacity',(.55*clampN(m*1.6,0,1)).toFixed(2));
- $('smTears').style.opacity=tr;
- const lv=m<.08?0:m<.3?1:m<.6?2:3,sm=$('smiley');
- if(sm.dataset.lv!==String(lv)){sm.dataset.lv=lv;$('smCap').textContent=SM_CAP[lv]}}
-function moodStep(){const d=moodTgt-moodCur;if(Math.abs(d)<.002){moodCur=moodTgt;drawMood(moodCur);moodRaf=0;return}
- moodCur+=d*.08;drawMood(moodCur);moodRaf=requestAnimationFrame(moodStep)}
-function setMood(b){moodTgt=clampN((+b||0)/1.2,0,1);if(!moodRaf)moodRaf=requestAnimationFrame(moodStep)}
-/* ---------- Admin-Modus (versteckt) ---------- */
-const isAdmin=()=>{try{return sessionStorage.getItem('m27adm')==='1'}catch(e){return false}};
-let taps=0,tapT,fails=0,lockUntil=0;
-$('logo').addEventListener('click',()=>{clearTimeout(tapT);taps++;tapT=setTimeout(()=>taps=0,1800);
-if(taps>=5){taps=0;isAdmin()?openAdmin():openLogin()}});
-function showAdminPill(){$('apill').style.display=isAdmin()?'flex':'none'}
-function openLogin(){$('sheet').className='sheet';
-$('sheet').innerHTML=`<div class="sh-h"><div class="lockic">${ic('lock')}</div><h3>Admin-Zugang</h3><button class="xbtn" onclick="closeR()" aria-label="Schließen">${ic('x')}</button></div>
-<label>Passwort</label><input id="pw" type="password" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Passwort eingeben">
-<div class="msg" id="pwmsg"></div><div class="arow"><button class="btn pr" onclick="checkPw()">Entsperren</button></div>`;
-$('ov').classList.add('on');$('pw').addEventListener('keydown',e=>{if(e.key==='Enter')checkPw()});setTimeout(()=>$('pw')&&$('pw').focus(),300)}
-function checkPw(){const now=Date.now();
-if(now<lockUntil){$('pwmsg').textContent='Zu viele Versuche – bitte '+Math.ceil((lockUntil-now)/1000)+' s warten.';return}
-const ok=sha256('m27|'+$('pw').value)===ADMIN_HASH;
-if(ok){try{sessionStorage.setItem('m27adm','1')}catch(e){}fails=0;showAdminPill();openAdmin()}
-else{fails++;if(fails>=5){lockUntil=now+30000;fails=0}
-$('pwmsg').textContent='Falsches Passwort.';$('pw').value='';const s=$('sheet');s.classList.remove('shake');void s.offsetWidth;s.classList.add('shake')}}
-function openAdmin(){if(!isAdmin())return openLogin();
-const hidden=cfg.hidden;
-$('sheet').className='sheet';
-$('sheet').innerHTML=`<div class="sh-h"><div class="lockic">${ic('lock')}</div><h3>Admin-Modus</h3><button class="xbtn" onclick="closeR()" aria-label="Schließen">${ic('x')}</button></div>
-<div class="sh-n" style="margin-top:0">Alle Änderungen gelten nur für dieses Gerät und diesen Browser.</div>
-<h4>Rechner-Einstellungen</h4>
-<div class="row"><div><label>Abbau (‰ pro Std.)</label><input id="aRate" type="number" inputmode="decimal" step="0.01" min="0.05" max="0.3" value="${cfg.rate}"></div>
-<div><label>Resorptionsdefizit (%)</label><input id="aDef" type="number" inputmode="decimal" step="1" min="0" max="30" value="${Math.round(cfg.def*100)}"></div></div>
-<label>Liedtextsicherheit: 100 % nach (Std.)</label><input id="aSafe" type="number" inputmode="decimal" step="0.5" min="1" max="12" value="${cfg.safe}">
-<div class="arow"><button class="btn pr" onclick="saveAdminCfg()">Übernehmen</button><button class="btn" onclick="defaultCfg()">Standard (0,1 / 10 / 5)</button></div>
-<div class="msg" id="amsg" style="color:var(--gr)"></div>
-<h4>Getränke ein-/ausblenden</h4>
-<div class="tgl" id="tgl">${items.filter(i=>!i.custom).map(i=>`<button class="tg${hidden.includes(i.name)?' off':''}" data-n="${i.name.replace(/"/g,'&quot;')}">${i.name}</button>`).join('')}</div>
-<h4>Sicherung</h4>
-<textarea id="bk" placeholder="Hier erscheint die Sicherung (JSON) – oder zum Importieren einfügen."></textarea>
-<div class="arow"><button class="btn" onclick="bkExport()">Exportieren</button><button class="btn" onclick="bkImport()">Importieren</button></div>
-<h4>Gefahrenzone</h4>
-<div class="arow"><button class="btn dg" onclick="wipeAll()">${ic('trash')}Alle Daten auf diesem Gerät löschen</button><button class="btn" onclick="adminLogout()">Abmelden</button></div>`;
-$('sheet').querySelectorAll('.tg').forEach(b=>b.onclick=()=>{const n=b.dataset.n;const k=cfg.hidden.indexOf(n);
-if(k>=0)cfg.hidden.splice(k,1);else cfg.hidden.push(n);b.classList.toggle('off',k<0);saveCfg();renderChips();renderList()});
-$('sheet').scrollTop=0;$('ov').classList.add('on')}
-function saveAdminCfg(){let r=parseFloat($('aRate').value),d=parseFloat($('aDef').value),s=parseFloat($('aSafe').value);
-if(!(r>=.05&&r<=.3)||!(d>=0&&d<=30)||!(s>=1&&s<=12)){$('amsg').style.color='#ff8a95';$('amsg').textContent='Werte außerhalb des erlaubten Bereichs.';return}
-cfg.rate=r;cfg.def=d/100;cfg.safe=s;saveCfg();applyCfg();calc();$('amsg').style.color='var(--gr)';$('amsg').textContent='Gespeichert.'}
-function defaultCfg(){cfg.rate=.1;cfg.def=.1;cfg.safe=5;saveCfg();applyCfg();calc();openAdmin()}
-function bkExport(){$('bk').value=JSON.stringify(payload());$('bk').focus();$('bk').select()}
-function bkImport(){try{const d=JSON.parse($('bk').value);if(!d||typeof d!=='object')throw 0;applyData(d);renderChips();renderList();calc();$('amsg').style.color='var(--gr)';$('amsg').textContent='Import erfolgreich.'}catch(e){$('amsg').style.color='#ff8a95';$('amsg').textContent='Ungültige Sicherung.'}}
-function wipeAll(){if(!confirm('Wirklich alle gespeicherten Daten auf diesem Gerät löschen?'))return;
-try{localStorage.removeItem('m27');localStorage.removeItem('m27a')}catch(e){}
-cfg={rate:.15,def:.2,safe:5,hidden:[]};applyCfg();applyData({});items=items.filter(i=>!i.custom);renderChips();renderList();calc();closeR()}
-function adminLogout(){try{sessionStorage.removeItem('m27adm')}catch(e){}showAdminPill();closeR()}
-['w','start'].forEach(id=>$(id).oninput=()=>calc());
-$('start2').oninput=()=>{$('start').value=$('start2').value;calc()};
-$('now').oninput=()=>{$('now').dataset.m=1;calc()};
-$('now2').oninput=()=>{$('now').value=$('now2').value;$('now').dataset.m=1;calc()};
-setInterval(()=>{if(!$('now').dataset.m){$('now').value=clock();calc()}},30000);
-setInterval(renderBoard,30000);setInterval(poll,20000);
-let rz;window.addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(calc,150)});
-drawMood(0);hydrate();loadCfg();load();showAdminPill();renderChips();renderList();updateMe();setConn(false);
-if(!U.name)openName(false);
-calc();connect();poll();if(U.name)pushScore();
+const T=Date.parse(TARGET);
+let off=0,src='Gerätezeit',done=false,ready=false;
+const now=()=>Date.now()+off;
+const p2=n=>String(n).padStart(2,'0');
+let when;try{when=new Date(T).toLocaleString('de-DE',{day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit',timeZone:'Europe/Berlin'})}catch(e){when=TARGET}
+$('lkTitle').textContent=TITLE;
+$('lkSub').textContent=LOCK_SUB+' '+when+' Uhr';
+$('lkGrid').classList.toggle('nod',!SHOW_DAYS);
+function put(v){if(!$('lkD'))return;['lkD','lkH','lkM','lkS'].forEach((id,i)=>{const e=$(id),t=p2(v[i]);if(e.textContent!==t){e.textContent=t;if(i===3){const b=e.parentNode;b.classList.remove('tick');void b.offsetWidth;b.classList.add('tick')}}});
+$('lkSrc').textContent='Zeitbasis: '+src}
+function render(){
+ if(done)return;
+ const ms=T-now();
+ if(ms<=0){put([0,0,0,0]);
+  if(ready){done=true;stop();$('lock').classList.add('done');if(window.onUnlock)window.onUnlock()}
+  return}
+ const s=Math.floor(ms/1000);let d=Math.floor(s/86400),h=Math.floor(s%86400/3600);
+ if(!SHOW_DAYS){h+=d*24;d=0}
+ put([d,h,Math.floor(s%3600/60),s%60])}
+async function sync(){
+ const ac=new AbortController(),to=setTimeout(()=>ac.abort(),4000);
+ try{const t0=Date.now();
+  const r=await fetch(location.pathname||'/',{method:'HEAD',cache:'no-store',signal:ac.signal});const t1=Date.now();
+  const d=r.headers.get('date');
+  if(r.ok&&d){const srv=Date.parse(d)+((+r.headers.get('age'))||0)*1000+(t1-t0)/2,o=srv-t1;
+   if(isFinite(o)&&Math.abs(o)<1e11){off=o;src='Serverzeit'}}
+ }catch(e){}
+ clearTimeout(to);ready=true;render()}
+const iv=setInterval(render,250),iv2=setInterval(sync,300000),vis=()=>{if(!document.hidden)sync()};
+document.addEventListener('visibilitychange',vis);
+function stop(){clearInterval(iv);clearInterval(iv2);document.removeEventListener('visibilitychange',vis)}
+render();sync();
+})();
+
 </script></body></html>
